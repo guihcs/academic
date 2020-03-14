@@ -1,0 +1,12 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="menuEvent.emit()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="app-title"> Academic </span>
+  <div class="spacer"></div>
+  <img matListAvatar src="">
+  <button mat-button [matMenuTriggerFor]="beforeMenu">Options</button>
+  <mat-menu #beforeMenu="matMenu" xPosition="before">
+    <ng-content select="app-options-items"></ng-content>
+  </mat-menu>
+</mat-toolbar>

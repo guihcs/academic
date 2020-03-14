@@ -1,0 +1,28 @@
+
+
+<div class="login-card centered">
+  <form
+    [formGroup]="loginForm"
+    (ngSubmit)="onSubmit(loginForm.value)"
+    class="form"
+  >
+    <div class="column login-content">
+      <h2 class="form-title">Academic</h2>
+      <mat-form-field>
+        <mat-label>Login</mat-label>
+        <input class="form-field" matInput formControlName="login">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input class="form-field" matInput type="password" formControlName="password">
+      </mat-form-field>
+      <div class="center">
+        <button color="primary" mat-raised-button type="submit">Login</button>
+      </div>
+
+    </div>
+  </form>
+</div>
+
+
+

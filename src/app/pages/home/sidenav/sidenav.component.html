@@ -1,0 +1,18 @@
+<mat-sidenav-container class="example-container">
+  <mat-sidenav mode="side"
+               class="example-sidenav"
+               [fixedInViewport]="false"
+               opened
+  >
+    <mat-nav-list>
+      <ng-content select="app-sidenav-items"></ng-content>
+
+
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+
+    <ng-content></ng-content>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

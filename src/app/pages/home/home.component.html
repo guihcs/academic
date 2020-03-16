@@ -2,20 +2,73 @@
 
   <app-toolbar (menuEvent)="sidenav.toggle()">
     <app-options-items>
-      <a mat-menu-item>Profile</a>
+      <a [routerLink]="'profile'" mat-menu-item>Profile</a>
       <button mat-menu-item (click)="logout()">Logout</button>
     </app-options-items>
   </app-toolbar>
 
   <app-sidenav #sidenav>
     <app-sidenav-items>
-      <h3 mat-subheader>Insert</h3>
+      <ng-container [ngSwitch]="session.type">
 
-      <mat-list-item>
-        <mat-icon matListIcon>person_add</mat-icon>
-        <a matLine [routerLink]="'insertCoordinator'">Insert Coordinator</a>
+        <ng-container *ngSwitchCase="userType.ADMIN">
 
-      </mat-list-item>
+          <h3 mat-subheader>Insert</h3>
+          <mat-list-item>
+            <mat-icon matListIcon>person_add</mat-icon>
+            <a [routerLink]="'insertCoordinator'" matLine>Insert Coordinator</a>
+          </mat-list-item>
+
+          <h3 mat-subheader>View</h3>
+          <mat-list-item>
+            <mat-icon matListIcon>view_list</mat-icon>
+            <a [routerLink]="'coordinatorView'" matLine>View Coordinators</a>
+          </mat-list-item>
+
+          <h3 mat-subheader>Exam</h3>
+          <mat-list-item>
+            <mat-icon matListIcon>view_list</mat-icon>
+            <a [routerLink]="'examForm'" matLine>Update Exam</a>
+          </mat-list-item>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="userType.COORDINATOR">
+          <h3 mat-subheader>Insert</h3>
+          <mat-list-item>
+            <mat-icon matListIcon>person_add</mat-icon>
+            <a [routerLink]="'insertProfessor'" matLine>Insert Professor</a>
+          </mat-list-item>
+          <mat-list-item>
+            <mat-icon matListIcon>person_add</mat-icon>
+            <a [routerLink]="'insertStudent'" matLine>Insert Student</a>
+          </mat-list-item>
+          <h3 mat-subheader>View</h3>
+          <mat-list-item>
+            <mat-icon matListIcon>view_list</mat-icon>
+            <a [routerLink]="'professorView'" matLine>View Professors</a>
+          </mat-list-item>
+          <mat-list-item>
+            <mat-icon matListIcon>view_list</mat-icon>
+            <a [routerLink]="'studentView'" matLine>View Students</a>
+          </mat-list-item>
+        </ng-container>
+
+
+        <ng-container *ngSwitchCase="userType.PROFESSOR">
+
+
+        </ng-container>
+
+
+        <ng-container *ngSwitchCase="userType.STUDENT">
+
+
+        </ng-container>
+
+
+      </ng-container>
+
+
     </app-sidenav-items>
 
     <mat-card class="content-card">

@@ -1,0 +1,54 @@
+<h1>Professor Details</h1>
+
+<div class="column">
+
+  <mat-form-field class="input-form-field">
+    <mat-label>Name</mat-label>
+    <input [(ngModel)]="professor.name" matInput>
+  </mat-form-field>
+
+  <mat-form-field class="input-form-field">
+    <mat-label>CPF</mat-label>
+    <input [(ngModel)]="professor.cpf" matInput>
+  </mat-form-field>
+
+  <mat-form-field class="input-form-field">
+    <mat-label>Email</mat-label>
+    <input [(ngModel)]="professor.profile.email" matInput>
+  </mat-form-field>
+
+  <mat-form-field class="input-form-field">
+    <mat-label>Phone</mat-label>
+    <input [(ngModel)]="professor.profile.phone" matInput>
+  </mat-form-field>
+
+  <mat-form-field class="input-form-field">
+    <mat-label>City</mat-label>
+    <input [(ngModel)]="professor.address.city" matInput>
+  </mat-form-field>
+
+  <mat-form-field class="input-form-field">
+    <mat-label>Street</mat-label>
+    <input [(ngModel)]="professor.address.street" matInput>
+  </mat-form-field>
+
+  <mat-form-field class="input-form-field">
+    <mat-label>State</mat-label>
+    <input [(ngModel)]="professor.address.state" matInput>
+  </mat-form-field>
+
+  <mat-form-field class="input-form-field">
+    <mat-label>Login</mat-label>
+    <input [(ngModel)]="professor.login" matInput>
+  </mat-form-field>
+
+  <mat-form-field class="input-form-field">
+    <mat-label>Password</mat-label>
+    <input [(ngModel)]="professor.password" matInput type="password">
+  </mat-form-field>
+
+  <div>
+    <button (click)="update()" color="primary" mat-raised-button>Update</button>
+  </div>
+
+</div>

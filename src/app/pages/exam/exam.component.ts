@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ExamService} from '../../services/exam/exam.service';
 
 @Component({
   selector: 'app-exam',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./exam.component.css']
 })
 export class ExamComponent implements OnInit {
+  exam;
 
-  constructor() { }
+  constructor(private examService: ExamService) {
+  }
 
   ngOnInit(): void {
+    this.exam = this.examService.getExam();
   }
 
 }

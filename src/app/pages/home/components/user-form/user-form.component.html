@@ -1,0 +1,53 @@
+<!--add stepper-->
+<div class="column">
+  <mat-form-field class="input-form-field">
+    <mat-label>Name</mat-label>
+    <input [(ngModel)]="user.name" matInput>
+  </mat-form-field>
+
+  <mat-form-field class="input-form-field">
+    <mat-label>CPF</mat-label>
+    <input [(ngModel)]="user.cpf" matInput>
+  </mat-form-field>
+
+  <mat-form-field class="input-form-field">
+    <mat-label>Email</mat-label>
+    <input [(ngModel)]="user.profile.email" matInput>
+  </mat-form-field>
+
+
+  <mat-form-field class="input-form-field">
+    <mat-label>Phone</mat-label>
+    <input [(ngModel)]="user.profile.phone" matInput>
+  </mat-form-field>
+
+  <mat-form-field class="input-form-field">
+    <mat-label>City</mat-label>
+    <input [(ngModel)]="user.address.city" matInput>
+  </mat-form-field>
+
+  <mat-form-field class="input-form-field">
+    <mat-label>Street</mat-label>
+    <input [(ngModel)]="user.address.street" matInput>
+  </mat-form-field>
+
+  <mat-form-field class="input-form-field">
+    <mat-label>State</mat-label>
+    <input [(ngModel)]="user.address.state" matInput>
+  </mat-form-field>
+
+  <mat-form-field class="input-form-field">
+    <mat-label>Login</mat-label>
+    <input [(ngModel)]="user.login" matInput>
+  </mat-form-field>
+
+  <mat-form-field class="input-form-field">
+    <mat-label>Password</mat-label>
+    <input [(ngModel)]="user.password" matInput type="password">
+  </mat-form-field>
+
+  <div>
+    <button (click)="emitUser()" color="primary" mat-raised-button>Insert</button>
+  </div>
+</div>
+

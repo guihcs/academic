@@ -1,0 +1,33 @@
+import {Injectable} from '@angular/core';
+import {UserService} from '../../../services/user/user.service';
+import {User} from '../../../models/User';
+import {UserType} from '../../../models/UserType';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ProfessorService extends UserService {
+
+
+  constructor(private userService: UserService) {
+    super();
+  }
+
+  getUsers(): User[] {
+    const professors = [];
+
+
+    for (const user of this.userService.getUsers()) {
+
+      if (user.type === UserType.PROFESSOR) {
+        professors.push(user);
+      }
+    }
+    return professors;
+  }
+
+
+  deleteUser(user: User) {
+    this.userService.deleteUser(user);
+  }
+}

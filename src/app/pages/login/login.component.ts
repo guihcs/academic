@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
+import {LoginService} from '../../services/login/login.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private loginService: LoginService
   ) {
   }
 
@@ -24,8 +26,14 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  async onSubmit(loginData) {
+  async login(loginData) {
 
-    await this.router.navigate(['home']);
+    if (this.loginService.login(loginData)) {
+
+      await this.router.navigate(['home']);
+    } else {
+      console.log('error');
+    }
+
   }
 }

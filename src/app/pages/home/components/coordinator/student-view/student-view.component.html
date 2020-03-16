@@ -1,0 +1,7 @@
+<h1>Student View</h1>
+
+<app-user-view
+  (deleteEvent)="delete($event)"
+  (rowClickEvent)="details($event)"
+  [dataObservable]="studentSubject"
+></app-user-view>

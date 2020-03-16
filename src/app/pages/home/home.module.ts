@@ -1,18 +1,24 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {HomeRoutingModule} from './home-routing.module';
-import { ToolbarComponent } from './toolbar/toolbar.component';
+import {ToolbarComponent} from './toolbar/toolbar.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
 import {MatListModule} from '@angular/material/list';
-import { SidenavComponent } from './sidenav/sidenav.component';
+import {SidenavComponent} from './sidenav/sidenav.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SidenavItemsComponent} from './sidenav/sidenav.items.component';
 import {OptionsItemsComponent} from './toolbar/options.items.component';
-
+import {UserFormComponent} from './components/user-form/user-form.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {UserViewComponent} from './components/user-view/user-view.component';
+import {MatTableModule} from '@angular/material/table';
+import {MatInputModule} from '@angular/material/input';
+import {UserComponent} from './components/user/user.component';
+import {ExamFormComponent} from './components/admin/exam-form/exam-form.component';
 
 
 @NgModule({
@@ -20,13 +26,19 @@ import {OptionsItemsComponent} from './toolbar/options.items.component';
     ToolbarComponent,
     SidenavComponent,
     SidenavItemsComponent,
-    OptionsItemsComponent
+    OptionsItemsComponent,
+    UserFormComponent,
+    UserViewComponent,
+    UserComponent,
+    ExamFormComponent
   ],
   exports: [
     ToolbarComponent,
     SidenavComponent,
     OptionsItemsComponent,
-    SidenavItemsComponent
+    SidenavItemsComponent,
+    UserFormComponent,
+    UserViewComponent
   ],
   imports: [
     HomeRoutingModule,
@@ -37,7 +49,11 @@ import {OptionsItemsComponent} from './toolbar/options.items.component';
     MatButtonModule,
     MatListModule,
     MatSidenavModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatTableModule,
+    MatInputModule
   ]
 })
 export class HomeModule { }

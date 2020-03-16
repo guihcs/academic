@@ -1,0 +1,8 @@
+<h1>Coordinator View</h1>
+
+
+<app-user-view
+  (deleteEvent)="delete($event)"
+  (rowClickEvent)="details($event)"
+  [dataObservable]="coordinators"
+></app-user-view>

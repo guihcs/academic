@@ -13,22 +13,22 @@ export class UserService {
   users: User[] = [];
 
   constructor() {
-    let admin = new Admin();
+    const admin = new Admin();
     admin.name = 'Cleito rasta';
     admin.login = 'qwe';
     admin.password = 'asd';
     admin.cpf = '123';
-    let coordinator = new Coordinator();
+    const coordinator = new Coordinator();
     coordinator.name = 'Alm';
     coordinator.login = 'asd';
     coordinator.password = 'zxc';
     coordinator.cpf = '234';
-    let professor = new Professor();
+    const professor = new Professor();
     professor.name = 'Luan';
     professor.login = 'wer';
     professor.password = 'sdf';
     professor.cpf = '654';
-    let student = new Student();
+    const student = new Student();
     student.name = 'Tiam';
     student.login = 'sdf';
     student.password = 'xcv';

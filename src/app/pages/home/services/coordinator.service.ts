@@ -14,7 +14,7 @@ export class CoordinatorService extends UserService {
   }
 
   getUsers(): User[] {
-    let professors = [];
+    const professors = [];
     for (const user of this.userService.getUsers()) {
       if (user.type === UserType.COORDINATOR) {
         professors.push(user);

@@ -28,8 +28,7 @@ export class LoginComponent implements OnInit {
 
   async login(loginData) {
 
-    if (this.loginService.login(loginData)) {
-
+    if (await this.loginService.login(loginData)) {
       await this.router.navigate(['home']);
     } else {
       console.log('error');

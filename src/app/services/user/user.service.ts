@@ -1,70 +1,42 @@
 import {Injectable} from '@angular/core';
 import {User} from '../../models/User';
-import {Admin} from '../../models/Admin';
-import {Coordinator} from '../../models/Coordinator';
-import {Professor} from '../../models/Professor';
-import {Student} from '../../models/Student';
+import {HttpClient} from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  users: User[] = [];
+  constructor(private http: HttpClient) {
 
-  constructor() {
-    const admin = new Admin();
-    admin.name = 'Cleito rasta';
-    admin.login = 'qwe';
-    admin.password = 'asd';
-    admin.cpf = '123';
-    const coordinator = new Coordinator();
-    coordinator.name = 'Alm';
-    coordinator.login = 'asd';
-    coordinator.password = 'zxc';
-    coordinator.cpf = '234';
-    const professor = new Professor();
-    professor.name = 'Luan';
-    professor.login = 'wer';
-    professor.password = 'sdf';
-    professor.cpf = '654';
-    const student = new Student();
-    student.name = 'Tiam';
-    student.login = 'sdf';
-    student.password = 'xcv';
-    student.cpf = '543';
-
-    this.users.push(admin, professor, coordinator, student);
   }
 
-  saveUser(user: User) {
-    this.users.push(user);
+  async saveUser(user: User): Promise<boolean> {
+
+    let insertResult: any = await this.http.post('api/insertUser', {user: user}).toPromise();
+
+    return insertResult.status === 'ok';
   }
 
-  deleteUser(user: User) {
-    for (let i = 0; i < this.users.length; i++) {
-      if (user.cpf === this.users[i].cpf) {
-        this.users.splice(i, 1);
-        break;
-      }
-    }
+  async deleteUser(user: User): Promise<boolean> {
+    let deleteResult: any = await this.http.post('api/deleteUser', {
+      key: 'cpf',
+      value: user.cpf
+    }).toPromise();
+
+    return deleteResult.status === 'ok';
   }
 
 
-  getUsers(userData: any = false) {
-    if (userData) {
-      const users = [];
+  async getUsers(userData: any): Promise<User[]> {
+    return await this.http.get<User[]>('api/getUsers/' + userData).toPromise();
+  }
 
-      for (const user of this.users) {
+  async updateUser(user) {
+    let result: any = await this.http.post('api/updateUser', {user: user}).toPromise();
 
-        if (userData === user.type) {
-          users.push(user);
-        }
-      }
-      return users;
-    } else {
-      return this.users;
-    }
+    return result.status === 'ok';
   }
 
 }

@@ -35,11 +35,11 @@ export class UserViewComponent implements OnInit {
     });
   }
 
-  updateView(params) {
+  async updateView(params) {
     this.isUpdating = false;
     this.userType = +params.get('userType');
     this.viewTitle = UserType[this.userType];
-    this.userData = this.userService.getUsers(+this.userType);
+    this.userData = await this.userService.getUsers(+this.userType);
     this.dataSource = new BehaviorSubject<User[]>(this.userData);
   }
 
@@ -48,13 +48,15 @@ export class UserViewComponent implements OnInit {
     this.user = user;
   }
 
-  updateUser() {
+  async updateUser() {
+    await this.userService.updateUser(this.user);
     this.isUpdating = false;
+    this.user = null;
   }
 
-  delete(user) {
-    this.userService.deleteUser(user);
-    this.dataSource.next(this.userService.getUsers(+this.userType));
+  async delete(user) {
+    await this.userService.deleteUser(user);
+    this.dataSource.next(await this.userService.getUsers(+this.userType));
   }
 
 }

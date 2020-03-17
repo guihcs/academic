@@ -21,6 +21,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatTableModule} from '@angular/material/table';
 import {ProfileComponent} from './pages/home/components/profile/profile.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     ReactiveFormsModule,
     MatTableModule,
     MatCheckboxModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

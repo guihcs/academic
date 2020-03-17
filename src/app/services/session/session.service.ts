@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {User} from '../../models/User';
-import {UserService} from '../user/user.service';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -9,16 +9,19 @@ export class SessionService {
 
   session: User;
 
-  constructor(private userService: UserService) {
+  constructor(private http: HttpClient) {
   }
 
-  login(data) {
-    for (const user of this.userService.getUsers()) {
-      if (user.login === data.login && user.password === data.password) {
-        this.session = user;
-        return true;
-      }
+  async login(data) {
+    const result = this.http.post('/api/login', data);
+    const objectPromise: any = await result.toPromise();
+
+    if (objectPromise.status === 'ok') {
+
+      this.session = objectPromise.session;
+      return true;
     }
+
     return false;
   }
 

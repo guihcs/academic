@@ -1,54 +1,55 @@
-<h1>Coordinator Details</h1>
+<h1>{{title}}</h1>
 
 <div class="column">
 
   <mat-form-field class="input-form-field">
     <mat-label>Name</mat-label>
-    <input [(ngModel)]="coordinator.name" matInput>
+    <input [(ngModel)]="user.name" matInput>
   </mat-form-field>
 
   <mat-form-field class="input-form-field">
     <mat-label>CPF</mat-label>
-    <input [(ngModel)]="coordinator.cpf" matInput>
+    <input [(ngModel)]="user.cpf" matInput>
   </mat-form-field>
 
   <mat-form-field class="input-form-field">
     <mat-label>Email</mat-label>
-    <input [(ngModel)]="coordinator.profile.email" matInput>
+    <input [(ngModel)]="user.profile.email" matInput>
   </mat-form-field>
 
   <mat-form-field class="input-form-field">
     <mat-label>Phone</mat-label>
-    <input [(ngModel)]="coordinator.profile.phone" matInput>
+    <input [(ngModel)]="user.profile.phone" matInput>
   </mat-form-field>
 
   <mat-form-field class="input-form-field">
     <mat-label>City</mat-label>
-    <input [(ngModel)]="coordinator.address.city" matInput>
+    <input [(ngModel)]="user.address.city" matInput>
   </mat-form-field>
 
   <mat-form-field class="input-form-field">
     <mat-label>Street</mat-label>
-    <input [(ngModel)]="coordinator.address.street" matInput>
+    <input [(ngModel)]="user.address.street" matInput>
   </mat-form-field>
 
   <mat-form-field class="input-form-field">
     <mat-label>State</mat-label>
-    <input [(ngModel)]="coordinator.address.state" matInput>
+    <input [(ngModel)]="user.address.state" matInput>
   </mat-form-field>
 
   <mat-form-field class="input-form-field">
     <mat-label>Login</mat-label>
-    <input [(ngModel)]="coordinator.login" matInput>
+    <input [(ngModel)]="user.login" matInput>
   </mat-form-field>
 
   <mat-form-field class="input-form-field">
     <mat-label>Password</mat-label>
-    <input [(ngModel)]="coordinator.password" matInput type="password">
+    <input [(ngModel)]="user.password" matInput type="password">
   </mat-form-field>
 
   <div>
-    <button (click)="update()" color="primary" mat-raised-button>Update</button>
+    <button (click)="updateUser.emit(user)" color="primary" mat-raised-button>Update</button>
   </div>
 
 </div>
+

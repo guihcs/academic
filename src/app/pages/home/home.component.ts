@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {LoginService} from '../../services/login/login.service';
+import {SessionService} from '../../services/session/session.service';
 import {UserType} from '../../models/UserType';
 
 @Component({
@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   session;
   userType = UserType;
 
-  constructor(private router: Router, private loginService: LoginService) {
+  constructor(private router: Router, private loginService: SessionService) {
   }
 
   ngOnInit(): void {

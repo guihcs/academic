@@ -1,5 +1,8 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {User} from '../../../../models/User';
+import {UserService} from '../../../../services/user/user.service';
+import {ActivatedRoute} from '@angular/router';
+import {UserType} from '../../../../models/UserType';
 
 @Component({
   selector: 'app-user-form',
@@ -8,18 +11,24 @@ import {User} from '../../../../models/User';
 })
 export class UserFormComponent implements OnInit {
 
+  userType;
+  title;
   user: User = new User();
-  @Output() formResult = new EventEmitter();
 
-  constructor() {
+  constructor(private route: ActivatedRoute, private userService: UserService) {
   }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe(map => {
+      this.userType = +map.get('userType');
+      this.title = UserType[this.userType];
+    });
 
   }
 
-  emitUser() {
-    this.formResult.emit(this.user);
+  saveUser() {
+    this.user.type = +this.userType;
+    this.userService.saveUser(this.user);
     this.user = new User();
   }
 

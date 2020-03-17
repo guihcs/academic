@@ -17,8 +17,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {UserViewComponent} from './components/user-view/user-view.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
-import {UserComponent} from './components/user/user.component';
 import {ExamFormComponent} from './components/admin/exam-form/exam-form.component';
+import {UserDetailsComponent} from './components/user-details/user-details.component';
 
 
 @NgModule({
@@ -29,8 +29,8 @@ import {ExamFormComponent} from './components/admin/exam-form/exam-form.componen
     OptionsItemsComponent,
     UserFormComponent,
     UserViewComponent,
-    UserComponent,
-    ExamFormComponent
+    ExamFormComponent,
+    UserDetailsComponent
   ],
   exports: [
     ToolbarComponent,

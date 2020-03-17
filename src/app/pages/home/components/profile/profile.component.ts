@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {LoginService} from '../../../../services/login/login.service';
+import {SessionService} from '../../../../services/session/session.service';
 import {UserType} from '../../../../models/UserType';
 
 @Component({
@@ -12,7 +12,7 @@ export class ProfileComponent implements OnInit {
   session;
   userType = UserType;
 
-  constructor(private loginService: LoginService) {
+  constructor(private loginService: SessionService) {
   }
 
   ngOnInit(): void {

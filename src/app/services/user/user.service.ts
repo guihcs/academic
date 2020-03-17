@@ -38,28 +38,33 @@ export class UserService {
   }
 
   saveUser(user: User) {
-
-
     this.users.push(user);
   }
 
   deleteUser(user: User) {
-
-
     for (let i = 0; i < this.users.length; i++) {
-
-
       if (user.cpf === this.users[i].cpf) {
         this.users.splice(i, 1);
-
-
         break;
       }
     }
   }
 
 
-  getUsers() {
-    return this.users;
+  getUsers(userData: any = false) {
+    if (userData) {
+      const users = [];
+
+      for (const user of this.users) {
+
+        if (userData === user.type) {
+          users.push(user);
+        }
+      }
+      return users;
+    } else {
+      return this.users;
+    }
   }
+
 }

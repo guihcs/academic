@@ -26,7 +26,6 @@ export class UserFormDescriptor {
   state = {};
 }
 
-
 export class User {
   type: UserType;
   name: string;
@@ -42,3 +41,5 @@ export class User {
     this.address = new Address();
   }
 }
+
+

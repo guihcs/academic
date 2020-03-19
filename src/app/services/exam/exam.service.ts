@@ -1,28 +1,27 @@
 import {Injectable} from '@angular/core';
 import {Exam} from '../../models/Exam';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExamService {
 
-  exam: Exam;
+  constructor(private http: HttpClient) {
 
-  constructor() {
-    const exam = new Exam();
-    exam.date = new Date(2019, 3, 16).toISOString();
-    exam.local = 'Fafe';
-    exam.courses = ['Mat', 'Port', 'Hue', 'BR'];
-    this.exam = exam;
   }
 
 
-  getExam() {
-    return this.exam;
+  async getExam() {
+    return this.http.get('api/getExam').toPromise();
   }
 
-  updateExam(exam: Exam) {
-    this.exam = exam;
+  async updateExam(exam: Exam) {
+
+    let result: any = await this.http.post('api/updateExam', {exam: exam}).toPromise();
+
+    return result.status === 'ok';
+
   }
 
 

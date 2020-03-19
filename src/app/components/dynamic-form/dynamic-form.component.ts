@@ -30,12 +30,14 @@ export class DynamicFormComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
 
     for (const key of Object.keys(this.formDescriptor)) {
+      let args = this.formDescriptor[key];
+      if (!args.label) {
+        args.label = key;
+      }
+      args.value = this.value[key];
+      args.class = this.inputClass;
 
-      let dynamicControl = this.inputBuilder.buildInput(this.formContainer, this.formDescriptor[key]?.type, {
-        label: key,
-        value: this.value[key],
-        class: this.inputClass
-      });
+      let dynamicControl = this.inputBuilder.buildInput(this.formContainer, this.formDescriptor[key]?.type, args);
 
       this.dynamicForm.addControl(key, dynamicControl.getFormControl());
     }

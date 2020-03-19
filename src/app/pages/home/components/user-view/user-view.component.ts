@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {User} from '../../../../models/User';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {User, UserFormDescriptor} from '../../../../models/User';
 import {BehaviorSubject} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 import {UserService} from '../../../../services/user/user.service';
@@ -12,12 +12,16 @@ import {UserType} from '../../../../models/UserType';
 })
 export class UserViewComponent implements OnInit {
 
+  @ViewChild('userForm') userForm;
+  formDescriptor;
+
   viewTitle;
   isUpdating = false;
   userType;
   userData: User[];
   user: User;
   dataSource: BehaviorSubject<User[]>;
+  paramMap;
 
   displayedColumns = ['name', 'cpf', 'remove'];
 
@@ -31,6 +35,7 @@ export class UserViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(paramMap => {
+      this.paramMap = paramMap;
       this.updateView(paramMap);
     });
   }
@@ -44,14 +49,40 @@ export class UserViewComponent implements OnInit {
   }
 
   showDetails(user) {
-    this.isUpdating = true;
     this.user = user;
+    this.formDescriptor = new UserFormDescriptor();
+
+    delete this.formDescriptor.login;
+    delete this.formDescriptor.password;
+
+    for (const key of Object.keys(this.user)) {
+      if (typeof this.user[key] === 'object') {
+
+        for (const key1 of Object.keys(this.user[key])) {
+          if (this.formDescriptor.hasOwnProperty(key)) {
+            this.formDescriptor[key].default = this.user[key][key1];
+          }
+        }
+      } else {
+        if (this.formDescriptor.hasOwnProperty(key)) {
+          this.formDescriptor[key].default = this.user[key];
+        }
+      }
+    }
+    this.isUpdating = true;
+
+
   }
 
   async updateUser() {
-    await this.userService.updateUser(this.user);
+    let user = this.userForm.getResult();
+    user['_id'] = this.user['_id'];
+    console.log(user);
+
+    await this.userService.updateUser(user);
     this.isUpdating = false;
-    this.user = null;
+    this.userForm.reset();
+    this.updateView(this.paramMap);
   }
 
   async delete(user) {

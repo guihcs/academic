@@ -12,8 +12,8 @@ export class ExamComponent implements OnInit {
   constructor(private examService: ExamService) {
   }
 
-  ngOnInit(): void {
-    this.exam = this.examService.getExam();
+  async ngOnInit() {
+    this.exam = await this.examService.getExam();
   }
 
 }

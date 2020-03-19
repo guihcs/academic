@@ -33,6 +33,10 @@ export class TextInputComponent implements OnInit, DynamicInput {
     if (args['class']) {
       this.class = args.class;
     }
+
+    if (args['default']) {
+      this.formControl.setValue(args.default);
+    }
   }
 
   getFormControl() {

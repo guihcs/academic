@@ -1,1 +1,13 @@
-<p>exam-form works!</p>
+<h1> Update Exam </h1>
+<ng-container *ngIf="!isLoading">
+  <app-dynamic-form
+    #dynamicForm
+    [formDescriptor]="formDescriptor"
+    formClass="column"
+    inputClass="input-form-field"
+  ></app-dynamic-form>
+  <div>
+    <button (click)="updateExam()" color="primary" mat-raised-button>Update</button>
+  </div>
+</ng-container>
+

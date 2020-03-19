@@ -19,6 +19,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
 import {ExamFormComponent} from './components/admin/exam-form/exam-form.component';
 import {UserDetailsComponent} from './components/user-details/user-details.component';
+import {DynamicFormComponent} from '../../components/dynamic-form/dynamic-form.component';
+import {TextInputComponent} from '../../services/input-builder/inputs/text-input/text-input.component';
 
 
 @NgModule({
@@ -30,7 +32,9 @@ import {UserDetailsComponent} from './components/user-details/user-details.compo
     UserFormComponent,
     UserViewComponent,
     ExamFormComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
+    DynamicFormComponent,
+    TextInputComponent
   ],
   exports: [
     ToolbarComponent,
@@ -38,7 +42,8 @@ import {UserDetailsComponent} from './components/user-details/user-details.compo
     OptionsItemsComponent,
     SidenavItemsComponent,
     UserFormComponent,
-    UserViewComponent
+    UserViewComponent,
+    DynamicFormComponent
   ],
   imports: [
     HomeRoutingModule,

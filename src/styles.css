@@ -21,3 +21,15 @@ body {
 .input-form-field {
   width: 300px;
 }
+
+mat-list-item {
+  /*transition: 0.3s;*/
+}
+
+mat-list-item.selected {
+  /*background-color: red;*/
+}
+
+mat-list-item.selected:hover {
+  /*background-color: rgba(0.3, 0.4, 0.3, 0.2) !important;*/
+}

@@ -1,0 +1,36 @@
+<h3 mat-subheader>Insert</h3>
+<mat-list-item
+  #insertNav
+  (click)="selected = insertNav"
+  [class.selected]="selected == insertNav"
+  [routerLink]="['insert', userType.COORDINATOR]"
+  matRipple
+>
+  <mat-icon matListIcon>person_add</mat-icon>
+  <a matLine>Insert Coordinator</a>
+</mat-list-item>
+
+<h3 mat-subheader>View</h3>
+<mat-list-item
+  #viewNav
+  (click)="selected = viewNav"
+  [class.selected]="selected == viewNav"
+  [routerLink]="['view', userType.COORDINATOR]"
+  matRipple
+>
+  <mat-icon matListIcon>view_list</mat-icon>
+  <a matLine>View Coordinators</a>
+</mat-list-item>
+
+<h3 mat-subheader>Exam</h3>
+<mat-list-item
+  #examNav
+  (click)="selected = examNav"
+  [class.selected]="selected == examNav"
+  [routerLink]="'examForm'"
+  matRipple
+>
+  <mat-icon matListIcon>view_list</mat-icon>
+  <a matLine>Update Exam</a>
+</mat-list-item>
+

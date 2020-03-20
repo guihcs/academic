@@ -2,7 +2,7 @@
   <button mat-icon-button (click)="menuEvent.emit()">
     <mat-icon>menu</mat-icon>
   </button>
-  <span class="app-title"> Academic </span>
+  <span [routerLink]="'/home'" class="app-title"> Academic </span>
   <div class="spacer"></div>
   <img matListAvatar src="">
   <button mat-button [matMenuTriggerFor]="beforeMenu">Options</button>

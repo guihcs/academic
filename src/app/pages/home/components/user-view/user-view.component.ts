@@ -4,6 +4,9 @@ import {BehaviorSubject} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 import {UserService} from '../../../../services/user/user.service';
 import {UserType} from '../../../../models/UserType';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatDialog} from '@angular/material/dialog';
+import {ConfirmDeleteDialog} from './confirm-delete-dialog';
 
 @Component({
   selector: 'app-user-view',
@@ -27,7 +30,9 @@ export class UserViewComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private userService: UserService
+    private userService: UserService,
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
   ) {
 
 
@@ -43,7 +48,7 @@ export class UserViewComponent implements OnInit {
   async updateView(params) {
     this.isUpdating = false;
     this.userType = +params.get('userType');
-    this.viewTitle = UserType[this.userType];
+    this.viewTitle = this.toPascalCase(UserType[this.userType]);
     this.userData = await this.userService.getUsers(+this.userType);
     this.dataSource = new BehaviorSubject<User[]>(this.userData);
   }
@@ -56,11 +61,15 @@ export class UserViewComponent implements OnInit {
     delete this.formDescriptor.password;
 
     for (const key of Object.keys(this.user)) {
+
+
       if (typeof this.user[key] === 'object') {
 
+
         for (const key1 of Object.keys(this.user[key])) {
-          if (this.formDescriptor.hasOwnProperty(key)) {
-            this.formDescriptor[key].default = this.user[key][key1];
+
+          if (this.formDescriptor.hasOwnProperty(key1)) {
+            this.formDescriptor[key1].default = this.user[key][key1];
           }
         }
       } else {
@@ -69,6 +78,8 @@ export class UserViewComponent implements OnInit {
         }
       }
     }
+
+
     this.isUpdating = true;
 
 
@@ -77,17 +88,48 @@ export class UserViewComponent implements OnInit {
   async updateUser() {
     let user = this.userForm.getResult();
     user['_id'] = this.user['_id'];
-    console.log(user);
+    if (await this.userService.updateUser(user)) {
+      this.isUpdating = false;
+      this.userForm.reset();
+      this.updateView(this.paramMap);
+      this.snackBar.open('User updated.', '', {
+        duration: 2000
+      });
+    } else {
+      this.snackBar.open('Error.', '', {
+        duration: 2000
+      });
+    }
 
-    await this.userService.updateUser(user);
-    this.isUpdating = false;
-    this.userForm.reset();
-    this.updateView(this.paramMap);
   }
 
   async delete(user) {
-    await this.userService.deleteUser(user);
-    this.dataSource.next(await this.userService.getUsers(+this.userType));
+    let dialogRef = this.dialog.open(ConfirmDeleteDialog, {});
+
+    dialogRef.afterClosed().subscribe(async res => {
+      if (res === 'delete') {
+        if (await this.userService.deleteUser(user)) {
+          this.snackBar.open('User removed.', '', {
+            duration: 2000
+          });
+
+        } else {
+          this.snackBar.open('Error.', '', {
+            duration: 2000
+          });
+        }
+        this.dataSource.next(await this.userService.getUsers(+this.userType));
+      }
+    });
+
+
+  }
+
+  private toPascalCase(text: string) {
+    return text[0].toUpperCase() + text.substr(1).toLowerCase();
   }
 
 }
+
+
+

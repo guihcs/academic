@@ -9,12 +9,24 @@
     <div class="column login-content">
       <h2 class="form-title">Academic</h2>
       <mat-form-field>
-        <mat-label>Login</mat-label>
-        <input class="form-field" matInput formControlName="login">
+        <mat-label>Email</mat-label>
+        <input class="form-field" formControlName="email" matInput>
+        <mat-error *ngIf="haveLoginError">
+          {{loginErrorMessage}}
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <mat-label>Password</mat-label>
-        <input class="form-field" matInput type="password" formControlName="password">
+        <input
+          [errorStateMatcher]="errorMatcher"
+          class="form-field"
+          formControlName="password"
+          matInput
+          type="password"
+        >
+        <mat-error *ngIf="havePasswordError">
+          {{passwordErrorMessage}}
+        </mat-error>
       </mat-form-field>
       <div class="center">
         <button color="primary" mat-raised-button type="submit">Login</button>

@@ -1,13 +1,10 @@
 import {Injectable} from '@angular/core';
-import {User} from '../../models/User';
 import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessionService {
-
-  session: User;
 
   constructor(private http: HttpClient) {
   }
@@ -18,7 +15,7 @@ export class SessionService {
 
     if (objectPromise.status === 'ok') {
 
-      this.session = objectPromise.session;
+      localStorage.setItem('user', JSON.stringify(objectPromise.session));
       return true;
     }
 
@@ -27,10 +24,10 @@ export class SessionService {
 
 
   getSession() {
-    return this.session;
+    return JSON.parse(localStorage.getItem('user'));
   }
 
   logout() {
-    this.session = null;
+    localStorage.clear();
   }
 }

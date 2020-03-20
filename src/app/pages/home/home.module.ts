@@ -10,7 +10,6 @@ import {MatListModule} from '@angular/material/list';
 import {SidenavComponent} from './sidenav/sidenav.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {SidenavItemsComponent} from './sidenav/sidenav.items.component';
 import {OptionsItemsComponent} from './toolbar/options.items.component';
 import {UserFormComponent} from './components/user-form/user-form.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -18,32 +17,45 @@ import {UserViewComponent} from './components/user-view/user-view.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
 import {ExamFormComponent} from './components/admin/exam-form/exam-form.component';
-import {UserDetailsComponent} from './components/user-details/user-details.component';
 import {DynamicFormComponent} from '../../components/dynamic-form/dynamic-form.component';
 import {TextInputComponent} from '../../services/input-builder/inputs/text-input/text-input.component';
+import {AdminNavComponent} from './components/admin/admin-nav/admin-nav.component';
+import {CoordinatorNavComponent} from './components/coordinator/coordinator-nav/coordinator-nav.component';
+import {ProfessorNavComponent} from './components/professor/professor-nav/professor-nav.component';
+import {StudentNavComponent} from './components/student/student-nav/student-nav.component';
+import {MatRippleModule} from '@angular/material/core';
+import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from '@angular/material/snack-bar';
+import {MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from '@angular/material/dialog';
+import {ConfirmDeleteDialog} from './components/user-view/confirm-delete-dialog';
 
 
 @NgModule({
   declarations: [
     ToolbarComponent,
     SidenavComponent,
-    SidenavItemsComponent,
     OptionsItemsComponent,
     UserFormComponent,
     UserViewComponent,
     ExamFormComponent,
-    UserDetailsComponent,
     DynamicFormComponent,
-    TextInputComponent
+    TextInputComponent,
+    AdminNavComponent,
+    CoordinatorNavComponent,
+    ProfessorNavComponent,
+    StudentNavComponent,
+    ConfirmDeleteDialog
   ],
   exports: [
     ToolbarComponent,
     SidenavComponent,
     OptionsItemsComponent,
-    SidenavItemsComponent,
     UserFormComponent,
     UserViewComponent,
-    DynamicFormComponent
+    DynamicFormComponent,
+    AdminNavComponent,
+    CoordinatorNavComponent,
+    ProfessorNavComponent,
+    StudentNavComponent
   ],
   imports: [
     HomeRoutingModule,
@@ -58,7 +70,14 @@ import {TextInputComponent} from '../../services/input-builder/inputs/text-input
     ReactiveFormsModule,
     MatFormFieldModule,
     MatTableModule,
-    MatInputModule
+    MatInputModule,
+    MatRippleModule,
+    MatSnackBarModule,
+    MatDialogModule
+  ],
+  providers: [
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}},
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}}
   ]
 })
 export class HomeModule { }

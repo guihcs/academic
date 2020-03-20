@@ -7,10 +7,4 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
   title = 'academic';
-
-
-  printResult(result) {
-    console.log(result);
-
-  }
 }

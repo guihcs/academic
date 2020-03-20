@@ -1,0 +1,42 @@
+<h3 mat-subheader>Insert</h3>
+<mat-list-item
+  #insertProfessorNav
+  (click)="selected = insertProfessorNav"
+  [class.selected]="selected == insertProfessorNav"
+  [routerLink]="['insert', userType.PROFESSOR]"
+  matRipple
+>
+  <mat-icon matListIcon>person_add</mat-icon>
+  <a matLine>Insert Professor</a>
+</mat-list-item>
+<mat-list-item
+  #insertStudentNav
+  (click)="selected = insertStudentNav"
+  [class.selected]="selected == insertStudentNav"
+  [routerLink]="['insert', userType.STUDENT]"
+  matRipple
+>
+  <mat-icon matListIcon>person_add</mat-icon>
+  <a matLine>Insert Student</a>
+</mat-list-item>
+<h3 mat-subheader>View</h3>
+<mat-list-item
+  #viewProfessorNav
+  (click)="selected = viewProfessorNav"
+  [class.selected]="selected == viewProfessorNav"
+  [routerLink]="['view', userType.PROFESSOR]"
+  matRipple
+>
+  <mat-icon matListIcon>view_list</mat-icon>
+  <a matLine>View Professors</a>
+</mat-list-item>
+<mat-list-item
+  #viewStudentNav
+  (click)="selected = viewStudentNav"
+  [class.selected]="selected == viewStudentNav"
+  [routerLink]="['view', userType.STUDENT]"
+  matRipple
+>
+  <mat-icon matListIcon>view_list</mat-icon>
+  <a matLine>View Students</a>
+</mat-list-item>

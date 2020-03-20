@@ -8,14 +8,11 @@ export class UserFormDescriptor {
   cpf = {
     type: 'cpf'
   };
-  login = {
+  email = {
     type: 'email'
   };
   password = {
     type: 'password'
-  };
-  email = {
-    type: 'email'
   };
 
   phone = {
@@ -30,7 +27,7 @@ export class User {
   type: UserType;
   name: string;
   cpf: string;
-  login: string;
+  email: string;
   password: string;
   profile: Profile;
   address: Address;

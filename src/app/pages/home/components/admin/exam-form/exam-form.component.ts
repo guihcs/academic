@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {ExamFormDescriptor} from '../../../../../models/Exam';
 import {ExamService} from '../../../../../services/exam/exam.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-exam-form',
@@ -14,7 +15,9 @@ export class ExamFormComponent implements OnInit, AfterViewInit {
   isLoading = true;
   examID;
 
-  constructor(private examService: ExamService) {
+  constructor(private examService: ExamService,
+              private snackBar: MatSnackBar
+  ) {
   }
 
   ngOnInit(): void {
@@ -62,6 +65,13 @@ export class ExamFormComponent implements OnInit, AfterViewInit {
 
       this.isLoading = true;
       this.getExamData();
+      this.snackBar.open('Exam Updated', '', {
+        duration: 2000
+      });
+    } else {
+      this.snackBar.open('Error', '', {
+        duration: 2000
+      });
     }
   }
 

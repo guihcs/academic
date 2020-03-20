@@ -6,6 +6,7 @@ import {UserType} from '../../../../models/UserType';
 import {DynamicFormComponent} from '../../../../components/dynamic-form/dynamic-form.component';
 import {Profile} from '../../../../models/Profile';
 import {Address} from '../../../../models/Address';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-user-form',
@@ -22,7 +23,8 @@ export class UserFormComponent implements OnInit, AfterViewInit {
 
   constructor(private route: ActivatedRoute,
               private userService: UserService,
-              private changeDetectorRef: ChangeDetectorRef
+              private changeDetectorRef: ChangeDetectorRef,
+              private snackBar: MatSnackBar
   ) {
   }
 
@@ -33,13 +35,12 @@ export class UserFormComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.route.paramMap.subscribe(map => {
       this.userType = +map.get('userType');
-      this.title = 'Insert ' + UserType[this.userType];
+      this.title = 'Insert ' + this.toPascalCase(UserType[this.userType]);
       this.userForm.reset();
       this.changeDetectorRef.detectChanges();
     });
 
   }
-
 
   async saveUser() {
     let userData = this.userForm.getResult();
@@ -60,8 +61,19 @@ export class UserFormComponent implements OnInit, AfterViewInit {
     user.password = userData.password;
     user.type = +this.userType;
 
-    await this.userService.saveUser(user);
-    this.userForm.reset();
+    if (await this.userService.saveUser(user)) {
+      this.userForm.reset();
+      this.snackBar.open('User Inserted.', '', {
+        duration: 2000
+      });
+    } else {
+      this.snackBar.open('Error.');
+    }
+
+  }
+
+  private toPascalCase(text: string) {
+    return text[0].toUpperCase() + text.substr(1).toLowerCase();
   }
 
 }

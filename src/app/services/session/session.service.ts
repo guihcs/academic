@@ -12,13 +12,10 @@ export class SessionService {
   async login(data) {
     const result = this.http.post('/api/login', data);
     const objectPromise: any = await result.toPromise();
-
     if (objectPromise.status === 'ok') {
-
       localStorage.setItem('user', JSON.stringify(objectPromise.session));
       return true;
     }
-
     return false;
   }
 

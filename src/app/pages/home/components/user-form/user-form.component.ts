@@ -1,12 +1,11 @@
 import {AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
-import {User, UserFormDescriptor} from '../../../../models/User';
+import {User} from '../../../../models/User';
 import {UserService} from '../../../../services/user/user.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, ParamMap} from '@angular/router';
 import {UserType} from '../../../../models/UserType';
 import {DynamicFormComponent} from '../../../../components/dynamic-form/dynamic-form.component';
-import {Profile} from '../../../../models/Profile';
-import {Address} from '../../../../models/Address';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {assign, toPascalCase} from '../../../../utils/utils';
 
 @Component({
   selector: 'app-user-form',
@@ -15,11 +14,10 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class UserFormComponent implements OnInit, AfterViewInit {
 
-  @ViewChild('userForm') userForm: DynamicFormComponent;
+  @ViewChild('userForm') formContainer: DynamicFormComponent;
   userType;
-  title;
+  pageTitle;
   user: User = new User();
-  formDescriptor = new UserFormDescriptor();
 
   constructor(private route: ActivatedRoute,
               private userService: UserService,
@@ -29,51 +27,35 @@ export class UserFormComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-
   }
 
   ngAfterViewInit(): void {
-    this.route.paramMap.subscribe(map => {
-      this.userType = +map.get('userType');
-      this.title = 'Insert ' + this.toPascalCase(UserType[this.userType]);
-      this.userForm.reset();
-      this.changeDetectorRef.detectChanges();
-    });
-
+    this.route.paramMap.subscribe(map => this.updateForm(map));
   }
 
   async saveUser() {
-    let userData = this.userForm.getResult();
-
-    let profile = new Profile();
-    profile.phone = userData.phone;
-    profile.email = userData.email;
-    let address = new Address();
-    address.state = userData.state;
-    address.city = userData.city;
-    address.street = userData.street;
+    let userData = this.formContainer.getResult();
     let user = new User();
-    user.profile = profile;
-    user.address = address;
-    user.name = userData.name;
-    user.cpf = userData.cpf;
-    user.login = userData.login;
-    user.password = userData.password;
-    user.type = +this.userType;
+    userData.type = +this.userType;
+
+    assign(user, userData, 2);
 
     if (await this.userService.saveUser(user)) {
-      this.userForm.reset();
+      this.formContainer.reset();
       this.snackBar.open('User Inserted.', '', {
         duration: 2000
       });
     } else {
       this.snackBar.open('Error.');
     }
-
   }
 
-  private toPascalCase(text: string) {
-    return text[0].toUpperCase() + text.substr(1).toLowerCase();
+  private updateForm(map: ParamMap) {
+    this.userType = +map.get('userType');
+    this.pageTitle = 'Insert ' + toPascalCase(UserType[this.userType]);
+    this.formContainer.reset();
+    this.changeDetectorRef.detectChanges();
   }
+
 
 }

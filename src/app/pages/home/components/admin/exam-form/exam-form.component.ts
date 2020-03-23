@@ -1,5 +1,4 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {ExamFormDescriptor} from '../../../../../models/Exam';
 import {ExamService} from '../../../../../services/exam/exam.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
@@ -11,9 +10,9 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 export class ExamFormComponent implements OnInit, AfterViewInit {
 
   @ViewChild('dynamicForm') dynamicForm;
-  formDescriptor = new ExamFormDescriptor();
   isLoading = true;
   examID;
+  formDescriptor = {};
 
   constructor(private examService: ExamService,
               private snackBar: MatSnackBar
@@ -31,28 +30,8 @@ export class ExamFormComponent implements OnInit, AfterViewInit {
 
   async getExamData() {
     let exam = await this.examService.getExam();
-
-    if (exam) {
-
-      if (exam['_id']) {
-        this.examID = exam['_id'];
-      }
-      for (const key of Object.keys(exam)) {
-        if (typeof exam[key] === 'object') {
-
-          for (const key1 of Object.keys(exam[key])) {
-            if (this.formDescriptor.hasOwnProperty(key)) {
-              this.formDescriptor[key].default = exam[key][key1];
-            }
-          }
-        } else {
-          if (this.formDescriptor.hasOwnProperty(key)) {
-            this.formDescriptor[key].default = exam[key];
-          }
-        }
-      }
-
-    }
+    this.examID = exam._id;
+    this.formDescriptor = exam;
     this.isLoading = false;
   }
 

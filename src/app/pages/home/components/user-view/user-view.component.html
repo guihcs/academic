@@ -1,5 +1,5 @@
 <ng-container *ngIf="!isUpdating">
-  <h1>View {{viewTitle}}</h1>
+  <h1>View {{pageTitle}}</h1>
   <table [dataSource]="dataSource" mat-table style="width: 100%">
 
     <!--  <ng-container matColumnDef="checkbox">
@@ -42,9 +42,12 @@
 
 
 <ng-container *ngIf="isUpdating">
-  <h1>{{viewTitle}} Details</h1>
-  <app-dynamic-form #userForm [formDescriptor]="formDescriptor" formClass="column"
-                    inputClass="input-form-field"></app-dynamic-form>
+  <h1>{{pageTitle}} Details</h1>
+  <app-dynamic-form
+    #userForm
+    [formDescriptor]="user"
+    formStyleClass="column"
+    inputStyleClass="input-form-field"></app-dynamic-form>
   <div>
     <button (click)="updateUser()" color="primary" mat-raised-button>Update</button>
   </div>

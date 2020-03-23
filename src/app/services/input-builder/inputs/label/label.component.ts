@@ -1,21 +1,18 @@
 import {Component, OnInit} from '@angular/core';
+import {InputDescriptor} from '../../InputDescriptor';
 import {DynamicInput} from '../../DynamicInput';
 import {FormControl} from '@angular/forms';
-import {InputDescriptor} from '../../InputDescriptor';
 
 @Component({
-  selector: 'app-text-input',
+  selector: 'app-label',
   template: `
-    <mat-form-field [class]="args.styleClass">
-      <mat-label>{{args.label}}</mat-label>
-      <input matInput [type]="args.type" [formControl]="formControl">
-    </mat-form-field>
+    <p>{{args.label}}: {{args.defaultValue}}</p>
   `
 })
-export class TextInputComponent implements OnInit, DynamicInput {
+export class LabelComponent implements OnInit, DynamicInput {
 
-  formControl = new FormControl('');
   args: InputDescriptor;
+  formControl = new FormControl('');
 
   constructor() {
   }
@@ -33,5 +30,6 @@ export class TextInputComponent implements OnInit, DynamicInput {
   getFormControl() {
     return this.formControl;
   }
+
 
 }

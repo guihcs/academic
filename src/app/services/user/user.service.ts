@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {User} from '../../models/User';
 import {HttpClient} from '@angular/common/http';
-
+import {assign} from '../../utils/utils';
 
 @Injectable({
   providedIn: 'root'
@@ -9,13 +9,10 @@ import {HttpClient} from '@angular/common/http';
 export class UserService {
 
   constructor(private http: HttpClient) {
-
   }
 
   async saveUser(user: User): Promise<boolean> {
-
     let insertResult: any = await this.http.post('api/insertUser', {user: user}).toPromise();
-
     return insertResult.status === 'ok';
   }
 
@@ -24,18 +21,21 @@ export class UserService {
       key: 'cpf',
       value: user.cpf
     }).toPromise();
-
     return deleteResult.status === 'ok';
   }
 
-
   async getUsers(userData: any): Promise<User[]> {
-    return await this.http.get<User[]>('api/getUsers/' + userData).toPromise();
+    let userJson = await this.http.get<User[]>('api/getUsers/' + userData).toPromise();
+    let users = [];
+    for (const user of userJson) {
+      let targetUser = new User();
+      assign(targetUser, user, 2);
+      users.push(targetUser);
+    }
+    return users;
   }
-
   async updateUser(user) {
     let result: any = await this.http.post('api/updateUser', {user: user}).toPromise();
-
     return result.status === 'ok';
   }
 

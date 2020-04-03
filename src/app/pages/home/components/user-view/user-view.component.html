@@ -43,11 +43,11 @@
 
 <ng-container *ngIf="isUpdating">
   <h1>{{pageTitle}} Details</h1>
-  <app-dynamic-form
+  <dynamic-form
     #userForm
     [formDescriptor]="user"
     formStyleClass="column"
-    inputStyleClass="input-form-field"></app-dynamic-form>
+    inputStyleClass="input-form-field"></dynamic-form>
   <div>
     <button (click)="updateUser()" color="primary" mat-raised-button>Update</button>
   </div>

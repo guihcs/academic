@@ -1,5 +1,6 @@
 import 'reflect-metadata';
-import {InputDescriptor} from './InputDescriptor';
+import {InputDescriptor} from './input-descriptor';
+
 
 export function FormInput(descriptor: InputDescriptor): any {
   return (target, key) => {

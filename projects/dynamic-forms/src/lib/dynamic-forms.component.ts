@@ -1,35 +1,37 @@
-import {AfterViewInit, ChangeDetectorRef, Component, Input, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
-import {InputBuilderService} from '../../services/input-builder/input-builder.service';
+import {ChangeDetectorRef, Component, Input, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {getDescriptor} from '../../services/input-builder/form-metadata';
+import {InputBuilderService} from './input-builder/input-builder.service';
+// @ts-ignore
+import {getDescriptor} from './models/form-metadata';
+import 'reflect-metadata';
 
 @Component({
-  selector: 'app-dynamic-form',
-  templateUrl: './dynamic-form.component.html',
-  styleUrls: ['./dynamic-form.component.css']
+  selector: 'dynamic-form',
+  template: `
+    <form [classList]="formStyleClass" [formGroup]="dynamicForm">
+      <ng-container #formContainer></ng-container>
+    </form>
+  `,
+  styles: []
 })
-export class DynamicFormComponent implements OnInit, AfterViewInit {
+export class DynamicFormsComponent implements OnInit {
 
   @Input() formStyleClass;
   @Input() inputStyleClass;
   @Input() formDescriptor;
-  private dynamicForm: FormGroup;
+  dynamicForm: FormGroup;
   @ViewChild('formContainer', {read: ViewContainerRef}) private formContainer;
 
-  constructor(private viewContainerRef: ViewContainerRef,
-              private inputBuilder: InputBuilderService,
-              private changeDetectorRef: ChangeDetectorRef,
-              private formBuilder: FormBuilder
+  constructor(
+    private formBuilder: FormBuilder,
+    private changeDetectorRef: ChangeDetectorRef,
+    private viewContainerRef: ViewContainerRef,
+    private inputBuilderService: InputBuilderService
   ) {
   }
 
-
   ngOnInit(): void {
     this.dynamicForm = this.formBuilder.group({});
-  }
-
-  get dynamicFormGroup() {
-    return this.dynamicForm;
   }
 
   ngAfterViewInit(): void {
@@ -42,7 +44,7 @@ export class DynamicFormComponent implements OnInit, AfterViewInit {
   }
 
   reset() {
-
+    this.dynamicForm.reset('');
   }
 
   private buildGroup(container, descriptor, depth) {
@@ -64,7 +66,7 @@ export class DynamicFormComponent implements OnInit, AfterViewInit {
           group = nestedGroup;
         }
       } else {
-        let dynamicInput = this.inputBuilder.buildInput(container, metadataDescriptor);
+        let dynamicInput = this.inputBuilderService.buildInput(container, metadataDescriptor);
         group = dynamicInput.getFormControl();
       }
       formGroup.addControl(metadataKey, group);

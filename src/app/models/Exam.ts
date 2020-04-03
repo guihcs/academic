@@ -1,4 +1,4 @@
-import {FormInput} from '../services/input-builder/form-metadata';
+import {FormInput} from 'dynamic-forms';
 
 export class Exam {
   _id?;

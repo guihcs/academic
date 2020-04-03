@@ -22,7 +22,6 @@ import {MatTableModule} from '@angular/material/table';
 import {ProfileComponent} from './pages/home/components/profile/profile.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {HttpClientModule} from '@angular/common/http';
-import {LabelComponent} from './services/input-builder/inputs/label/label.component';
 
 @NgModule({
   declarations: [
@@ -30,8 +29,7 @@ import {LabelComponent} from './services/input-builder/inputs/label/label.compon
     LoginComponent,
     HomeComponent,
     ExamComponent,
-    ProfileComponent,
-    LabelComponent,
+    ProfileComponent
   ],
   imports: [
     HomeModule,

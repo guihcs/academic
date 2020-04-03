@@ -1,4 +1,4 @@
-export interface DynamicInput {
+export interface ConfigurableInput {
   applyArguments(args);
 
   getFormControl();

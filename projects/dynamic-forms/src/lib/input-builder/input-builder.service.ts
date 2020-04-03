@@ -1,8 +1,8 @@
 import {ComponentFactoryResolver, Injectable, ViewContainerRef} from '@angular/core';
-import {TextInputComponent} from './inputs/text-input/text-input.component';
-import {DynamicInput} from './DynamicInput';
-import {InputDescriptor} from './InputDescriptor';
-import {LabelComponent} from './inputs/label/label.component';
+import {InputDescriptor} from '../models/input-descriptor';
+import {ConfigurableInput} from '../models/configurable-input';
+import {TextInputComponent} from '../inputs/text/text-input.component';
+import {LabelComponent} from '../inputs/label/label.component';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class InputBuilderService {
   }
 
 
-  buildInput(viewRef: ViewContainerRef, descriptor: InputDescriptor): DynamicInput {
+  buildInput(viewRef: ViewContainerRef, descriptor: InputDescriptor): ConfigurableInput {
 
     switch (descriptor.type) {
       case 'password':
@@ -37,14 +37,14 @@ export class InputBuilderService {
   }
 
   private buildTextInput(viewRef, type, args) {
-    const instance: DynamicInput = this.buildComponent(viewRef, TextInputComponent);
+    const instance: ConfigurableInput = this.buildComponent(viewRef, TextInputComponent);
     args.type = type;
     instance.applyArguments(args);
     return instance;
   }
 
   private buildLabel(viewRef, descriptor) {
-    const instance: DynamicInput = this.buildComponent(viewRef, LabelComponent);
+    const instance: ConfigurableInput = this.buildComponent(viewRef, LabelComponent);
     instance.applyArguments(descriptor);
     return instance;
   }

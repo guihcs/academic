@@ -3,9 +3,9 @@ import {User} from '../../../../models/User';
 import {UserService} from '../../../../services/user/user.service';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {UserType} from '../../../../models/UserType';
-import {DynamicFormComponent} from '../../../../components/dynamic-form/dynamic-form.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {assign, toPascalCase} from '../../../../utils/utils';
+import {DynamicFormsComponent} from 'dynamic-forms';
 
 @Component({
   selector: 'app-user-form',
@@ -14,7 +14,7 @@ import {assign, toPascalCase} from '../../../../utils/utils';
 })
 export class UserFormComponent implements OnInit, AfterViewInit {
 
-  @ViewChild('userForm') formContainer: DynamicFormComponent;
+  @ViewChild('userForm') formContainer: DynamicFormsComponent;
   userType;
   pageTitle;
   user: User = new User();

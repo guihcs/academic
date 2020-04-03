@@ -1,7 +1,7 @@
 import {Profile} from './Profile';
 import {Address} from './Address';
 import {UserType} from './UserType';
-import {FormInput, NestedInput} from '../services/input-builder/form-metadata';
+import {FormInput, NestedInput} from 'dynamic-forms';
 
 export class User {
   _id?;

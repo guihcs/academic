@@ -17,8 +17,6 @@ import {UserViewComponent} from './components/user-view/user-view.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
 import {ExamFormComponent} from './components/admin/exam-form/exam-form.component';
-import {DynamicFormComponent} from '../../components/dynamic-form/dynamic-form.component';
-import {TextInputComponent} from '../../services/input-builder/inputs/text-input/text-input.component';
 import {AdminNavComponent} from './components/admin/admin-nav/admin-nav.component';
 import {CoordinatorNavComponent} from './components/coordinator/coordinator-nav/coordinator-nav.component';
 import {ProfessorNavComponent} from './components/professor/professor-nav/professor-nav.component';
@@ -27,6 +25,7 @@ import {MatRippleModule} from '@angular/material/core';
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from '@angular/material/snack-bar';
 import {MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from '@angular/material/dialog';
 import {ConfirmDeleteDialog} from './components/user-view/confirm-delete-dialog';
+import {DynamicFormsModule} from 'dynamic-forms';
 
 
 @NgModule({
@@ -37,8 +36,6 @@ import {ConfirmDeleteDialog} from './components/user-view/confirm-delete-dialog'
     UserFormComponent,
     UserViewComponent,
     ExamFormComponent,
-    DynamicFormComponent,
-    TextInputComponent,
     AdminNavComponent,
     CoordinatorNavComponent,
     ProfessorNavComponent,
@@ -51,7 +48,6 @@ import {ConfirmDeleteDialog} from './components/user-view/confirm-delete-dialog'
     OptionsItemsComponent,
     UserFormComponent,
     UserViewComponent,
-    DynamicFormComponent,
     AdminNavComponent,
     CoordinatorNavComponent,
     ProfessorNavComponent,
@@ -73,7 +69,9 @@ import {ConfirmDeleteDialog} from './components/user-view/confirm-delete-dialog'
     MatInputModule,
     MatRippleModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    DynamicFormsModule,
+    DynamicFormsModule
   ],
   providers: [
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2000}},

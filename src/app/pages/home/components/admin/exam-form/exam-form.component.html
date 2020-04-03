@@ -1,11 +1,11 @@
 <h1> Update Exam </h1>
 <ng-container *ngIf="!isLoading">
-  <app-dynamic-form
+  <dynamic-form
     #dynamicForm
     [formDescriptor]="formDescriptor"
     formStyleClass="column"
     inputStyleClass="input-form-field"
-  ></app-dynamic-form>
+  ></dynamic-form>
   <div>
     <button (click)="updateExam()" color="primary" mat-raised-button>Update</button>
   </div>

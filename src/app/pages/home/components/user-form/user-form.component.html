@@ -1,9 +1,9 @@
 <h1>{{pageTitle}}</h1>
-<app-dynamic-form
+<dynamic-form
   #userForm
   [formDescriptor]="user"
   formStyleClass="column"
-  inputStyleClass="input-form-field"></app-dynamic-form>
+  inputStyleClass="input-form-field"></dynamic-form>
 <div>
   <button (click)="saveUser()" color="primary" mat-raised-button>Insert</button>
 </div>

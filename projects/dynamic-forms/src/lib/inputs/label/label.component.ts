@@ -1,17 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {InputDescriptor} from '../../InputDescriptor';
-import {DynamicInput} from '../../DynamicInput';
+import {ConfigurableInput} from '../../models/configurable-input';
 import {FormControl} from '@angular/forms';
 
 @Component({
-  selector: 'app-label',
-  template: `
-    <p>{{args.label}}: {{args.defaultValue}}</p>
-  `
+  selector: 'lib-label',
+  templateUrl: './label.component.html',
+  styleUrls: ['./label.component.css']
 })
-export class LabelComponent implements OnInit, DynamicInput {
+export class LabelComponent implements OnInit, ConfigurableInput {
 
-  args: InputDescriptor;
+  args;
   formControl = new FormControl('');
 
   constructor() {

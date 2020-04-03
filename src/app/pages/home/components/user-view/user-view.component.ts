@@ -9,7 +9,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {ConfirmDeleteDialog} from './confirm-delete-dialog';
 import 'reflect-metadata';
 import {toPascalCase} from '../../../../utils/utils';
-import {DynamicFormComponent} from '../../../../components/dynamic-form/dynamic-form.component';
+import {DynamicFormsComponent} from 'dynamic-forms';
 
 @Component({
   selector: 'app-user-view',
@@ -18,7 +18,7 @@ import {DynamicFormComponent} from '../../../../components/dynamic-form/dynamic-
 })
 export class UserViewComponent implements OnInit {
 
-  @ViewChild('userForm', {read: DynamicFormComponent}) userForm;
+  @ViewChild('userForm', {read: DynamicFormsComponent}) userForm;
   pageTitle;
   isUpdating = false;
   userType;

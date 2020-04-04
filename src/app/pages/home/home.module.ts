@@ -25,7 +25,7 @@ import {MatRippleModule} from '@angular/material/core';
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from '@angular/material/snack-bar';
 import {MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from '@angular/material/dialog';
 import {ConfirmDeleteDialog} from './components/user-view/confirm-delete-dialog';
-import {DynamicFormsModule} from 'dynamic-forms';
+import {DynamicFormsModule} from '../../../../projects/dynamic-forms/src/lib/dynamic-forms.module';
 
 
 @NgModule({
@@ -70,6 +70,7 @@ import {DynamicFormsModule} from 'dynamic-forms';
     MatRippleModule,
     MatSnackBarModule,
     MatDialogModule,
+    DynamicFormsModule,
     DynamicFormsModule,
     DynamicFormsModule
   ],

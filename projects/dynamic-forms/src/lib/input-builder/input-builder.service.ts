@@ -19,15 +19,22 @@ export class InputBuilderService {
       case 'password':
       case 'email':
       case 'text': {
-        return this.buildTextInput(viewRef, descriptor.type, descriptor);
+        return this.buildTextInput(viewRef, descriptor);
       }
       case 'label': {
         return this.buildLabel(viewRef, descriptor);
       }
       default: {
-        return this.buildTextInput(viewRef, 'text', descriptor);
+        return this.buildTextInput(viewRef, descriptor);
       }
     }
+  }
+
+
+  buildCustomInput(viewRef: ViewContainerRef, descriptor: InputDescriptor, type): ConfigurableInput {
+    let instance: ConfigurableInput = this.buildComponent(viewRef, type);
+    instance.applyArguments(descriptor);
+    return instance;
   }
 
   private buildComponent(viewRef, type) {
@@ -36,9 +43,8 @@ export class InputBuilderService {
     ).instance;
   }
 
-  private buildTextInput(viewRef, type, args) {
+  private buildTextInput(viewRef, args) {
     const instance: ConfigurableInput = this.buildComponent(viewRef, TextInputComponent);
-    args.type = type;
     instance.applyArguments(args);
     return instance;
   }

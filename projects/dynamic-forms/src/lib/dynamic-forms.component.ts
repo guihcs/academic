@@ -18,7 +18,7 @@ export class DynamicFormsComponent implements OnInit {
 
   @Input() formStyleClass;
   @Input() inputStyleClass;
-  @Input() formDescriptor;
+  @Input() formObject;
   dynamicForm: FormGroup;
   @ViewChild('formContainer', {read: ViewContainerRef}) private formContainer;
 
@@ -35,7 +35,7 @@ export class DynamicFormsComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {
-    this.dynamicForm = this.buildGroup(this.formContainer, this.formDescriptor, 2);
+    this.dynamicForm = this.buildGroup(this.formContainer, this.formObject, 2);
     this.changeDetectorRef.detectChanges();
   }
 
@@ -47,31 +47,52 @@ export class DynamicFormsComponent implements OnInit {
     this.dynamicForm.reset('');
   }
 
-  private buildGroup(container, descriptor, depth) {
+  private buildGroup(container, formObject, depth) {
     if (depth && depth <= 0) {
       return null;
     }
     let formGroup = new FormGroup({});
-    let group;
-    for (const metadataKey of Reflect.getMetadataKeys(descriptor)) {
-      let metadataDescriptor = getDescriptor(descriptor, metadataKey);
+
+    for (const decoratedPropertyName of Reflect.getMetadataKeys(formObject)) {
+
+      let metadataDescriptor = getDescriptor(formObject, decoratedPropertyName);
       if (!metadataDescriptor) {
         continue;
       }
-      if (metadataDescriptor.title) {
-        let nestedObject = this.formDescriptor[metadataKey];
-        let metadataDescriptor = getDescriptor(descriptor, metadataKey);
-        let nestedGroup = this.buildGroup(container, nestedObject, metadataDescriptor.depth - 1);
-        if (nestedGroup) {
-          group = nestedGroup;
-        }
-      } else {
-        let dynamicInput = this.inputBuilderService.buildInput(container, metadataDescriptor);
-        group = dynamicInput.getFormControl();
-      }
-      formGroup.addControl(metadataKey, group);
+      let group = this.buildInput(metadataDescriptor, decoratedPropertyName, formObject, container);
+      formGroup.addControl(decoratedPropertyName, group);
     }
     return formGroup;
   }
 
+  private buildInput(inputConfig, decoratedPropertyName, formObject, container) {
+    let group;
+
+    switch (inputConfig.type) {
+
+      case 'nested-input': {
+        let nestedObject = this.formObject[decoratedPropertyName];
+        let metadataDescriptor = getDescriptor(formObject, decoratedPropertyName);
+        let nestedGroup = this.buildGroup(container, nestedObject, metadataDescriptor.depth - 1);
+        if (nestedGroup) {
+          group = nestedGroup;
+        }
+        break;
+      }
+
+      case 'custom-input': {
+
+        let input = this.inputBuilderService.buildCustomInput(container, inputConfig.descriptor, inputConfig.component);
+        group = input.getFormControl();
+
+        break;
+      }
+      default: {
+        let dynamicInput = this.inputBuilderService.buildInput(container, inputConfig.descriptor);
+        group = dynamicInput.getFormControl();
+      }
+    }
+
+    return group;
+  }
 }

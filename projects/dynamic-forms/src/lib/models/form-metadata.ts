@@ -1,18 +1,34 @@
 import 'reflect-metadata';
 import {InputDescriptor} from './input-descriptor';
+import {Type} from '@angular/core';
 
 
 export function FormInput(descriptor: InputDescriptor): any {
   return (target, key) => {
-    Reflect.defineMetadata(key, descriptor, target);
+    Reflect.defineMetadata(key, {
+      type: 'form-input',
+      descriptor
+    }, target);
   };
 }
 
 export function NestedInput(title, depth?): any {
   return (target, key) => {
     Reflect.defineMetadata(key, {
+      type: 'nested-input',
       title: title,
       depth: depth
+    }, target);
+  };
+}
+
+export function CustomInput<T>(component: Type<T>, descriptor): any {
+  return (target, key) => {
+
+    Reflect.defineMetadata(key, {
+      type: 'custom-input',
+      descriptor,
+      component
     }, target);
   };
 }

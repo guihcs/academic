@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {InputDescriptor} from '../../models/input-descriptor';
 import {ConfigurableInput} from '../../models/configurable-input';
 import {FormControl} from '@angular/forms';
+import {InputValidators} from '../../validators/input-validators';
 
 @Component({
   selector: 'lib-text',
@@ -12,6 +12,7 @@ export class TextInputComponent implements OnInit, ConfigurableInput {
 
   args;
   formControl: FormControl = new FormControl('');
+  validator;
 
   constructor() {
   }
@@ -19,8 +20,17 @@ export class TextInputComponent implements OnInit, ConfigurableInput {
   ngOnInit(): void {
   }
 
-  applyArguments(args: InputDescriptor) {
+  applyArguments(args) {
     this.args = args;
+
+    if (args.descriptor.type) {
+      this.validator = InputValidators.validatorsMap[args.descriptor.type];
+
+      if (this.validator) {
+        this.formControl.setValidators(this.validator.validators);
+      }
+
+    }
 
     if (args.defaultValue) {
       this.formControl.setValue(args.defaultValue);
@@ -29,6 +39,13 @@ export class TextInputComponent implements OnInit, ConfigurableInput {
 
   getFormControl() {
     return this.formControl;
+  }
+
+  getErrorMessage() {
+    if (this.validator) {
+      return this.validator.getErrorMessage(this.formControl);
+    }
+    return 'Error.';
   }
 
 }

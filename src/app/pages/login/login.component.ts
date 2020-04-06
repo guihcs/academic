@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
+import {ErrorStateMatcher} from '@angular/material/core';
 import {FormBuilder, FormControl, FormGroupDirective, NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 import {SessionService} from '../../services/session/session.service';
-import {ErrorStateMatcher} from '@angular/material/core';
 
 export class ErrorMatcher implements ErrorStateMatcher {
   state;
@@ -19,7 +19,6 @@ export class ErrorMatcher implements ErrorStateMatcher {
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
   loginForm;
   haveLoginError;
   loginErrorMessage;
@@ -33,7 +32,7 @@ export class LoginComponent implements OnInit {
     private loginService: SessionService
   ) {
     if (this.loginService.getSession()) {
-      this.router.navigate(['home']);
+      this.router.navigate(['/home']);
     }
   }
 
@@ -51,7 +50,7 @@ export class LoginComponent implements OnInit {
     this.havePasswordError = false;
     this.errorMatcher.state = false;
     if (await this.loginService.login(loginData)) {
-      await this.router.navigate(['home']);
+      await this.router.navigate(['/home']);
     } else {
       this.errorMatcher.state = true;
       this.passwordErrorMessage = 'Invalid login or password.';

@@ -9,25 +9,33 @@
 
   <app-sidenav #sidenav>
     <div class="sidenav-items">
-      <ng-container [ngSwitch]="session.type">
 
-        <ng-container *ngSwitchCase="userType.ADMIN">
-          <app-admin-nav></app-admin-nav>
+      <ng-container *ngFor="let item of navDescriptor">
+
+        <ng-container [ngSwitch]="item.type">
+
+          <ng-container *ngSwitchCase="'header'">
+            <h3 mat-subheader>{{item.label}}</h3>
+          </ng-container>
+          <ng-container *ngSwitchCase="'list-item'">
+            <mat-list-item
+              #insertNav
+              (click)="selected = insertNav"
+              [class.selected]="selected == insertNav"
+              [routerLink]="item.link"
+              matRipple
+            >
+              <mat-icon class="nav-icon" matListIcon>{{item.icon}}</mat-icon>
+              <a matLine>{{item.label}}</a>
+            </mat-list-item>
+          </ng-container>
+          <ng-container *ngSwitchCase="'divider'">
+            <mat-divider></mat-divider>
+          </ng-container>
+
         </ng-container>
-
-        <ng-container *ngSwitchCase="userType.COORDINATOR">
-          <app-coordinator-nav></app-coordinator-nav>
-        </ng-container>
-
-        <ng-container *ngSwitchCase="userType.PROFESSOR">
-          <app-professor-nav></app-professor-nav>
-        </ng-container>
-
-        <ng-container *ngSwitchCase="userType.STUDENT">
-          <app-student-nav></app-student-nav>
-        </ng-container>
-
       </ng-container>
+
     </div>
 
     <mat-card class="content-card">

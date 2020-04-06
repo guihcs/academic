@@ -5,5 +5,5 @@
   formStyleClass="column"
   inputStyleClass="input-form-field"></dynamic-form>
 <div>
-  <button (click)="saveUser()" color="primary" mat-raised-button>Insert</button>
+  <button (click)="saveUser()" [disabled]="!isValid()" color="primary" mat-raised-button>Insert</button>
 </div>

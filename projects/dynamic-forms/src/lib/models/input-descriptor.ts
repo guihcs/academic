@@ -4,4 +4,6 @@ export class InputDescriptor {
   args?: string;
   defaultValue?: any;
   styleClass?: any;
+  required?: boolean;
+  errorMessage?: string;
 }

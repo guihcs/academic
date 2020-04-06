@@ -40,14 +40,15 @@ export class UserFormComponent implements OnInit, AfterViewInit {
 
     assign(user, userData, 2);
 
-    if (await this.userService.saveUser(user)) {
-      this.formContainer.reset();
-      this.snackBar.open('User Inserted.', '', {
-        duration: 2000
-      });
-    } else {
-      this.snackBar.open('Error.');
+    await this.saveUserAPI(user);
+  }
+
+  isValid() {
+    if (this.formContainer) {
+      return this.formContainer.isValid();
     }
+
+    return false;
   }
 
   private updateForm(map: ParamMap) {
@@ -57,5 +58,15 @@ export class UserFormComponent implements OnInit, AfterViewInit {
     this.changeDetectorRef.detectChanges();
   }
 
+  private async saveUserAPI(user: User) {
+    if (await this.userService.saveUser(user)) {
+      this.formContainer.reset();
+      this.snackBar.open('User Inserted.', '', {
+        duration: 2000
+      });
+    } else {
+      this.snackBar.open('Error.');
+    }
+  }
 
 }

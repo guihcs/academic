@@ -13,21 +13,27 @@ export class User {
   })
   name: string;
 
+  // @ts-ignore
   @FormInput({
     type: 'cpf',
-    label: 'CPF'
+    label: 'CPF',
+    required: true
   })
   cpf: string;
 
+  // @ts-ignore
   @FormInput({
     type: 'email',
-    label: 'Email'
+    label: 'Email',
+    required: true
   })
   email: string;
 
+  // @ts-ignore
   @FormInput({
     type: 'password',
-    label: 'Password'
+    label: 'Password',
+    required: true
   })
   password: string;
 

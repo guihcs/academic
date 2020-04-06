@@ -5,11 +5,13 @@ import {ProfileComponent} from './components/profile/profile.component';
 import {ExamFormComponent} from './components/admin/exam-form/exam-form.component';
 import {UserViewComponent} from './components/user-view/user-view.component';
 import {UserFormComponent} from './components/user-form/user-form.component';
+import {AuthGuard} from '../../auth/auth.guard';
 
 
 const routes: Routes = [
   {
-    path: 'home', component: HomeComponent,
+    path: '', component: HomeComponent,
+    canActivate: [AuthGuard],
     children: [
       {path: 'insert/:userType', component: UserFormComponent},
       {path: 'view/:userType', component: UserViewComponent},

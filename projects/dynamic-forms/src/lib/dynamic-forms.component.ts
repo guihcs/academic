@@ -39,6 +39,10 @@ export class DynamicFormsComponent implements OnInit {
     this.changeDetectorRef.detectChanges();
   }
 
+  isValid() {
+    return this.dynamicForm.valid;
+  }
+
   getResult() {
     return this.dynamicForm.value;
   }

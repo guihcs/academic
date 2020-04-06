@@ -17,8 +17,6 @@ import {UserViewComponent} from './components/user-view/user-view.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
 import {ExamFormComponent} from './components/admin/exam-form/exam-form.component';
-import {AdminNavComponent} from './components/admin/admin-nav/admin-nav.component';
-import {CoordinatorNavComponent} from './components/coordinator/coordinator-nav/coordinator-nav.component';
 import {ProfessorNavComponent} from './components/professor/professor-nav/professor-nav.component';
 import {StudentNavComponent} from './components/student/student-nav/student-nav.component';
 import {MatRippleModule} from '@angular/material/core';
@@ -28,18 +26,18 @@ import {ConfirmDeleteDialog} from './components/user-view/confirm-delete-dialog'
 import {DynamicFormsModule} from '../../../../projects/dynamic-forms/src/lib/dynamic-forms.module';
 import {AddressInputComponent} from './components/address-input/address-input.component';
 import {MatCardModule} from '@angular/material/card';
+import {HomeComponent} from './home.component';
 
 
 @NgModule({
   declarations: [
+    HomeComponent,
     ToolbarComponent,
     SidenavComponent,
     OptionsItemsComponent,
     UserFormComponent,
     UserViewComponent,
     ExamFormComponent,
-    AdminNavComponent,
-    CoordinatorNavComponent,
     ProfessorNavComponent,
     StudentNavComponent,
     ConfirmDeleteDialog,
@@ -51,8 +49,6 @@ import {MatCardModule} from '@angular/material/card';
     OptionsItemsComponent,
     UserFormComponent,
     UserViewComponent,
-    AdminNavComponent,
-    CoordinatorNavComponent,
     ProfessorNavComponent,
     StudentNavComponent,
     AddressInputComponent

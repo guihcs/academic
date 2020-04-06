@@ -20,6 +20,7 @@ export class LabelComponent implements OnInit, ConfigurableInput {
 
   applyArguments(args) {
     this.args = args;
+
     if (args.defaultValue) {
       this.formControl.setValue(args.defaultValue);
     }

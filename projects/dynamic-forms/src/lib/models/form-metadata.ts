@@ -2,6 +2,14 @@ import 'reflect-metadata';
 import {InputDescriptor} from './input-descriptor';
 import {Type} from '@angular/core';
 
+export function Label(descriptor: InputDescriptor): any {
+  return (target, key) => {
+    Reflect.defineMetadata(key, {
+      type: 'label',
+      descriptor
+    }, target);
+  };
+}
 
 export function FormInput(descriptor: InputDescriptor): any {
   return (target, key) => {
@@ -22,7 +30,7 @@ export function NestedInput(title, depth?): any {
   };
 }
 
-export function CustomInput<T>(component: Type<T>, descriptor): any {
+export function CustomInput<T>(component: Type<T>, descriptor: InputDescriptor): any {
   return (target, key) => {
 
     Reflect.defineMetadata(key, {
@@ -32,6 +40,8 @@ export function CustomInput<T>(component: Type<T>, descriptor): any {
     }, target);
   };
 }
+
+
 
 
 export function getDescriptor(target, key): any {

@@ -6,7 +6,7 @@
   [routerLink]="['insert', userType.PROFESSOR]"
   matRipple
 >
-  <mat-icon matListIcon>person_add</mat-icon>
+  <mat-icon class="nav-icon" matListIcon>person_add</mat-icon>
   <a matLine>Insert Professor</a>
 </mat-list-item>
 <mat-list-item
@@ -16,9 +16,10 @@
   [routerLink]="['insert', userType.STUDENT]"
   matRipple
 >
-  <mat-icon matListIcon>person_add</mat-icon>
+  <mat-icon class="nav-icon" matListIcon>person_add</mat-icon>
   <a matLine>Insert Student</a>
 </mat-list-item>
+<mat-divider></mat-divider>
 <h3 mat-subheader>View</h3>
 <mat-list-item
   #viewProfessorNav
@@ -27,7 +28,7 @@
   [routerLink]="['view', userType.PROFESSOR]"
   matRipple
 >
-  <mat-icon matListIcon>view_list</mat-icon>
+  <mat-icon class="nav-icon" matListIcon>assignment_ind</mat-icon>
   <a matLine>View Professors</a>
 </mat-list-item>
 <mat-list-item
@@ -37,6 +38,6 @@
   [routerLink]="['view', userType.STUDENT]"
   matRipple
 >
-  <mat-icon matListIcon>view_list</mat-icon>
+  <mat-icon class="nav-icon" matListIcon>assignment_ind</mat-icon>
   <a matLine>View Students</a>
 </mat-list-item>

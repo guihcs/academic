@@ -59,6 +59,7 @@ export class DynamicFormsComponent implements OnInit {
       if (!metadataDescriptor) {
         continue;
       }
+
       let group = this.buildInput(metadataDescriptor, decoratedPropertyName, formObject, container);
       formGroup.addControl(decoratedPropertyName, group);
     }
@@ -67,7 +68,6 @@ export class DynamicFormsComponent implements OnInit {
 
   private buildInput(inputConfig, decoratedPropertyName, formObject, container) {
     let group;
-
     switch (inputConfig.type) {
 
       case 'nested-input': {
@@ -82,13 +82,19 @@ export class DynamicFormsComponent implements OnInit {
 
       case 'custom-input': {
 
-        let input = this.inputBuilderService.buildCustomInput(container, inputConfig.descriptor, inputConfig.component);
+        let input = this.inputBuilderService.buildCustomInput(container, inputConfig, inputConfig.component);
         group = input.getFormControl();
 
         break;
       }
+
+      case 'label': {
+        let dynamicInput = this.inputBuilderService.buildLabel(container, inputConfig);
+        group = dynamicInput.getFormControl();
+        break;
+      }
       default: {
-        let dynamicInput = this.inputBuilderService.buildInput(container, inputConfig.descriptor);
+        let dynamicInput = this.inputBuilderService.buildInput(container, inputConfig);
         group = dynamicInput.getFormControl();
       }
     }

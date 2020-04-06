@@ -1,0 +1,22 @@
+
+.data-row {
+
+  transition: 0.3s;
+}
+
+.data-row:hover {
+
+  background-color: whitesmoke;
+  cursor: pointer;
+}
+
+.view-title {
+  margin: 0 0 0 16px;
+}
+
+.view-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 30px;
+}

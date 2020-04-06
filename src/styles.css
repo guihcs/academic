@@ -33,3 +33,7 @@ mat-list-item.selected {
 mat-list-item.selected:hover {
   /*background-color: rgba(0.3, 0.4, 0.3, 0.2) !important;*/
 }
+
+.nav-icon {
+  color: gray;
+}

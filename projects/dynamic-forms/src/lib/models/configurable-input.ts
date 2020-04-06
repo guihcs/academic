@@ -1,5 +1,7 @@
+import {InputDescriptor} from './input-descriptor';
+
 export interface ConfigurableInput {
-  applyArguments(args);
+  applyArguments(args: InputDescriptor);
 
   getFormControl();
 

@@ -34,7 +34,7 @@
 
     <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
 
-    <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+    <tr *matRowDef="let row; columns: displayedColumns;" class="data-row" mat-row></tr>
 
   </table>
 
@@ -42,7 +42,16 @@
 
 
 <ng-container *ngIf="isUpdating">
-  <h1>{{pageTitle}} Details</h1>
+  <div class="view-header">
+    <button
+      (click)="backToList()"
+      mat-icon-button
+    >
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 class="view-title">{{pageTitle}} Details</h1>
+  </div>
+
   <dynamic-form
     #userForm
     [formObject]="user"

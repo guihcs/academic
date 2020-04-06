@@ -1,15 +1,15 @@
 import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
-import {User} from '../../../../models/User';
 import {BehaviorSubject} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
-import {UserService} from '../../../../services/user/user.service';
-import {UserType} from '../../../../models/UserType';
+import {UserService} from '../../services/user/user.service';
+import {UserType} from '../../models/UserType';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatDialog} from '@angular/material/dialog';
 import {ConfirmDeleteDialog} from './confirm-delete-dialog';
 import 'reflect-metadata';
 import {toPascalCase} from '../../../../utils/utils';
 import {DynamicFormsComponent} from 'dynamic-forms';
+import {ViewUser} from '../../models/ViewUser';
 
 @Component({
   selector: 'app-user-view',
@@ -22,9 +22,9 @@ export class UserViewComponent implements OnInit {
   pageTitle;
   isUpdating = false;
   userType;
-  userData: User[];
-  user: User;
-  dataSource: BehaviorSubject<User[]>;
+  userData: ViewUser[];
+  user: ViewUser;
+  dataSource: BehaviorSubject<ViewUser[]>;
   paramMap;
   displayedColumns = ['name', 'cpf', 'remove'];
 
@@ -41,6 +41,7 @@ export class UserViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(paramMap => {
+      this.isUpdating = false;
       this.paramMap = paramMap;
       this.updateView(paramMap);
     });
@@ -51,16 +52,19 @@ export class UserViewComponent implements OnInit {
     this.userType = +params.get('userType');
     this.pageTitle = toPascalCase(UserType[this.userType]);
     this.userData = await this.userService.getUsers(+this.userType);
-    this.dataSource = new BehaviorSubject<User[]>(this.userData);
+    this.dataSource = new BehaviorSubject<ViewUser[]>(this.userData);
   }
 
-  showDetails(user) {
+  showDetails(user: ViewUser) {
     this.user = user;
-    Reflect.defineMetadata('email', {type: 'label', label: 'Email'}, this.user);
-    Reflect.defineMetadata('password', null, this.user);
     this.isUpdating = true;
     this.changeDetectorRef.detectChanges();
-    this.userForm.reset();
+    this.userForm?.reset();
+  }
+
+
+  backToList() {
+    this.isUpdating = false;
   }
 
   async updateUser() {

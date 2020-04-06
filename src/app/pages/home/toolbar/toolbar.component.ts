@@ -1,4 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {SessionService} from '../../../services/session/session.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -7,9 +8,13 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 })
 export class ToolbarComponent implements OnInit {
   @Output() menuEvent = new EventEmitter();
-  constructor() { }
+  userName;
+
+  constructor(private sessionService: SessionService) {
+  }
 
   ngOnInit(): void {
+    this.userName = this.sessionService.getSession().name[0];
   }
 
 }

@@ -1,11 +1,11 @@
-<mat-toolbar color="primary">
+<mat-toolbar class="mat-elevation-z4" color="primary">
   <button mat-icon-button (click)="menuEvent.emit()">
     <mat-icon>menu</mat-icon>
   </button>
   <span [routerLink]="'/home'" class="app-title"> Academic </span>
   <div class="spacer"></div>
-  <img matListAvatar src="">
-  <button mat-button [matMenuTriggerFor]="beforeMenu">Options</button>
+  <!--  <img matListAvatar src="">-->
+  <div [matMenuTriggerFor]="beforeMenu" class="avatar"><span>{{userName}}</span></div>
   <mat-menu #beforeMenu="matMenu" xPosition="before">
     <ng-content select="app-options-items"></ng-content>
   </mat-menu>

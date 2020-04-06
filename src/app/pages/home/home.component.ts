@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {SessionService} from '../../services/session/session.service';
-import {UserType} from '../../models/UserType';
+import {UserType} from './models/UserType';
 
 @Component({
   selector: 'app-home',

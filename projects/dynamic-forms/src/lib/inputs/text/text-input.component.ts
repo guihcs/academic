@@ -10,7 +10,7 @@ import {FormControl} from '@angular/forms';
 })
 export class TextInputComponent implements OnInit, ConfigurableInput {
 
-  args: InputDescriptor;
+  args;
   formControl: FormControl = new FormControl('');
 
   constructor() {
@@ -21,6 +21,7 @@ export class TextInputComponent implements OnInit, ConfigurableInput {
 
   applyArguments(args: InputDescriptor) {
     this.args = args;
+
     if (args.defaultValue) {
       this.formControl.setValue(args.defaultValue);
     }

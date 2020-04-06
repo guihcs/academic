@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {UserType} from '../../../../../models/UserType';
+import {UserType} from '../../../models/UserType';
 
 @Component({
   selector: 'app-coordinator-nav',

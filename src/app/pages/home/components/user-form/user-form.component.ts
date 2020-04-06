@@ -1,8 +1,8 @@
 import {AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
-import {User} from '../../../../models/User';
-import {UserService} from '../../../../services/user/user.service';
+import {User} from '../../models/User';
+import {UserService} from '../../services/user/user.service';
 import {ActivatedRoute, ParamMap} from '@angular/router';
-import {UserType} from '../../../../models/UserType';
+import {UserType} from '../../models/UserType';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {assign, toPascalCase} from '../../../../utils/utils';
 import {DynamicFormsComponent} from 'dynamic-forms';

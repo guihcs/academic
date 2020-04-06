@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {ExamService} from '../../../../../services/exam/exam.service';
+import {ExamService} from '../../../../exam/services/exam/exam.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({

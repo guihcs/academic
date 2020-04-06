@@ -26,6 +26,8 @@ import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from '@angular/materia
 import {MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from '@angular/material/dialog';
 import {ConfirmDeleteDialog} from './components/user-view/confirm-delete-dialog';
 import {DynamicFormsModule} from '../../../../projects/dynamic-forms/src/lib/dynamic-forms.module';
+import {AddressInputComponent} from './components/address-input/address-input.component';
+import {MatCardModule} from '@angular/material/card';
 
 
 @NgModule({
@@ -40,7 +42,8 @@ import {DynamicFormsModule} from '../../../../projects/dynamic-forms/src/lib/dyn
     CoordinatorNavComponent,
     ProfessorNavComponent,
     StudentNavComponent,
-    ConfirmDeleteDialog
+    ConfirmDeleteDialog,
+    AddressInputComponent
   ],
   exports: [
     ToolbarComponent,
@@ -51,7 +54,8 @@ import {DynamicFormsModule} from '../../../../projects/dynamic-forms/src/lib/dyn
     AdminNavComponent,
     CoordinatorNavComponent,
     ProfessorNavComponent,
-    StudentNavComponent
+    StudentNavComponent,
+    AddressInputComponent
   ],
   imports: [
     HomeRoutingModule,
@@ -72,7 +76,8 @@ import {DynamicFormsModule} from '../../../../projects/dynamic-forms/src/lib/dyn
     MatDialogModule,
     DynamicFormsModule,
     DynamicFormsModule,
-    DynamicFormsModule
+    DynamicFormsModule,
+    MatCardModule
   ],
   providers: [
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2000}},

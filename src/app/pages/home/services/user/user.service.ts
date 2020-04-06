@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {User} from '../../models/User';
 import {HttpClient} from '@angular/common/http';
-import {assign} from '../../utils/utils';
+import {assign} from '../../../../utils/utils';
+import {ViewUser} from '../../models/ViewUser';
 
 @Injectable({
   providedIn: 'root'
@@ -24,16 +25,17 @@ export class UserService {
     return deleteResult.status === 'ok';
   }
 
-  async getUsers(userData: any): Promise<User[]> {
-    let userJson = await this.http.get<User[]>('api/getUsers/' + userData).toPromise();
+  async getUsers(userData: any): Promise<ViewUser[]> {
+    let userJson = await this.http.get<ViewUser[]>('api/getUsers/' + userData).toPromise();
     let users = [];
     for (const user of userJson) {
-      let targetUser = new User();
+      let targetUser = new ViewUser();
       assign(targetUser, user, 2);
       users.push(targetUser);
     }
     return users;
   }
+
   async updateUser(user) {
     let result: any = await this.http.post('api/updateUser', {user: user}).toPromise();
     return result.status === 'ok';

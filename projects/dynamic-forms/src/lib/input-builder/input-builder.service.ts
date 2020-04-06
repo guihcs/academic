@@ -21,9 +21,6 @@ export class InputBuilderService {
       case 'text': {
         return this.buildTextInput(viewRef, descriptor);
       }
-      case 'label': {
-        return this.buildLabel(viewRef, descriptor);
-      }
       default: {
         return this.buildTextInput(viewRef, descriptor);
       }
@@ -33,6 +30,12 @@ export class InputBuilderService {
 
   buildCustomInput(viewRef: ViewContainerRef, descriptor: InputDescriptor, type): ConfigurableInput {
     let instance: ConfigurableInput = this.buildComponent(viewRef, type);
+    instance.applyArguments(descriptor);
+    return instance;
+  }
+
+  buildLabel(viewRef, descriptor) {
+    const instance: ConfigurableInput = this.buildComponent(viewRef, LabelComponent);
     instance.applyArguments(descriptor);
     return instance;
   }
@@ -49,9 +52,5 @@ export class InputBuilderService {
     return instance;
   }
 
-  private buildLabel(viewRef, descriptor) {
-    const instance: ConfigurableInput = this.buildComponent(viewRef, LabelComponent);
-    instance.applyArguments(descriptor);
-    return instance;
-  }
+
 }

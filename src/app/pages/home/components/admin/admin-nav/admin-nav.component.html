@@ -6,10 +6,10 @@
   [routerLink]="['insert', userType.COORDINATOR]"
   matRipple
 >
-  <mat-icon matListIcon>person_add</mat-icon>
+  <mat-icon class="nav-icon" matListIcon>person_add</mat-icon>
   <a matLine>Insert Coordinator</a>
 </mat-list-item>
-
+<mat-divider></mat-divider>
 <h3 mat-subheader>View</h3>
 <mat-list-item
   #viewNav
@@ -18,10 +18,10 @@
   [routerLink]="['view', userType.COORDINATOR]"
   matRipple
 >
-  <mat-icon matListIcon>view_list</mat-icon>
+  <mat-icon class="nav-icon" matListIcon>assignment_ind</mat-icon>
   <a matLine>View Coordinators</a>
 </mat-list-item>
-
+<mat-divider></mat-divider>
 <h3 mat-subheader>Exam</h3>
 <mat-list-item
   #examNav
@@ -30,7 +30,7 @@
   [routerLink]="'examForm'"
   matRipple
 >
-  <mat-icon matListIcon>view_list</mat-icon>
+  <mat-icon class="nav-icon" matListIcon>assignment</mat-icon>
   <a matLine>Update Exam</a>
 </mat-list-item>
 

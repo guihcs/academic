@@ -1,0 +1,44 @@
+<mat-sidenav-container class="example-container">
+  <mat-sidenav mode="side"
+               class="example-sidenav"
+               [fixedInViewport]="false"
+               opened
+  >
+    <mat-nav-list>
+      <ng-container *ngFor="let item of navDescriptor">
+        <ng-container [ngSwitch]="item.type">
+          <ng-container *ngSwitchCase="'header'">
+            <h3 mat-subheader>{{item.label}}</h3>
+          </ng-container>
+          <ng-container *ngSwitchCase="'list-item'">
+            <mat-list-item
+              #insertNav
+              (click)="selected = insertNav"
+              [class.selected]="selected == insertNav"
+              [routerLink]="item.link"
+              [queryParams]="item.query"
+              [state]="item.state"
+              matRipple
+            >
+              <mat-icon class="nav-icon" matListIcon>{{item.icon}}</mat-icon>
+              <a matLine>{{item.label}}</a>
+            </mat-list-item>
+          </ng-container>
+          <ng-container *ngSwitchCase="'divider'">
+            <mat-divider></mat-divider>
+          </ng-container>
+
+        </ng-container>
+      </ng-container>
+
+
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+
+    <mat-card class="content-card">
+      <ng-content></ng-content>
+    </mat-card>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

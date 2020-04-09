@@ -1,0 +1,28 @@
+.app-title {
+  margin-left: 16px;
+  cursor: pointer;
+}
+
+.mat-toolbar {
+  position: fixed;
+  z-index: 2;
+}
+
+.avatar {
+  margin-right: 20px;
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  object-fit: cover;
+  text-transform: uppercase;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}

@@ -1,0 +1,12 @@
+<h1>Create Course</h1>
+<mat-divider></mat-divider>
+<dynamic-form
+  #courseForm
+  [objectObservable]="courseObservable"
+  formStyleClass="column"
+  inputStyleClass="input-form-field"></dynamic-form>
+
+<div>
+  <button (click)="createCourse()" [disabled]="!isValid()" color="primary" mat-raised-button>Create</button>
+</div>
+

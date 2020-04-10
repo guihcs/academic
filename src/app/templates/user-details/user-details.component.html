@@ -1,0 +1,28 @@
+<div class="view-header">
+  <button
+    (click)="backToList()"
+    mat-icon-button
+  >
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <h1 class="view-title">{{pageTitle}} Details</h1>
+
+</div>
+<mat-divider></mat-divider>
+<dynamic-form
+  #userForm
+  [objectObservable]="user"
+  formStyleClass="column"
+  inputStyleClass="input-form-field"
+></dynamic-form>
+<mat-divider></mat-divider>
+<div>
+
+  <div class="action-footer">
+    <button (click)="updateUser()" color="primary" mat-raised-button>Update</button>
+    <button (click)="delete()" class="delete-button" color="warn" mat-raised-button>
+      Delete
+    </button>
+  </div>
+
+</div>

@@ -1,0 +1,13 @@
+<h1> Update Exam </h1>
+<ng-container *ngIf="!isLoading">
+  <dynamic-form
+    #dynamicForm
+    [objectObservable]="formDescriptor"
+    formStyleClass="column"
+    inputStyleClass="input-form-field"
+  ></dynamic-form>
+  <div>
+    <button (click)="updateExam()" color="primary" mat-raised-button>Update</button>
+  </div>
+</ng-container>
+

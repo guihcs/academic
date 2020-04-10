@@ -2,3 +2,48 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-form-field {
+  width: 300px;
+}
+
+mat-list-item {
+  /*transition: 0.3s;*/
+}
+
+mat-list-item.selected {
+  /*background-color: red;*/
+}
+
+mat-list-item.selected:hover {
+  /*background-color: rgba(0.3, 0.4, 0.3, 0.2) !important;*/
+}
+
+.nav-icon {
+  color: gray;
+}
+
+
+.data-table {
+  width: 100%
+}
+
+.data-row {
+
+  transition: 0.3s;
+}
+
+.data-row:hover {
+
+  background-color: whitesmoke;
+  cursor: pointer;
+}

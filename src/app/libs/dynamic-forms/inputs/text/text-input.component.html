@@ -1,0 +1,5 @@
+<mat-form-field appearance="standard">
+  <mat-label>{{args.descriptor.label}}</mat-label>
+  <input [formControl]="formControl" [required]="args.descriptor.required" [type]="args.descriptor.type" matInput>
+  <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+</mat-form-field>

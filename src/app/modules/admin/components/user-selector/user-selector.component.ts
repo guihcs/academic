@@ -11,12 +11,17 @@ import {ConfigurableInput} from '../../../../libs/dynamic-forms/models/configura
 export class UserSelectorComponent implements OnInit, ConfigurableInput {
 
   formControl = new FormControl();
+  control = new FormControl();
   users = [];
+  defaultValue;
 
   constructor(private backendService: BackendService) {
   }
 
   ngOnInit(): void {
+    this.formControl.valueChanges.subscribe(value => {
+      this.control.setValue({id: value._id, name: value.name});
+    });
   }
 
   applyArguments(args: any): any {
@@ -24,13 +29,25 @@ export class UserSelectorComponent implements OnInit, ConfigurableInput {
     this.backendService.getAll('users').then(
       v => {
         this.users = v.filter(v => v.type === args.descriptor.args.type);
+
+        if (args.defaultValue){
+          this.defaultValue = args.defaultValue;
+          this.formControl.setValue(v.find(u => {
+            return u._id === this.defaultValue.id;
+          }))
+
+        }
       }
     );
+
+
+
+
 
   }
 
   getFormControl(): any {
-    return this.formControl;
+    return this.control;
   }
 
 }

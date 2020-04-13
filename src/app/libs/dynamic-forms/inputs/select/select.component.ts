@@ -18,6 +18,10 @@ export class SelectComponent implements OnInit, ConfigurableInput {
   }
 
   applyArguments(args: any): any {
+    if (args.defaultValue){
+      this.formControl.setValue(args.defaultValue);
+
+    }
     this.args = args;
   }
 

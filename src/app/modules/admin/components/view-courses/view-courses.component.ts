@@ -1,13 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {CourseService} from '../../../../global-services/course/course.service';
-import {UserType} from '../../../../global-models/UserType';
 import {MatTableDataSource} from '@angular/material/table';
-import {User} from '../../../../global-models/User';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {BackendService} from '../../../../global-services/backend/backend.service';
 import {Course} from '../../../../global-models/Course';
 import {Router} from '@angular/router';
+
+
 
 @Component({
   selector: 'app-view-courses',
@@ -16,15 +15,16 @@ import {Router} from '@angular/router';
 })
 export class ViewCoursesComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'area'];
+
+  displayedColumns: string[] = ['name', 'area', 'coordinator'];
   dataSource: MatTableDataSource<Course>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(
-    private router: Router,
-    private backend: BackendService
+    private backend: BackendService,
+    private router: Router
   ) {
 
   }
@@ -34,7 +34,6 @@ export class ViewCoursesComponent implements OnInit {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-
     });
   }
 

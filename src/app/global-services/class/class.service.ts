@@ -10,8 +10,6 @@ export class ClassService {
   }
 
   async addClass(val) {
-    console.log(val);
-
     let response: any = await this.http.post('api/createClass', val).toPromise();
 
     return response.status === 'ok';

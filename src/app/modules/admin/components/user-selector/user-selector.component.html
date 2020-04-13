@@ -1,8 +1,8 @@
 
 <label>
   Select user:
-  <select [formControl]="formControl">
-    <option *ngFor="let user of users" [value]="user">
+  <select [formControl]="formControl" >
+    <option *ngFor="let user of users" [ngValue]="user">
       {{user.name}}
     </option>
   </select>

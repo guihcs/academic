@@ -1,0 +1,11 @@
+<h1>Insert Subject</h1>
+<!--<mat-divider></mat-divider>-->
+<dynamic-form
+  #userForm
+  [objectObservable]="user"
+  formStyleClass="column"
+  inputStyleClass="input-form-field"></dynamic-form>
+
+<div>
+  <button (click)="saveUser()" [disabled]="!isValid()" color="primary" mat-raised-button>Insert</button>
+</div>

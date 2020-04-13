@@ -23,6 +23,6 @@ export class Course {
       type: UserType.COORDINATOR
     }
   })
-  coordinator;
+  coordinator = {};
   _id: any;
 }

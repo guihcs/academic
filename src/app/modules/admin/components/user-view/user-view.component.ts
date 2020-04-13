@@ -40,7 +40,9 @@ export class UserViewComponent implements OnInit {
         for (const displayedColumn of this.displayedColumns) {
           if (displayedColumn === 'type'){
             serializeFields.push(UserType[data1[displayedColumn]]);
-          }else {
+          } else if (displayedColumn === 'course'){
+            serializeFields.push(data1[displayedColumn]?.name);
+          } else {
             serializeFields.push(data1[displayedColumn]);
           }
 

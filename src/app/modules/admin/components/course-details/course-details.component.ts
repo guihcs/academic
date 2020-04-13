@@ -34,9 +34,12 @@ export class CourseDetailsComponent implements OnInit {
     private dialog: MatDialog
   ) {
     activatedRoute.paramMap.subscribe(async paramMap => {
+
       this.userID = paramMap.get('id');
       let data = await this.backend.getAll('courses');
       let user = data.filter(user => user._id === this.userID)[0];
+      console.log(user);
+
       let coordinatorView = new Course();
       assign(coordinatorView, user, 2);
       this.course.next(coordinatorView);
@@ -48,12 +51,12 @@ export class CourseDetailsComponent implements OnInit {
   }
 
   async updateUser() {
-    let user = this.userForm.getResult();
-    user['_id'] = this.userID;
-    console.log(user);
 
-    if (await this.userService.updateUser(user)) {
-      this.snackBar.open('User updated.', '');
+    let course = this.userForm.getResult();
+    course['_id'] = this.userID;
+
+    if (await this.backend.update('courses', this.userID, course)) {
+      this.snackBar.open('Course updated.', '');
     } else {
       this.snackBar.open('Error.', '');
     }
@@ -66,7 +69,7 @@ export class CourseDetailsComponent implements OnInit {
 
 
   async delete() {
-    let dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {});
+    /*let dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {});
     dialogRef.afterClosed().subscribe(async res => {
       if (res === 'delete') {
         if (await this.backend.delete('users', this.course.getValue()._id)) {
@@ -77,7 +80,7 @@ export class CourseDetailsComponent implements OnInit {
         }
 
       }
-    });
+    });*/
   }
 
 }

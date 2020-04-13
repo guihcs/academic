@@ -17,6 +17,7 @@ import {DynamicFormsModule} from '../libs/dynamic-forms/dynamic-forms.module';
 import {ConfirmDeleteDialogComponent} from './confirm-delete-dialog/confirm-delete-dialog.component';
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material/snack-bar';
 import {MatDialogModule} from '@angular/material/dialog';
+import { ProfileComponent } from './profile/profile.component';
 
 
 
@@ -26,7 +27,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     ToolbarComponent,
     OptionsItemsComponent,
     UserDetailsComponent,
-    ConfirmDeleteDialogComponent
+    ConfirmDeleteDialogComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,

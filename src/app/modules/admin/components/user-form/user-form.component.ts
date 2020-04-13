@@ -7,6 +7,7 @@ import {UserService} from '../../../../global-services/user/user.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {assign, toPascalCase} from '../../../../utils/utils';
 import {UserType} from '../../../../global-models/UserType';
+import {CourseSelectComponent} from '../course-select/course-select.component';
 
 @Component({
   selector: 'app-user-form',
@@ -16,6 +17,7 @@ import {UserType} from '../../../../global-models/UserType';
 export class UserFormComponent implements OnInit, AfterViewInit {
 
   @ViewChild('userForm') formContainer: DynamicFormsComponent;
+  @ViewChild('courseSelect') courseSelect: CourseSelectComponent;
   userType;
   pageTitle;
   user: BehaviorSubject<User> = new BehaviorSubject(new User());
@@ -38,7 +40,7 @@ export class UserFormComponent implements OnInit, AfterViewInit {
     let userData = this.formContainer.getResult();
     let user = new User();
     userData.type = +this.userType;
-
+    userData.course = this.courseSelect.formControl.value;
     assign(user, userData, 2);
 
     await this.saveUserAPI(user);
@@ -56,6 +58,7 @@ export class UserFormComponent implements OnInit, AfterViewInit {
     this.userType = +map.get('userType');
     this.pageTitle = 'Insert ' + toPascalCase(UserType[this.userType]);
     this.formContainer.reset();
+    this.courseSelect.formControl.setValue('');
     this.changeDetectorRef.detectChanges();
   }
 

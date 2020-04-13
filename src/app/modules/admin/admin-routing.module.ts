@@ -20,7 +20,6 @@ const routes: Routes = [
       {path: 'details/coordinator/:id', component: CoordinatorDetailsComponent},
       {path: 'details/course/:id', component: CourseDetailsComponent},
       {path: 'details/:userID', component: UserDetailsComponent},
-
       {path: 'user/view', component: UserViewComponent},
       {path: 'insert/:userType', component: UserFormComponent},
       {path: 'examForm', component: ExamFormComponent},

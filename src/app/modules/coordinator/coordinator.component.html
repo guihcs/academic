@@ -1,0 +1,16 @@
+<app-toolbar (menuEvent)="sidenav.toggle()">
+  <app-options-items>
+    <a [routerLink]="'profile'" mat-menu-item>Profile</a>
+    <button mat-menu-item (click)="logout()">Logout</button>
+  </app-options-items>
+</app-toolbar>
+
+<app-sidenav
+  #sidenav
+  [navDescriptor]="navDescriptor"
+>
+
+  <router-outlet></router-outlet>
+
+</app-sidenav>
+

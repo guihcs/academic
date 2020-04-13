@@ -1,4 +1,4 @@
-import {FormInput} from 'dynamic-forms';
+import {FormInput} from '../libs/dynamic-forms/models/form-metadata';
 
 
 export class Class {

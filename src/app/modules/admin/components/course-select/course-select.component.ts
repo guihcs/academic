@@ -21,11 +21,12 @@ export class CourseSelectComponent implements OnInit, ConfigurableInput{
   ) { }
 
   ngOnInit(): void {
-    this.formControl.valueChanges.subscribe( v => {
-      this.control.setValue(this.courses.filter(c => c.name === v)[0]);
-    });
+
     this.backend.getAll('courses').then(courses => {
       this.courses = courses;
+      this.formControl.valueChanges.subscribe( v => {
+        this.control.setValue(this.courses.filter(c => c.name === v)[0]);
+      });
     });
   }
 

@@ -50,7 +50,6 @@ export class CoordinatorDetailsComponent implements OnInit {
   async updateUser() {
     let user = this.userForm.getResult();
     user['_id'] = this.userID;
-    console.log(user);
 
     if (await this.userService.updateUser(user)) {
       this.snackBar.open('User updated.', '');

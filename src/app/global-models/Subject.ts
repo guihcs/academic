@@ -9,12 +9,5 @@ export class Subject {
   })
   name: string;
 
-
-  @CustomInput(ProfessorSelectorComponent, {
-    label: 'Professor',
-    args: {
-      type: UserType.PROFESSOR
-    }
-  })
   professor;
 }

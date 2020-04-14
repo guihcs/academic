@@ -36,4 +36,9 @@ export class ViewUser {
     this.profile = new Profile();
     this.address = new Address();
   }
+
+
+  get userType() {
+    return UserType[this.type];
+  }
 }

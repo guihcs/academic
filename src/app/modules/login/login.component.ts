@@ -3,6 +3,7 @@ import {FormBuilder, FormControl, FormGroupDirective, NgForm} from '@angular/for
 import {Router} from '@angular/router';
 import {SessionService} from '../../global-services/session/session.service';
 import {ErrorStateMatcher} from '@angular/material/core';
+import {UserType} from '../../global-models/UserType';
 
 export class ErrorMatcher implements ErrorStateMatcher {
   state;
@@ -30,7 +31,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private loginService: SessionService
+    private sessionService: SessionService
   ) {
   }
 
@@ -47,8 +48,27 @@ export class LoginComponent implements OnInit {
   async login(loginData) {
     this.havePasswordError = false;
     this.errorMatcher.state = false;
-    if (await this.loginService.login(loginData)) {
-      await this.router.navigate(['/home']);
+    if (await this.sessionService.login(loginData)) {
+      let session = this.sessionService.getSession();
+
+      switch (session.type) {
+        case UserType.ADMIN: {
+          await this.router.navigate(['/admin']);
+          break;
+        }
+        case UserType.COORDINATOR: {
+          await this.router.navigate(['/coordinator']);
+          break;
+        }
+        case UserType.PROFESSOR: {
+          await this.router.navigate(['/professor']);
+          break;
+        }
+        case UserType.STUDENT: {
+          await this.router.navigate(['/student']);
+          break;
+        }
+      }
     } else {
       this.errorMatcher.state = true;
       this.passwordErrorMessage = 'Invalid login or password.';

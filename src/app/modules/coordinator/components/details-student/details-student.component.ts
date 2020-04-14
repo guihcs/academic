@@ -10,16 +10,18 @@ import {ConfirmDeleteDialogComponent} from '../../../../templates/confirm-delete
 import {ViewProfessor} from '../../../../global-models/ViewProfessor';
 import {BackendService} from '../../../../global-services/backend/backend.service';
 import {assign} from '../../../../utils/utils';
+import {Student} from '../../../../global-models/Student';
 
 @Component({
-  selector: 'app-details-professor',
-  templateUrl: './details-professor.component.html',
-  styleUrls: ['./details-professor.component.css']
+  selector: 'app-details-student',
+  templateUrl: './details-student.component.html',
+  styleUrls: ['./details-student.component.css']
 })
-export class DetailsProfessorComponent implements OnInit {
+export class DetailsStudentComponent implements OnInit {
 
 
-  user: BehaviorSubject<ViewProfessor> = new BehaviorSubject<ViewProfessor>(null);
+
+  user: BehaviorSubject<Student> = new BehaviorSubject<Student>(null);
   pageTitle;
   @ViewChild('userForm')
   private userForm: DynamicFormsComponent;
@@ -36,7 +38,7 @@ export class DetailsProfessorComponent implements OnInit {
     activatedRoute.paramMap.subscribe(async paramMap => {
       this.userID = paramMap.get('id');
       let rawData = await this.backend.query('users', this.userID);
-      let professor = new ViewProfessor();
+      let professor = new Student();
       assign(professor, rawData[0], 2);
       this.user.next(professor);
 

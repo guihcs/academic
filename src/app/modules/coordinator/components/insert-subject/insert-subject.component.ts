@@ -9,6 +9,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {assign, toPascalCase} from '../../../../utils/utils';
 import {UserType} from '../../../../global-models/UserType';
 import {Subject} from '../../../../global-models/Subject';
+import {Student} from '../../../../global-models/Student';
 
 @Component({
   selector: 'app-insert-subject',
@@ -36,9 +37,9 @@ export class InsertSubjectComponent implements OnInit {
     this.route.paramMap.subscribe(map => this.updateForm(map));
   }
 
-  async saveUser() {
+  async prepareSubjectData() {
     let userData = this.formContainer.getResult();
-    let user = new User();
+    let user = new Student();
     userData.type = +this.userType;
     assign(user, userData, 2);
 

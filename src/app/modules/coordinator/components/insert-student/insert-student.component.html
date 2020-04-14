@@ -6,6 +6,15 @@
   formStyleClass="column"
   inputStyleClass="input-form-field"></dynamic-form>
 
+<label>
+  Select class:
+  <select [(ngModel)]="studentClass">
+    <option *ngFor="let classObj of classes" [ngValue]="classObj">
+      {{classObj.name}}
+    </option>
+  </select>
+</label>
+
 <div>
   <button (click)="saveUser()" [disabled]="!isValid()" color="primary" mat-raised-button>Insert</button>
 </div>

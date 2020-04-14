@@ -6,6 +6,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {BackendService} from '../../../../global-services/backend/backend.service';
 import {Router} from '@angular/router';
+import {Class} from '../../../../global-models/Class';
 
 @Component({
   selector: 'app-view-class',
@@ -15,8 +16,8 @@ import {Router} from '@angular/router';
 export class ViewClassComponent implements OnInit {
 
   userType = UserType;
-  displayedColumns: string[] = ['name', 'type', 'course'];
-  dataSource: MatTableDataSource<User>;
+  displayedColumns: string[] = ['name'];
+  dataSource: MatTableDataSource<Class>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -29,26 +30,11 @@ export class ViewClassComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.backend.getAll('users').then(data => {
+    this.backend.getAll('classes').then(data => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-      this.dataSource.filterPredicate = (data1, filter) => {
 
-        let serializeFields = [];
-        for (const displayedColumn of this.displayedColumns) {
-          if (displayedColumn === 'type'){
-            serializeFields.push(UserType[data1[displayedColumn]]);
-          } else if (displayedColumn === 'course'){
-            serializeFields.push(data1[displayedColumn]?.name);
-          } else {
-            serializeFields.push(data1[displayedColumn]);
-          }
-
-        }
-
-        return serializeFields.join('').toLocaleLowerCase().indexOf(filter) >= 0;
-      };
     });
 
   }
@@ -62,12 +48,7 @@ export class ViewClassComponent implements OnInit {
   }
 
   viewDetails(row: any) {
-    if (row.type === UserType.COORDINATOR){
-      this.router.navigate(['/admin','details', 'coordinator', row._id], {state: {route: this.router.url}});
+    this.router.navigate(['/professor','details', 'class', row._id], {state: {route: this.router.url}});
 
-    }else {
-
-      this.router.navigate(['/admin','details', row._id], {state: {route: this.router.url}});
-    }
   }
 }

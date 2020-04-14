@@ -18,7 +18,6 @@ import {Professor} from '../../../../global-models/Professor';
 export class InsertProfessorComponent implements OnInit {
 
   @ViewChild('userForm') formContainer: DynamicFormsComponent;
-  @ViewChild('courseSelect') courseSelect: CourseSelectComponent;
   userType;
   pageTitle;
   user: BehaviorSubject<Professor> = new BehaviorSubject(new Professor());
@@ -39,9 +38,7 @@ export class InsertProfessorComponent implements OnInit {
 
   async saveUser() {
     let userData = this.formContainer.getResult();
-    let user = new User();
-    userData.type = +this.userType;
-    userData.course = this.courseSelect.formControl.value;
+    let user = new Professor();
     assign(user, userData, 2);
 
     await this.saveUserAPI(user);
@@ -59,7 +56,6 @@ export class InsertProfessorComponent implements OnInit {
     this.userType = +map.get('userType');
     this.pageTitle = 'Insert ' + toPascalCase(UserType[this.userType]);
     this.formContainer.reset();
-    this.courseSelect.formControl.setValue('');
     this.changeDetectorRef.detectChanges();
   }
 

@@ -6,6 +6,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {BackendService} from '../../../../global-services/backend/backend.service';
 import {Router} from '@angular/router';
+import {SessionService} from '../../../../global-services/session/session.service';
 
 @Component({
   selector: 'app-view-student',
@@ -23,32 +24,22 @@ export class ViewStudentComponent implements OnInit {
 
   constructor(
     private backend: BackendService,
-    private router: Router
+    private router: Router,
+    private sessionService: SessionService
   ) {
 
   }
 
   ngOnInit() {
     this.backend.getAll('users').then(data => {
+
+      data = data.filter(v => v.type === UserType.STUDENT);
+      console.log(data);
+
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-      this.dataSource.filterPredicate = (data1, filter) => {
 
-        let serializeFields = [];
-        for (const displayedColumn of this.displayedColumns) {
-          if (displayedColumn === 'type'){
-            serializeFields.push(UserType[data1[displayedColumn]]);
-          } else if (displayedColumn === 'course'){
-            serializeFields.push(data1[displayedColumn]?.name);
-          } else {
-            serializeFields.push(data1[displayedColumn]);
-          }
-
-        }
-
-        return serializeFields.join('').toLocaleLowerCase().indexOf(filter) >= 0;
-      };
     });
 
   }
@@ -62,12 +53,7 @@ export class ViewStudentComponent implements OnInit {
   }
 
   viewDetails(row: any) {
-    if (row.type === UserType.COORDINATOR){
-      this.router.navigate(['/admin','details', 'coordinator', row._id], {state: {route: this.router.url}});
+    this.router.navigate(['/coordinator','details', 'student', row._id], {state: {route: this.router.url}});
 
-    }else {
-
-      this.router.navigate(['/admin','details', row._id], {state: {route: this.router.url}});
-    }
   }
 }

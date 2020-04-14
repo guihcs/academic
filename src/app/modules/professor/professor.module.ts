@@ -12,10 +12,11 @@ import {MatInputModule} from '@angular/material/input';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { ClassDetailsComponent } from './components/class-details/class-details.component';
 
 
 @NgModule({
-  declarations: [ProfessorComponent, ViewClassComponent],
+  declarations: [ProfessorComponent, ViewClassComponent, ClassDetailsComponent],
   imports: [
     CommonModule,
     ProfessorRoutingModule,

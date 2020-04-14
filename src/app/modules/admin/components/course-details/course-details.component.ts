@@ -38,7 +38,6 @@ export class CourseDetailsComponent implements OnInit {
       this.userID = paramMap.get('id');
       let data = await this.backend.getAll('courses');
       let user = data.filter(user => user._id === this.userID)[0];
-      console.log(user);
 
       let coordinatorView = new Course();
       assign(coordinatorView, user, 2);

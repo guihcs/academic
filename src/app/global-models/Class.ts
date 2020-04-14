@@ -1,4 +1,5 @@
 import {FormInput} from '../libs/dynamic-forms/models/form-metadata';
+import {Course} from './Course';
 
 
 export class Class {
@@ -11,5 +12,7 @@ export class Class {
     label: 'Name'
   })
   name;
+
+  course = new Course();
 
 }

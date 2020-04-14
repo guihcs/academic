@@ -9,6 +9,8 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {assign, toPascalCase} from '../../../../utils/utils';
 import {UserType} from '../../../../global-models/UserType';
 import {Class} from '../../../../global-models/Class';
+import {BackendService} from '../../../../global-services/backend/backend.service';
+import {SessionService} from '../../../../global-services/session/session.service';
 
 @Component({
   selector: 'app-insert-class',
@@ -18,15 +20,15 @@ import {Class} from '../../../../global-models/Class';
 export class InsertClassComponent implements OnInit {
 
   @ViewChild('userForm') formContainer: DynamicFormsComponent;
-  @ViewChild('courseSelect') courseSelect: CourseSelectComponent;
   userType;
   pageTitle;
   user: BehaviorSubject<Class> = new BehaviorSubject(new Class());
 
   constructor(private route: ActivatedRoute,
-              private userService: UserService,
+              private backendService: BackendService,
               private changeDetectorRef: ChangeDetectorRef,
-              private snackBar: MatSnackBar
+              private snackBar: MatSnackBar,
+              private sessionService: SessionService
   ) {
   }
 
@@ -39,9 +41,8 @@ export class InsertClassComponent implements OnInit {
 
   async saveUser() {
     let userData = this.formContainer.getResult();
-    let user = new User();
+    let user = new Class();
     userData.type = +this.userType;
-    userData.course = this.courseSelect.formControl.value;
     assign(user, userData, 2);
 
     await this.saveUserAPI(user);
@@ -59,12 +60,12 @@ export class InsertClassComponent implements OnInit {
     this.userType = +map.get('userType');
     this.pageTitle = 'Insert ' + toPascalCase(UserType[this.userType]);
     this.formContainer.reset();
-    this.courseSelect.formControl.setValue('');
     this.changeDetectorRef.detectChanges();
   }
 
-  private async saveUserAPI(user: User) {
-    if (await this.userService.saveUser(user)) {
+  private async saveUserAPI(user) {
+    user.course = this.sessionService.getSession().course;
+    if (await this.backendService.persist('classes', user)) {
       this.formContainer.reset();
       this.snackBar.open('User Inserted.', '', {
         duration: 2000

@@ -6,6 +6,10 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {BackendService} from '../../../../global-services/backend/backend.service';
 import {Router} from '@angular/router';
+import {SessionService} from '../../../../global-services/session/session.service';
+import {fromPromise} from 'rxjs/internal-compatibility';
+import {filter, map} from 'rxjs/operators';
+import {ProfessorService} from '../../services/professor/professor.service';
 
 @Component({
   selector: 'app-view-professor',
@@ -14,60 +18,43 @@ import {Router} from '@angular/router';
 })
 export class ViewProfessorComponent implements OnInit {
 
-  userType = UserType;
-  displayedColumns: string[] = ['name', 'type', 'course'];
-  dataSource: MatTableDataSource<User>;
+  title = 'View Professors';
+  placeholder = 'Name, Email or Course';
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  columnsDef = [
+    {field: 'name', header: 'Name'},
+    {field: 'userType', header: 'Profile'}
+  ];
+
+  data;
 
   constructor(
-    private backend: BackendService,
+    private professorService: ProfessorService,
     private router: Router
   ) {
 
   }
 
   ngOnInit() {
-    this.backend.getAll('users').then(data => {
-      this.dataSource = new MatTableDataSource(data);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-      this.dataSource.filterPredicate = (data1, filter) => {
-
-        let serializeFields = [];
-        for (const displayedColumn of this.displayedColumns) {
-          if (displayedColumn === 'type'){
-            serializeFields.push(UserType[data1[displayedColumn]]);
-          } else if (displayedColumn === 'course'){
-            serializeFields.push(data1[displayedColumn]?.name);
-          } else {
-            serializeFields.push(data1[displayedColumn]);
-          }
-
-        }
-
-        return serializeFields.join('').toLocaleLowerCase().indexOf(filter) >= 0;
-      };
-    });
-
+    this.data = fromPromise(this.professorService.getAll());
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
+  filter(data1, filter){
+    let serializeFields = [];
+    for (const displayedColumn of this.columnsDef) {
+      if (displayedColumn.field === 'type'){
+        serializeFields.push(UserType[data1[displayedColumn.field]]);
+      } else if (displayedColumn.field === 'course'){
+        serializeFields.push(data1[displayedColumn.field]?.name);
+      } else {
+        serializeFields.push(data1[displayedColumn.field]);
+      }
     }
+    return serializeFields.join('').toLocaleLowerCase().indexOf(filter) >= 0;
   }
 
   viewDetails(row: any) {
-    if (row.type === UserType.COORDINATOR){
-      this.router.navigate(['/admin','details', 'coordinator', row._id], {state: {route: this.router.url}});
+    this.router.navigate(['/coordinator','details', 'professor', row._id], {state: {route: this.router.url}});
 
-    }else {
-
-      this.router.navigate(['/admin','details', row._id], {state: {route: this.router.url}});
-    }
   }
 }

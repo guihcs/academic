@@ -13,6 +13,7 @@ import {InsertSubjectComponent} from './components/insert-subject/insert-subject
 import {DetailsClassComponent} from './components/details-class/details-class.component';
 import {ViewClassComponent} from './components/view-class/view-class.component';
 import {InsertClassComponent} from './components/insert-class/insert-class.component';
+import {Student} from '../../global-models/Student';
 
 
 const routes: Routes = [

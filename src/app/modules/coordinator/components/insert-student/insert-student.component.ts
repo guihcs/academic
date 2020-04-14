@@ -9,6 +9,8 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {assign, toPascalCase} from '../../../../utils/utils';
 import {UserType} from '../../../../global-models/UserType';
 import {Student} from '../../../../global-models/Student';
+import {BackendService} from '../../../../global-services/backend/backend.service';
+import {SessionService} from '../../../../global-services/session/session.service';
 
 @Component({
   selector: 'app-insert-student',
@@ -18,15 +20,18 @@ import {Student} from '../../../../global-models/Student';
 export class InsertStudentComponent implements OnInit {
 
   @ViewChild('userForm') formContainer: DynamicFormsComponent;
-  @ViewChild('courseSelect') courseSelect: CourseSelectComponent;
   userType;
   pageTitle;
   user: BehaviorSubject<Student> = new BehaviorSubject(new Student());
+  studentClass;
+  classes;
 
   constructor(private route: ActivatedRoute,
               private userService: UserService,
               private changeDetectorRef: ChangeDetectorRef,
-              private snackBar: MatSnackBar
+              private snackBar: MatSnackBar,
+              private backendService: BackendService,
+              private sessionService: SessionService
   ) {
   }
 
@@ -35,13 +40,15 @@ export class InsertStudentComponent implements OnInit {
 
   ngAfterViewInit(): void {
     this.route.paramMap.subscribe(map => this.updateForm(map));
+    this.backendService.getAll('classes').then(c => {
+
+      this.classes = c.filter(v => v.course?.name === this.sessionService.getSession().course?.name);
+    });
   }
 
   async saveUser() {
     let userData = this.formContainer.getResult();
-    let user = new User();
-    userData.type = +this.userType;
-    userData.course = this.courseSelect.formControl.value;
+    let user = new Student();
     assign(user, userData, 2);
 
     await this.saveUserAPI(user);
@@ -59,7 +66,6 @@ export class InsertStudentComponent implements OnInit {
     this.userType = +map.get('userType');
     this.pageTitle = 'Insert ' + toPascalCase(UserType[this.userType]);
     this.formContainer.reset();
-    this.courseSelect.formControl.setValue('');
     this.changeDetectorRef.detectChanges();
   }
 

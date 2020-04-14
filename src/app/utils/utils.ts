@@ -4,6 +4,7 @@ export function toPascalCase(text: string) {
 
 
 export function assign(target, src, depth) {
+
   if (depth <= 0) {
     return;
   }

@@ -11,6 +11,7 @@ import {ViewProfessor} from '../../../../global-models/ViewProfessor';
 import {BackendService} from '../../../../global-services/backend/backend.service';
 import {assign} from '../../../../utils/utils';
 import {Class} from '../../../../global-models/Class';
+import {UserType} from '../../../../global-models/UserType';
 
 @Component({
   selector: 'app-details-class',
@@ -27,6 +28,9 @@ export class DetailsClassComponent implements OnInit {
   private backUrl;
   private userID;
 
+  disciplines;
+  students;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private backend: BackendService,
@@ -37,11 +41,21 @@ export class DetailsClassComponent implements OnInit {
     activatedRoute.paramMap.subscribe(async paramMap => {
       this.userID = paramMap.get('id');
       let rawData = await this.backend.query('classes', this.userID);
-      let professor = new Class();
-      assign(professor, rawData[0], 2);
-      this.user.next(professor);
-
+      let class1 = new Class();
+      assign(class1, rawData[0], 2);
+      this.user.next(class1);
       this.backUrl = history.state.route;
+
+      let all = await this.backend.getAll('subjects');
+
+      this.disciplines = all.filter(v => {
+        return v.period === class1.period && v.course.name === class1.course.name;
+      });
+
+      let users = await this.backend.getAll('users');
+      this.students = users.filter(v => {
+        return v.type === UserType.STUDENT && v.class.name === class1.name;
+      });
     });
   }
 
@@ -66,18 +80,19 @@ export class DetailsClassComponent implements OnInit {
 
 
   async delete() {
-    /*let dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {});
+    let dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {});
     dialogRef.afterClosed().subscribe(async res => {
       if (res === 'delete') {
-        if (await this.userService.deleteUser(this.user.getValue())) {
+        let value = this.user.getValue();
+
+        if (await this.backend.delete('classes', value._id)) {
           this.snackBar.open('User removed.', '');
           this.backToList();
         } else {
           this.snackBar.open('Error.', '');
         }
-
       }
-    });*/
+    });
   }
 
 }

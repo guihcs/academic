@@ -32,37 +32,40 @@ import { CourseDetailsComponent } from './components/course-details/course-detai
 
 
 @NgModule({
-  declarations: [
-    AdminComponent,
-    UserViewComponent,
-    UserFormComponent,
-    AddressInputComponent,
-    ViewCoursesComponent,
-    ExamFormComponent,
-    CreateCourseComponent,
-    UserSelectorComponent,
-    CoordinatorDetailsComponent,
-    CourseSelectComponent,
-    CourseDetailsComponent
-  ],
-  imports: [
-    CommonModule,
-    AdminRoutingModule,
-    TemplatesModule,
-    MatMenuModule,
-    MatListModule,
-    MatIconModule,
-    MatRippleModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule,
-    DynamicFormsModule,
-    MatButtonModule,
-    MatSnackBarModule,
-    ReactiveFormsModule
-  ]
+    declarations: [
+        AdminComponent,
+        UserViewComponent,
+        UserFormComponent,
+        AddressInputComponent,
+        ViewCoursesComponent,
+        ExamFormComponent,
+        CreateCourseComponent,
+        UserSelectorComponent,
+        CoordinatorDetailsComponent,
+        CourseSelectComponent,
+        CourseDetailsComponent
+    ],
+    exports: [
+        CourseSelectComponent
+    ],
+    imports: [
+        CommonModule,
+        AdminRoutingModule,
+        TemplatesModule,
+        MatMenuModule,
+        MatListModule,
+        MatIconModule,
+        MatRippleModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatTableModule,
+        MatSortModule,
+        MatPaginatorModule,
+        DynamicFormsModule,
+        MatButtonModule,
+        MatSnackBarModule,
+        ReactiveFormsModule
+    ]
 })
 export class AdminModule { }

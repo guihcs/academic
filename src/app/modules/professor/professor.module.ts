@@ -13,10 +13,18 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { ClassDetailsComponent } from './components/class-details/class-details.component';
+import { ViewDisciplinesComponent } from './components/view-disciplines/view-disciplines.component';
+import { DisciplineDetailsComponent } from './components/discipline-details/discipline-details.component';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {MatDividerModule} from '@angular/material/divider';
+import {DynamicFormsModule} from '../../libs/dynamic-forms/dynamic-forms.module';
+import {MatListModule} from '@angular/material/list';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
-  declarations: [ProfessorComponent, ViewClassComponent, ClassDetailsComponent],
+  declarations: [ProfessorComponent, ViewClassComponent, ClassDetailsComponent, ViewDisciplinesComponent, DisciplineDetailsComponent],
   imports: [
     CommonModule,
     ProfessorRoutingModule,
@@ -27,7 +35,13 @@ import { ClassDetailsComponent } from './components/class-details/class-details.
     MatInputModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDividerModule,
+    DynamicFormsModule,
+    MatListModule,
+    ReactiveFormsModule
   ]
 })
 export class ProfessorModule { }

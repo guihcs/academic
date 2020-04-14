@@ -1,12 +1,8 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {UserType} from '../../../../global-models/UserType';
-import {MatTableDataSource} from '@angular/material/table';
-import {User} from '../../../../global-models/User';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
+import {Component, OnInit} from '@angular/core';
 import {BackendService} from '../../../../global-services/backend/backend.service';
 import {Router} from '@angular/router';
-import {Class} from '../../../../global-models/Class';
+import {SessionService} from '../../../../global-services/session/session.service';
+import {fromPromise} from 'rxjs/internal-compatibility';
 
 @Component({
   selector: 'app-view-class',
@@ -15,40 +11,43 @@ import {Class} from '../../../../global-models/Class';
 })
 export class ViewClassComponent implements OnInit {
 
-  userType = UserType;
-  displayedColumns: string[] = ['name'];
-  dataSource: MatTableDataSource<Class>;
+  title = 'View Class';
+  placeholder = 'Name, Email or Course';
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  columnsDef = [
+    {field: 'name', header: 'Name'},
+    {field: 'period', header: 'Period'}
+  ];
+
+  data;
 
   constructor(
     private backend: BackendService,
+    private sessionService: SessionService,
     private router: Router
   ) {
-
   }
 
   ngOnInit() {
-    this.backend.getAll('classes').then(data => {
-      this.dataSource = new MatTableDataSource(data);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
 
-    });
+    this.data = fromPromise(
+    (async () => {
+      let disciplines = await this.backend.getAll('subjects');
+      let classes = await this.backend.getAll('classes');
 
-  }
+      let periods = disciplines
+        .filter(d => d.professor.name === this.sessionService.getSession().name)
+        .map(v => v.period);
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+      return classes.filter(c => {
+        return periods.includes(c.period);
+      });
+
+    })());
   }
 
   viewDetails(row: any) {
-    this.router.navigate(['/professor','details', 'class', row._id], {state: {route: this.router.url}});
-
+    this.router.navigate(['/professor', 'details', 'class', row._id], {state: {route: this.router.url}});
   }
 }
+

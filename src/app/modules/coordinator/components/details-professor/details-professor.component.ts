@@ -65,10 +65,10 @@ export class DetailsProfessorComponent implements OnInit {
 
 
   async delete() {
-    /*let dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {});
+    let dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {});
     dialogRef.afterClosed().subscribe(async res => {
       if (res === 'delete') {
-        if (await this.userService.deleteUser(this.user.getValue())) {
+        if (await this.backend.delete('users', this.user.getValue())) {
           this.snackBar.open('User removed.', '');
           this.backToList();
         } else {
@@ -76,7 +76,7 @@ export class DetailsProfessorComponent implements OnInit {
         }
 
       }
-    });*/
+    });
   }
 
 }

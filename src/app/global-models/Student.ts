@@ -14,4 +14,12 @@ export class Student extends User {
     this.type = UserType.STUDENT;
     this.class = new Class();
   }
+
+  get className(){
+    return this.class.name;
+  }
+
+  get classPeriod(){
+    return this.class.period;
+  }
 }

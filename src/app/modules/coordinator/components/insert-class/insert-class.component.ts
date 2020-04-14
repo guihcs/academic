@@ -1,10 +1,7 @@
-import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {DynamicFormsComponent} from '../../../../libs/dynamic-forms/dynamic-forms.component';
-import {CourseSelectComponent} from '../../../admin/components/course-select/course-select.component';
 import {BehaviorSubject} from 'rxjs';
-import {User} from '../../../../global-models/User';
 import {ActivatedRoute, ParamMap} from '@angular/router';
-import {UserService} from '../../../../global-services/user/user.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {assign, toPascalCase} from '../../../../utils/utils';
 import {UserType} from '../../../../global-models/UserType';
@@ -17,12 +14,13 @@ import {SessionService} from '../../../../global-services/session/session.servic
   templateUrl: './insert-class.component.html',
   styleUrls: ['./insert-class.component.css']
 })
-export class InsertClassComponent implements OnInit {
+export class InsertClassComponent implements OnInit, AfterViewInit {
 
   @ViewChild('userForm') formContainer: DynamicFormsComponent;
   userType;
   pageTitle;
   user: BehaviorSubject<Class> = new BehaviorSubject(new Class());
+  course;
 
   constructor(private route: ActivatedRoute,
               private backendService: BackendService,
@@ -37,13 +35,15 @@ export class InsertClassComponent implements OnInit {
 
   ngAfterViewInit(): void {
     this.route.paramMap.subscribe(map => this.updateForm(map));
+    this.course = this.sessionService.getSession().course;
+    this.changeDetectorRef.detectChanges();
   }
 
-  async saveUser() {
-    let userData = this.formContainer.getResult();
+  async saveClass() {
+    let classData = this.formContainer.getResult();
     let user = new Class();
-    userData.type = +this.userType;
-    assign(user, userData, 2);
+    user.course = this.sessionService.getSession().course;
+    assign(user, classData, 2);
 
     await this.saveUserAPI(user);
   }
@@ -64,7 +64,7 @@ export class InsertClassComponent implements OnInit {
   }
 
   private async saveUserAPI(user) {
-    user.course = this.sessionService.getSession().course;
+
     if (await this.backendService.persist('classes', user)) {
       this.formContainer.reset();
       this.snackBar.open('User Inserted.', '', {

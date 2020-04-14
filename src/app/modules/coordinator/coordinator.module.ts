@@ -26,29 +26,33 @@ import {MatInputModule} from '@angular/material/input';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatIconModule} from '@angular/material/icon';
+import { DetailsCourseComponent } from './components/details-course/details-course.component';
+import {MatListModule} from '@angular/material/list';
 
 
 @NgModule({
-  declarations: [CoordinatorComponent, InsertStudentComponent, InsertProfessorComponent, InsertSubjectComponent, ViewProfessorComponent, ViewStudentComponent, ViewSubjectComponent, DetailsProfessorComponent, DetailsStudentComponent, DetailsSubjectComponent, ViewClassComponent, DetailsClassComponent, InsertClassComponent, ProfessorSelectorComponent],
-  imports: [
-    CommonModule,
-    CoordinatorRoutingModule,
-    TemplatesModule,
-    MatMenuModule,
-    DynamicFormsModule,
-    MatButtonModule,
-    MatSnackBarModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule,
-    FormsModule,
-    MatDividerModule,
-    MatIconModule
-  ]
+  declarations: [CoordinatorComponent, InsertStudentComponent, InsertProfessorComponent, InsertSubjectComponent, ViewProfessorComponent, ViewStudentComponent, ViewSubjectComponent, DetailsProfessorComponent, DetailsStudentComponent, DetailsSubjectComponent, ViewClassComponent, DetailsClassComponent, InsertClassComponent, ProfessorSelectorComponent, DetailsCourseComponent],
+    imports: [
+        CommonModule,
+        CoordinatorRoutingModule,
+        TemplatesModule,
+        MatMenuModule,
+        DynamicFormsModule,
+        MatButtonModule,
+        MatSnackBarModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatTableModule,
+        MatSortModule,
+        MatPaginatorModule,
+        FormsModule,
+        MatDividerModule,
+        MatIconModule,
+        ReactiveFormsModule,
+        MatListModule
+    ]
 })
 export class CoordinatorModule { }

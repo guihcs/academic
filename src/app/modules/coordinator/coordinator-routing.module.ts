@@ -14,6 +14,7 @@ import {DetailsClassComponent} from './components/details-class/details-class.co
 import {ViewClassComponent} from './components/view-class/view-class.component';
 import {InsertClassComponent} from './components/insert-class/insert-class.component';
 import {Student} from '../../global-models/Student';
+import {DetailsCourseComponent} from './components/details-course/details-course.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
       {path: 'details/student/:id', component: DetailsStudentComponent},
       {path: 'details/subject/:id', component: DetailsSubjectComponent},
       {path: 'details/class/:id', component: DetailsClassComponent},
+      {path: 'details/course', component: DetailsCourseComponent},
       {path: 'view/professor', component: ViewProfessorComponent},
       {path: 'view/student', component: ViewStudentComponent},
       {path: 'view/subject', component: ViewSubjectComponent},

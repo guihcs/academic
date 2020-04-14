@@ -39,6 +39,8 @@ export class CoordinatorDetailsComponent implements OnInit {
       let user = data.filter(user => user._id === this.userID)[0];
       let coordinatorView = new CoordinatorView();
       assign(coordinatorView, user, 2);
+      console.log(coordinatorView);
+
       this.user.next(coordinatorView);
       this.backUrl = history.state.route;
     });

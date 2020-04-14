@@ -4,14 +4,18 @@ import {Course} from './Course';
 
 export class Class {
 
-  @FormInput({
-    label: 'Period'
-  })
-  period;
+  _id;
+
   @FormInput({
     label: 'Name'
   })
   name;
+
+  @FormInput({
+    label: 'Period'
+  })
+  period;
+
 
   course = new Course();
 

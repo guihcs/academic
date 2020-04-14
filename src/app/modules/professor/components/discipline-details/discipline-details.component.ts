@@ -1,7 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import {Class} from '../../../../global-models/Class';
+import {Discipline} from '../../../../global-models/Discipline';
 import {DynamicFormsComponent} from '../../../../libs/dynamic-forms/dynamic-forms.component';
+import {FormControl} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BackendService} from '../../../../global-services/backend/backend.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -9,53 +10,41 @@ import {MatDialog} from '@angular/material/dialog';
 import {assign} from '../../../../utils/utils';
 import {UserType} from '../../../../global-models/UserType';
 import {ConfirmDeleteDialogComponent} from '../../../../templates/confirm-delete-dialog/confirm-delete-dialog.component';
-import {SessionService} from '../../../../global-services/session/session.service';
 
 @Component({
-  selector: 'app-class-details',
-  templateUrl: './class-details.component.html',
-  styleUrls: ['./class-details.component.css']
+  selector: 'app-discipline-details',
+  templateUrl: './discipline-details.component.html',
+  styleUrls: ['./discipline-details.component.css']
 })
-export class ClassDetailsComponent implements OnInit {
+export class DisciplineDetailsComponent implements OnInit {
 
-
-  user: BehaviorSubject<Class> = new BehaviorSubject<Class>(null);
+  user: BehaviorSubject<Discipline> = new BehaviorSubject<Discipline>(null);
   pageTitle;
   @ViewChild('userForm')
   private userForm: DynamicFormsComponent;
   private backUrl;
   private userID;
 
-  disciplines;
-  students;
-  class;
+  formControl = new FormControl();
+  classes;
+  discipline;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private backend: BackendService,
-    private sessionService: SessionService,
-    private router: Router,
-    private snackBar: MatSnackBar,
-    private dialog: MatDialog
+    private router: Router
   ) {
     activatedRoute.paramMap.subscribe(async paramMap => {
       this.userID = paramMap.get('id');
-      let rawData = await this.backend.query('classes', this.userID);
-      let class1 = new Class();
-      assign(class1, rawData[0], 2);
-      this.class = class1;
-
+      let rawData = await this.backend.query('subjects', this.userID);
+      let discipline1 = new Discipline();
+      assign(discipline1, rawData[0], 2);
+      this.discipline = discipline1;
       this.backUrl = history.state.route;
+      let classes = await this.backend.getAll('classes');
 
-      let all = await this.backend.getAll('subjects');
-
-      this.disciplines = all.filter(v => {
-        return v.period === class1.period && v.course.name === class1.course.name && v.professor.name === this.sessionService.getSession().name;
-      });
-
-      let users = await this.backend.getAll('users');
-      this.students = users.filter(v => {
-        return v.type === UserType.STUDENT && v.class.name === class1.name;
+      this.classes = classes.filter(v => {
+        return v.course.name === discipline1.course.name && v.period === discipline1.period;
       });
     });
   }
@@ -63,10 +52,10 @@ export class ClassDetailsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
   backToList() {
     this.router.navigate([this.backUrl]);
   }
+
 
 
 

@@ -1,1 +1,29 @@
-<p>class-details works!</p>
+<div class="view-header">
+  <button
+    (click)="backToList()"
+    mat-icon-button
+  >
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <h1 class="view-title">{{pageTitle}} Details</h1>
+
+</div>
+<mat-divider></mat-divider>
+<p> Name: {{class?.name}}</p>
+<p> Name: {{class?.period}}</p>
+
+<h2>Disciplines</h2>
+<mat-list>
+  <mat-list-item *ngFor="let discipline of disciplines">
+    {{discipline.name}}
+  </mat-list-item>
+</mat-list>
+
+<h2>Students</h2>
+<mat-list>
+  <mat-list-item *ngFor="let student of students">
+    {{student.name}}
+  </mat-list-item>
+</mat-list>
+
+

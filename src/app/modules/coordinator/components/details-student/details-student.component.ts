@@ -7,7 +7,6 @@ import {UserService} from '../../../../global-services/user/user.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatDialog} from '@angular/material/dialog';
 import {ConfirmDeleteDialogComponent} from '../../../../templates/confirm-delete-dialog/confirm-delete-dialog.component';
-import {ViewProfessor} from '../../../../global-models/ViewProfessor';
 import {BackendService} from '../../../../global-services/backend/backend.service';
 import {assign} from '../../../../utils/utils';
 import {Student} from '../../../../global-models/Student';
@@ -18,8 +17,6 @@ import {Student} from '../../../../global-models/Student';
   styleUrls: ['./details-student.component.css']
 })
 export class DetailsStudentComponent implements OnInit {
-
-
 
   user: BehaviorSubject<Student> = new BehaviorSubject<Student>(null);
   pageTitle;
@@ -67,10 +64,10 @@ export class DetailsStudentComponent implements OnInit {
 
 
   async delete() {
-    /*let dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {});
+    let dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {});
     dialogRef.afterClosed().subscribe(async res => {
       if (res === 'delete') {
-        if (await this.userService.deleteUser(this.user.getValue())) {
+        if (await this.backend.delete('users', this.user.getValue())) {
           this.snackBar.open('User removed.', '');
           this.backToList();
         } else {
@@ -78,7 +75,7 @@ export class DetailsStudentComponent implements OnInit {
         }
 
       }
-    });*/
+    });
   }
 
 }

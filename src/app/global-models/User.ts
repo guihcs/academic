@@ -13,7 +13,6 @@ export class User {
   })
   name: string;
 
-  // @ts-ignore
   @FormInput({
     type: 'cpf',
     label: 'CPF',
@@ -21,7 +20,6 @@ export class User {
   })
   cpf: string;
 
-  // @ts-ignore
   @FormInput({
     type: 'email',
     label: 'Email',
@@ -29,7 +27,6 @@ export class User {
   })
   email: string;
 
-  // @ts-ignore
   @FormInput({
     type: 'password',
     label: 'Password',

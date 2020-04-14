@@ -1,0 +1,23 @@
+<div class="view-header">
+  <button
+    (click)="backToList()"
+    mat-icon-button
+  >
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <h1 class="view-title">{{pageTitle}} Discipline Details</h1>
+
+</div>
+<mat-divider></mat-divider>
+
+<p>Discipline: {{discipline?.name}}</p>
+<p>Period: {{discipline?.period}}</p>
+
+<h2>Classes</h2>
+<mat-list>
+  <mat-list-item *ngFor="let class1 of classes">
+
+    {{class1?.name}}
+
+  </mat-list-item>
+</mat-list>

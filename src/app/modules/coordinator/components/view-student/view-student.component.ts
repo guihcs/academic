@@ -7,6 +7,8 @@ import {MatSort} from '@angular/material/sort';
 import {BackendService} from '../../../../global-services/backend/backend.service';
 import {Router} from '@angular/router';
 import {SessionService} from '../../../../global-services/session/session.service';
+import {fromPromise} from 'rxjs/internal-compatibility';
+import {StudentService} from '../../services/student/student.service';
 
 @Component({
   selector: 'app-view-student',
@@ -15,45 +17,29 @@ import {SessionService} from '../../../../global-services/session/session.servic
 })
 export class ViewStudentComponent implements OnInit {
 
-  userType = UserType;
-  displayedColumns: string[] = ['name', 'type', 'course'];
-  dataSource: MatTableDataSource<User>;
+  title = 'View Student';
+  placeholder = 'Name, Email or Course';
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  columnsDef = [
+    {field: 'name', header: 'Name'},
+    {field: 'className', header: 'Class'},
+    {field: 'classPeriod', header: 'Class Period'}
+  ];
+
+  data;
 
   constructor(
-    private backend: BackendService,
-    private router: Router,
-    private sessionService: SessionService
+    private studentService: StudentService,
+    private sessionService: SessionService,
+    private router: Router
   ) {
-
   }
 
   ngOnInit() {
-    this.backend.getAll('users').then(data => {
-
-      data = data.filter(v => v.type === UserType.STUDENT);
-      console.log(data);
-
-      this.dataSource = new MatTableDataSource(data);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-
-    });
-
-  }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+    this.data = fromPromise(this.studentService.getAll(this.sessionService.getSession().course));
   }
 
   viewDetails(row: any) {
-    this.router.navigate(['/coordinator','details', 'student', row._id], {state: {route: this.router.url}});
-
+    this.router.navigate(['/coordinator', 'details', 'student', row._id], {state: {route: this.router.url}});
   }
 }

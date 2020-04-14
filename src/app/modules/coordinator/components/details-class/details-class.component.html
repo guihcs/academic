@@ -15,6 +15,22 @@
   formStyleClass="column"
   inputStyleClass="input-form-field"
 ></dynamic-form>
+
+<h2>Disciplines</h2>
+<mat-list>
+  <mat-list-item *ngFor="let discipline of disciplines">
+    {{discipline.name}}
+  </mat-list-item>
+</mat-list>
+
+<h2>Students</h2>
+<mat-list>
+  <mat-list-item *ngFor="let student of students">
+    {{student.name}}
+  </mat-list-item>
+</mat-list>
+
+
 <mat-divider></mat-divider>
 <div>
 

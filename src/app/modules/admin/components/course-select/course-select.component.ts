@@ -25,7 +25,7 @@ export class CourseSelectComponent implements OnInit, ConfigurableInput{
     this.backend.getAll('courses').then(courses => {
       this.courses = courses;
       this.formControl.valueChanges.subscribe( v => {
-        this.control.setValue(this.courses.filter(c => c.name === v)[0]);
+        this.control.setValue({name: v.name, area: v.area});
       });
     });
   }
@@ -34,7 +34,7 @@ export class CourseSelectComponent implements OnInit, ConfigurableInput{
     this.args = args;
 
     if (args.defaultValue){
-      this.formControl.setValue(args.defaultValue.name);
+      // this.formControl.setValue(args.defaultValue.name);
     }
 
 

@@ -49,6 +49,7 @@ export class InsertStudentComponent implements OnInit {
   async saveUser() {
     let userData = this.formContainer.getResult();
     let user = new Student();
+    user.class = this.studentClass;
     assign(user, userData, 2);
 
     await this.saveUserAPI(user);
@@ -66,6 +67,7 @@ export class InsertStudentComponent implements OnInit {
     this.userType = +map.get('userType');
     this.pageTitle = 'Insert ' + toPascalCase(UserType[this.userType]);
     this.formContainer.reset();
+    //todo reset class selector
     this.changeDetectorRef.detectChanges();
   }
 

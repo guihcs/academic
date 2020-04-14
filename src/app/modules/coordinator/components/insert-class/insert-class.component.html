@@ -1,5 +1,7 @@
 <h1>Insert Class</h1>
 <!--<mat-divider></mat-divider>-->
+<p> Course: {{course?.name}}</p>
+
 <dynamic-form
   #userForm
   [objectObservable]="user"
@@ -7,5 +9,5 @@
   inputStyleClass="input-form-field"></dynamic-form>
 
 <div>
-  <button (click)="saveUser()" [disabled]="!isValid()" color="primary" mat-raised-button>Insert</button>
+  <button (click)="saveClass()" [disabled]="!isValid()" color="primary" mat-raised-button>Insert</button>
 </div>

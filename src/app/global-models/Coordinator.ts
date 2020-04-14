@@ -9,9 +9,7 @@ export class Coordinator extends User {
   constructor() {
     super();
     this.type = UserType.COORDINATOR;
-    this.course = new Course();
   }
-
 
 }
 

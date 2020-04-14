@@ -20,7 +20,7 @@ export class UserSelectorComponent implements OnInit, ConfigurableInput {
 
   ngOnInit(): void {
     this.formControl.valueChanges.subscribe(value => {
-      this.control.setValue({id: value._id, name: value.name});
+      if(value) this.control.setValue({id: value._id, name: value.name});
     });
   }
 

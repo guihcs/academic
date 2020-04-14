@@ -10,8 +10,13 @@ export function assign(target, src, depth) {
   }
   for (const key of Object.keys(src)) {
     if (src[key] && typeof src[key] === 'object') {
-      assign(target[key], src[key], depth - 1);
-    } else {
+      if (target[key]) {
+        assign(target[key], src[key], depth - 1);
+      }else {
+        target[key] = src[key];
+      }
+
+    } else if(src[key]){
       target[key] = src[key];
     }
   }

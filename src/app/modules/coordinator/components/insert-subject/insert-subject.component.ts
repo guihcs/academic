@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {DynamicFormsComponent} from '../../../../libs/dynamic-forms/dynamic-forms.component';
 import {CourseSelectComponent} from '../../../admin/components/course-select/course-select.component';
 import {BehaviorSubject} from 'rxjs';
@@ -8,39 +8,46 @@ import {UserService} from '../../../../global-services/user/user.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {assign, toPascalCase} from '../../../../utils/utils';
 import {UserType} from '../../../../global-models/UserType';
-import {Subject} from '../../../../global-models/Subject';
+import {Discipline} from '../../../../global-models/Discipline';
 import {Student} from '../../../../global-models/Student';
+import {SessionService} from '../../../../global-services/session/session.service';
+import {BackendService} from '../../../../global-services/backend/backend.service';
 
 @Component({
   selector: 'app-insert-subject',
   templateUrl: './insert-subject.component.html',
   styleUrls: ['./insert-subject.component.css']
 })
-export class InsertSubjectComponent implements OnInit {
+export class InsertSubjectComponent implements OnInit, AfterViewInit {
 
   @ViewChild('userForm') formContainer: DynamicFormsComponent;
   userType;
   pageTitle;
-  user: BehaviorSubject<Subject> = new BehaviorSubject(new Subject());
+  user: BehaviorSubject<Discipline> = new BehaviorSubject(new Discipline());
+  course;
 
   constructor(private route: ActivatedRoute,
-              private userService: UserService,
+              private backend: BackendService,
               private changeDetectorRef: ChangeDetectorRef,
-              private snackBar: MatSnackBar
+              private snackBar: MatSnackBar,
+              private sessionService: SessionService
   ) {
   }
 
   ngOnInit(): void {
+
   }
 
   ngAfterViewInit(): void {
     this.route.paramMap.subscribe(map => this.updateForm(map));
+    this.course = this.sessionService.getSession().course;
+    this.changeDetectorRef.detectChanges();
   }
 
   async prepareSubjectData() {
     let userData = this.formContainer.getResult();
-    let user = new Student();
-    userData.type = +this.userType;
+    let user = new Discipline();
+    userData.course = this.course;
     assign(user, userData, 2);
 
     await this.saveUserAPI(user);
@@ -61,8 +68,9 @@ export class InsertSubjectComponent implements OnInit {
     this.changeDetectorRef.detectChanges();
   }
 
-  private async saveUserAPI(user: User) {
-    if (await this.userService.saveUser(user)) {
+  private async saveUserAPI(discipline) {
+
+    if (await this.backend.persist('subjects', discipline)) {
       this.formContainer.reset();
       this.snackBar.open('User Inserted.', '', {
         duration: 2000

@@ -8,6 +8,8 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {assign, toPascalCase} from '../../../../utils/utils';
 import {UserType} from '../../../../global-models/UserType';
 import {CourseSelectComponent} from '../course-select/course-select.component';
+import {Coordinator} from '../../../../global-models/Coordinator';
+import {CoordinatorService} from '../../services/coordinator/coordinator.service';
 
 @Component({
   selector: 'app-user-form',
@@ -20,10 +22,10 @@ export class UserFormComponent implements OnInit, AfterViewInit {
   @ViewChild('courseSelect') courseSelect: CourseSelectComponent;
   userType;
   pageTitle;
-  user: BehaviorSubject<User> = new BehaviorSubject(new User());
+  user: BehaviorSubject<Coordinator> = new BehaviorSubject(new Coordinator());
 
   constructor(private route: ActivatedRoute,
-              private userService: UserService,
+              private coordinatorService: CoordinatorService,
               private changeDetectorRef: ChangeDetectorRef,
               private snackBar: MatSnackBar
   ) {
@@ -40,7 +42,7 @@ export class UserFormComponent implements OnInit, AfterViewInit {
     let userData = this.formContainer.getResult();
     let user = new User();
     userData.type = +this.userType;
-    userData.course = this.courseSelect.formControl.value;
+    userData.course = this.courseSelect.getFormControl().value;
     assign(user, userData, 2);
 
     await this.saveUserAPI(user);
@@ -63,7 +65,7 @@ export class UserFormComponent implements OnInit, AfterViewInit {
   }
 
   private async saveUserAPI(user: User) {
-    if (await this.userService.saveUser(user)) {
+    if (await this.coordinatorService.save(user)) {
       this.formContainer.reset();
       this.snackBar.open('User Inserted.', '', {
         duration: 2000

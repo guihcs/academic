@@ -1,20 +1,7 @@
 <h1>Insert Student</h1>
-<!--<mat-divider></mat-divider>-->
-<dynamic-form
-  #userForm
-  [objectObservable]="user"
-  formStyleClass="column"
-  inputStyleClass="input-form-field"></dynamic-form>
 
-<label>
-  Select class:
-  <select [(ngModel)]="studentClass">
-    <option *ngFor="let classObj of classes" [ngValue]="classObj">
-      {{classObj.name}}
-    </option>
-  </select>
-</label>
-
-<div>
-  <button (click)="saveUser()" [disabled]="!isValid()" color="primary" mat-raised-button>Insert</button>
-</div>
+<app-data-form
+  [collectionName]="collectionName"
+  [dataType]="dataType"
+  [prepareDataHook]="saveUser"
+></app-data-form>

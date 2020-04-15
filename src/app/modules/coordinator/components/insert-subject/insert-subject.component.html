@@ -1,13 +1,8 @@
 <h1>Create Discipline</h1>
 
-<p>Course: {{course?.name}}</p>
-
-<dynamic-form
-  #userForm
-  [objectObservable]="user"
-  formStyleClass="column"
-  inputStyleClass="input-form-field"></dynamic-form>
-
-<div>
-  <button (click)="prepareSubjectData()" [disabled]="!isValid()" color="primary" mat-raised-button>Insert</button>
-</div>
+<app-data-form
+  [collectionName]="collectionName"
+  [dataType]="dataType"
+  [prepareDataHook]="prepareSubjectData"
+  [injectedData]="course"
+></app-data-form>

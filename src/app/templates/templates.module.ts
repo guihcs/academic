@@ -24,6 +24,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { DataFormComponent } from './data-form/data-form.component';
 
 
 
@@ -35,7 +36,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     UserDetailsComponent,
     ConfirmDeleteDialogComponent,
     ProfileComponent,
-    DataViewComponent
+    DataViewComponent,
+    DataFormComponent
   ],
   imports: [
     CommonModule,
@@ -56,14 +58,15 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatSortModule,
     MatPaginatorModule
   ],
-  exports: [
-    SidenavComponent,
-    ToolbarComponent,
-    OptionsItemsComponent,
-    UserDetailsComponent,
-    ConfirmDeleteDialogComponent,
-    DataViewComponent
-  ],
+    exports: [
+        SidenavComponent,
+        ToolbarComponent,
+        OptionsItemsComponent,
+        UserDetailsComponent,
+        ConfirmDeleteDialogComponent,
+        DataViewComponent,
+        DataFormComponent
+    ],
 
   providers: [
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2000}},

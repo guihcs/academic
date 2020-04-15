@@ -29,7 +29,6 @@ export class ViewDisciplinesComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.sessionService.getSession());
 
     this.data = fromPromise(this.backend.getAll('subjects')).pipe(map(v => {
 

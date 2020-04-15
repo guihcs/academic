@@ -1,8 +1,8 @@
 import {User} from './User';
 import {UserType} from './UserType';
-import {Course} from './Course';
 import {Class} from './Class';
-import {FormInput} from '../libs/dynamic-forms/models/form-metadata';
+import {CustomInput, FormInput} from '../libs/dynamic-forms/models/form-metadata';
+import {ClassSelectorComponent} from '../modules/coordinator/components/class-selector/class-selector.component';
 
 
 export class Student extends User {

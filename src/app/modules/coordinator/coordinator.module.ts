@@ -31,10 +31,11 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatIconModule} from '@angular/material/icon';
 import { DetailsCourseComponent } from './components/details-course/details-course.component';
 import {MatListModule} from '@angular/material/list';
+import { ClassSelectorComponent } from './components/class-selector/class-selector.component';
 
 
 @NgModule({
-  declarations: [CoordinatorComponent, InsertStudentComponent, InsertProfessorComponent, InsertSubjectComponent, ViewProfessorComponent, ViewStudentComponent, ViewSubjectComponent, DetailsProfessorComponent, DetailsStudentComponent, DetailsSubjectComponent, ViewClassComponent, DetailsClassComponent, InsertClassComponent, ProfessorSelectorComponent, DetailsCourseComponent],
+  declarations: [CoordinatorComponent, InsertStudentComponent, InsertProfessorComponent, InsertSubjectComponent, ViewProfessorComponent, ViewStudentComponent, ViewSubjectComponent, DetailsProfessorComponent, DetailsStudentComponent, DetailsSubjectComponent, ViewClassComponent, DetailsClassComponent, InsertClassComponent, ProfessorSelectorComponent, DetailsCourseComponent, ClassSelectorComponent],
     imports: [
         CommonModule,
         CoordinatorRoutingModule,

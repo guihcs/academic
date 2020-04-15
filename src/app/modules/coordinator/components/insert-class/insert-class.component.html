@@ -1,13 +1,9 @@
 <h1>Insert Class</h1>
-<!--<mat-divider></mat-divider>-->
-<p> Course: {{course?.name}}</p>
 
-<dynamic-form
-  #userForm
-  [objectObservable]="user"
-  formStyleClass="column"
-  inputStyleClass="input-form-field"></dynamic-form>
 
-<div>
-  <button (click)="saveClass()" [disabled]="!isValid()" color="primary" mat-raised-button>Insert</button>
-</div>
+<app-data-form
+  [collectionName]="collectionName"
+  [dataType]="dataType"
+  [prepareDataHook]="saveClass"
+  [injectedData]="course"
+></app-data-form>

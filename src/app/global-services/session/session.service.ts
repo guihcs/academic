@@ -7,6 +7,7 @@ import {Admin} from '../../global-models/Admin';
 import {Coordinator} from '../../global-models/Coordinator';
 import {Professor} from '../../global-models/Professor';
 import {Student} from '../../global-models/Student';
+import {TypeService} from '../../modules/coordinator/services/type/type.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,10 @@ export class SessionService {
 
   session;
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private typeService: TypeService
+  ) {
   }
 
   async login(data) {
@@ -29,16 +33,6 @@ export class SessionService {
   }
 
 
-  buildUserObject(type){
-    switch (type) {
-      case UserType.ADMIN: return new Admin();
-      case UserType.COORDINATOR: return new Coordinator();
-      case UserType.PROFESSOR: return new Professor();
-      case UserType.STUDENT: return new Student();
-    }
-  }
-
-
   getSession() {
 
     let sessionData = JSON.parse(localStorage.getItem('user'));
@@ -47,7 +41,7 @@ export class SessionService {
       return null;
     }
 
-    let user = this.buildUserObject(sessionData.type);
+    let user = this.typeService.buildObject(sessionData.type);
     assign(user, sessionData, 2);
     return sessionData;
   }

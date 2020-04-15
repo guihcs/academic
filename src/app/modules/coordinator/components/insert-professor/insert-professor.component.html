@@ -1,11 +1,8 @@
 <h1>Insert Professor</h1>
-<!--<mat-divider></mat-divider>-->
-<dynamic-form
-  #userForm
-  [objectObservable]="user"
-  formStyleClass="column"
-  inputStyleClass="input-form-field"></dynamic-form>
 
-<div>
-  <button (click)="saveUser()" [disabled]="!isValid()" color="primary" mat-raised-button>Insert</button>
-</div>
+
+<app-data-form
+  [collectionName]="collectionName"
+  [dataType]="dataType"
+  [prepareDataHook]="saveUser"
+></app-data-form>

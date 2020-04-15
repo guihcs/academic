@@ -1,0 +1,8 @@
+<label>
+  Select class:
+  <select [formControl]="formControl">
+    <option *ngFor="let classObj of classes" [ngValue]="classObj">
+      {{classObj.name}}
+    </option>
+  </select>
+</label>

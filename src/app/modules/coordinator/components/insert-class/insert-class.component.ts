@@ -12,6 +12,7 @@ export class InsertClassComponent implements OnInit {
 
   collectionName = 'classes';
   dataType = Class;
+  pageTitle = 'Insert Class';
   course;
 
   constructor(private sessionService: SessionService) {

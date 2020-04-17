@@ -11,6 +11,7 @@ import {SessionService} from '../../../../global-services/session/session.servic
 export class InsertSubjectComponent implements OnInit {
 
   collectionName = 'users';
+  pageTitle = 'Insert Discipline';
   dataType = Discipline;
   course;
 

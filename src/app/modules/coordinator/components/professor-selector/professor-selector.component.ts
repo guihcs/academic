@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ConfigurableInput} from '../../../../libs/dynamic-forms/models/configurable-input';
 import {FormControl} from '@angular/forms';
+import {UserType} from '../../../../global-models/UserType';
+import {BackendService} from '../../../../global-services/backend/backend.service';
 
 @Component({
   selector: 'app-professor-selector',
@@ -10,13 +12,29 @@ import {FormControl} from '@angular/forms';
 export class ProfessorSelectorComponent implements OnInit, ConfigurableInput {
 
   formControl = new FormControl('');
+  professors;
+  args;
 
-  constructor() { }
+  constructor(
+    private backend: BackendService
+  ) { }
 
   ngOnInit(): void {
+    this.backend.getAll('users').then(data => {
+      this.professors = data.filter(v => v.type === UserType.PROFESSOR);
+      this.applyArguments(this.args);
+    });
+
   }
 
   applyArguments(args) {
+
+    this.args = args;
+
+    if (args.defaultValue && this.professors){
+      this.formControl.setValue(this.professors.find(v => v._id === args.defaultValue.id));
+    }
+
   }
 
   getFormControl() {

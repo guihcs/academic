@@ -20,6 +20,8 @@ export class ViewProfessorComponent implements OnInit {
 
   title = 'View Professors';
   placeholder = 'Name, Email or Course';
+  backRoute = '/coordinator/view/professor';
+  detailsRoute = '/coordinator/details/professor';
 
   columnsDef = [
     {field: 'name', header: 'Name'},
@@ -53,8 +55,4 @@ export class ViewProfessorComponent implements OnInit {
     return serializeFields.join('').toLocaleLowerCase().indexOf(filter) >= 0;
   }
 
-  viewDetails(row: any) {
-    this.router.navigate(['/coordinator','details', 'professor', row._id], {state: {route: this.router.url}});
-
-  }
 }

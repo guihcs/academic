@@ -25,6 +25,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { DataFormComponent } from './data-form/data-form.component';
+import { DataDetailsComponent } from './data-details/data-details.component';
 
 
 
@@ -37,7 +38,8 @@ import { DataFormComponent } from './data-form/data-form.component';
     ConfirmDeleteDialogComponent,
     ProfileComponent,
     DataViewComponent,
-    DataFormComponent
+    DataFormComponent,
+    DataDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -65,7 +67,8 @@ import { DataFormComponent } from './data-form/data-form.component';
         UserDetailsComponent,
         ConfirmDeleteDialogComponent,
         DataViewComponent,
-        DataFormComponent
+        DataFormComponent,
+        DataDetailsComponent
     ],
 
   providers: [

@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, Input, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, Input, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {getDescriptor} from './models/form-metadata';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {InputBuilderService} from './input-builder/input-builder.service';
@@ -9,7 +9,7 @@ import {Observable} from 'rxjs';
   templateUrl: './dynamic-forms.component.html',
   styleUrls: ['./dynamic-forms.component.css']
 })
-export class DynamicFormsComponent implements OnInit {
+export class DynamicFormsComponent implements OnInit, AfterViewInit {
 
   @Input() formStyleClass;
   @Input() inputStyleClass;
@@ -27,9 +27,11 @@ export class DynamicFormsComponent implements OnInit {
 
   ngOnInit(): void {
     this.dynamicForm = this.formBuilder.group({});
+
   }
 
   ngAfterViewInit(): void {
+
     this.objectObservable.subscribe(object => {
 
       if (object) {

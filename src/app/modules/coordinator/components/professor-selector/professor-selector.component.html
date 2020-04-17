@@ -1,1 +1,8 @@
-<p>professor-selector works!</p>
+<label>
+  Select professor:
+  <select [formControl]="formControl">
+    <option *ngFor="let professor of professors" [ngValue]="professor">
+      {{professor.name}}
+    </option>
+  </select>
+</label>

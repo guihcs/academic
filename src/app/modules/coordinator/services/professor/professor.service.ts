@@ -4,11 +4,13 @@ import {Professor} from '../../../../global-models/Professor';
 import {assign} from '../../../../utils/utils';
 import {UserType} from '../../../../global-models/UserType';
 import {ViewProfessor} from '../../../../global-models/ViewProfessor';
+import {DataSource} from '../../../../global-models/DataSource';
+import {Student} from '../../../../global-models/Student';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProfessorService {
+export class ProfessorService implements DataSource{
 
   constructor(
     private backendService: BackendService
@@ -28,4 +30,14 @@ export class ProfessorService {
 
     return professors;
   }
+
+  async queryOne(params) {
+    let rawData = await this.backendService.query('users', params);
+    let student = new Professor();
+    student._id = params;
+    assign(student, rawData[0], 2);
+    return student;
+  }
+
+
 }

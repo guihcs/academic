@@ -1,4 +1,4 @@
-import {UserType} from '../../../global-models/UserType';
+import {UserProfile} from '../../../global-models/user/UserProfile';
 
 export class CoordinatorNavDescriptor {
   static descriptor = [

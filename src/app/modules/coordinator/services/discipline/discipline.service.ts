@@ -4,7 +4,7 @@ import {BackendService} from '../../../../global-services/backend/backend.servic
 import {DisciplineDetails} from '../../../../global-models/DisciplineDetails';
 import {assign} from '../../../../utils/utils';
 import {map} from 'rxjs/operators';
-import {Discipline} from '../../../../global-models/Discipline';
+import {DisciplineFormData} from '../../../../global-models/DisciplineFormData';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class DisciplineService implements DataSource{
 
     data = data.map(v => {
 
-      let discipline = new Discipline();
+      let discipline = new DisciplineFormData();
       assign(discipline, v, 2);
       return discipline;
     });
@@ -35,6 +35,16 @@ export class DisciplineService implements DataSource{
     assign(discipline, rawData[0], 2);
     return discipline;
   }
+
+  insert(data) {
+  }
+
+  delete(data) {
+  }
+
+  update(data) {
+  }
+
 
 
 

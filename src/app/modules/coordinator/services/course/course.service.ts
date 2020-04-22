@@ -20,6 +20,15 @@ export class CourseService implements DataSource{
     return this.sessionService.getSession().course;
   }
 
+  insert(data) {
+  }
+
+  delete(data) {
+  }
+
+  update(data) {
+  }
+
 
 
 }

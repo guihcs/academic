@@ -7,7 +7,7 @@ import {BackendService} from '../../../../global-services/backend/backend.servic
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatDialog} from '@angular/material/dialog';
 import {assign} from '../../../../utils/utils';
-import {UserType} from '../../../../global-models/UserType';
+import {UserProfile} from '../../../../global-models/user/UserProfile';
 import {ConfirmDeleteDialogComponent} from '../../../../templates/confirm-delete-dialog/confirm-delete-dialog.component';
 import {SessionService} from '../../../../global-services/session/session.service';
 
@@ -55,7 +55,7 @@ export class ClassDetailsComponent implements OnInit {
 
       let users = await this.backend.getAll('users');
       this.students = users.filter(v => {
-        return v.type === UserType.STUDENT && v.class.name === class1.name;
+        return v.type === UserProfile.STUDENT && v.class.name === class1.name;
       });
     });
   }

@@ -1,3 +1,0 @@
-export enum UserType {
-  ADMIN, COORDINATOR, PROFESSOR, STUDENT
-}

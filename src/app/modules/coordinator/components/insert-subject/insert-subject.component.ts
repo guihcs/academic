@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {assign} from '../../../../utils/utils';
-import {Discipline} from '../../../../global-models/Discipline';
+import {DisciplineFormData} from '../../../../global-models/DisciplineFormData';
 import {SessionService} from '../../../../global-services/session/session.service';
 
 @Component({
@@ -12,7 +12,7 @@ export class InsertSubjectComponent implements OnInit {
 
   collectionName = 'users';
   pageTitle = 'Insert Discipline';
-  dataType = Discipline;
+  dataType = DisciplineFormData;
   course;
 
   constructor(private sessionService: SessionService) {
@@ -24,7 +24,7 @@ export class InsertSubjectComponent implements OnInit {
 
   async prepareSubjectData(data, injectedData) {
     data.course = injectedData;
-    let user = new Discipline();
+    let user = new DisciplineFormData();
     assign(user, data, 2);
     return user;
   }

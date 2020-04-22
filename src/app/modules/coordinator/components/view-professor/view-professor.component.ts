@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {UserType} from '../../../../global-models/UserType';
+import {UserProfile} from '../../../../global-models/user/UserProfile';
 import {MatTableDataSource} from '@angular/material/table';
-import {User} from '../../../../global-models/User';
+import {UserFormData} from '../../../../global-models/user/UserFormData';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {BackendService} from '../../../../global-services/backend/backend.service';
@@ -20,7 +20,6 @@ export class ViewProfessorComponent implements OnInit {
 
   title = 'View Professors';
   placeholder = 'Name, Email or Course';
-  backRoute = '/coordinator/view/professor';
   detailsRoute = '/coordinator/details/professor';
 
   columnsDef = [
@@ -45,7 +44,7 @@ export class ViewProfessorComponent implements OnInit {
     let serializeFields = [];
     for (const displayedColumn of this.columnsDef) {
       if (displayedColumn.field === 'type'){
-        serializeFields.push(UserType[data1[displayedColumn.field]]);
+        serializeFields.push(UserProfile[data1[displayedColumn.field]]);
       } else if (displayedColumn.field === 'course'){
         serializeFields.push(data1[displayedColumn.field]?.name);
       } else {

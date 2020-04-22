@@ -10,8 +10,8 @@
 </div>
 <mat-divider></mat-divider>
 <dynamic-form
-  #userForm
-  [objectObservable]="userData"
+  #dynamicFormsComponent
+  [objectObservable]="dataDescriptor"
   formStyleClass="column"
   inputStyleClass="input-form-field"
 ></dynamic-form>
@@ -20,7 +20,7 @@
 
   <mat-divider></mat-divider>
   <div class="action-footer">
-    <button (click)="updateUser()" color="primary" mat-raised-button>Update</button>
+    <button (click)="updateData()" color="primary" mat-raised-button>Update</button>
     <button (click)="delete()" class="delete-button" color="warn" mat-raised-button>
       Delete
     </button>

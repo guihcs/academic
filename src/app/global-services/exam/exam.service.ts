@@ -14,6 +14,7 @@ export class ExamService {
 
   async getExam() {
     let examData = await this.http.get('api/getExam').toPromise();
+    if (!examData) return null;
     let exam = new Exam();
     assign(exam, examData, 1);
     return exam;

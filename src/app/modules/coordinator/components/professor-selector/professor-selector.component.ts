@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ConfigurableInput} from '../../../../libs/dynamic-forms/models/configurable-input';
 import {FormControl} from '@angular/forms';
-import {UserType} from '../../../../global-models/UserType';
+import {UserProfile} from '../../../../global-models/user/UserProfile';
 import {BackendService} from '../../../../global-services/backend/backend.service';
 
 @Component({
@@ -21,7 +21,7 @@ export class ProfessorSelectorComponent implements OnInit, ConfigurableInput {
 
   ngOnInit(): void {
     this.backend.getAll('users').then(data => {
-      this.professors = data.filter(v => v.type === UserType.PROFESSOR);
+      this.professors = data.filter(v => v.type === UserProfile.PROFESSOR);
       this.applyArguments(this.args);
     });
 

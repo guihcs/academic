@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {assign} from '../../utils/utils';
-import {User} from '../../global-models/User';
-import {UserType} from '../../global-models/UserType';
-import {Admin} from '../../global-models/Admin';
-import {Coordinator} from '../../global-models/Coordinator';
-import {Professor} from '../../global-models/Professor';
-import {Student} from '../../global-models/Student';
+import {UserFormData} from '../../global-models/user/UserFormData';
+import {UserProfile} from '../../global-models/user/UserProfile';
+import {Admin} from '../../global-models/user/Admin';
+import {CoordinatorFormData} from '../../global-models/user/CoordinatorFormData';
+import {ProfessorFormData} from '../../global-models/user/ProfessorFormData';
+import {StudentFormData} from '../../global-models/user/Student';
 import {TypeService} from '../../modules/coordinator/services/type/type.service';
 
 @Injectable({

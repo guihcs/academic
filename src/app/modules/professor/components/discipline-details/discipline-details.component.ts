@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import {Discipline} from '../../../../global-models/Discipline';
+import {DisciplineFormData} from '../../../../global-models/DisciplineFormData';
 import {DynamicFormsComponent} from '../../../../libs/dynamic-forms/dynamic-forms.component';
 import {FormControl} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -8,7 +8,7 @@ import {BackendService} from '../../../../global-services/backend/backend.servic
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatDialog} from '@angular/material/dialog';
 import {assign} from '../../../../utils/utils';
-import {UserType} from '../../../../global-models/UserType';
+import {UserProfile} from '../../../../global-models/user/UserProfile';
 import {ConfirmDeleteDialogComponent} from '../../../../templates/confirm-delete-dialog/confirm-delete-dialog.component';
 
 @Component({
@@ -18,7 +18,7 @@ import {ConfirmDeleteDialogComponent} from '../../../../templates/confirm-delete
 })
 export class DisciplineDetailsComponent implements OnInit {
 
-  user: BehaviorSubject<Discipline> = new BehaviorSubject<Discipline>(null);
+  user: BehaviorSubject<DisciplineFormData> = new BehaviorSubject<DisciplineFormData>(null);
   pageTitle;
   @ViewChild('userForm')
   private userForm: DynamicFormsComponent;
@@ -37,7 +37,7 @@ export class DisciplineDetailsComponent implements OnInit {
     activatedRoute.paramMap.subscribe(async paramMap => {
       this.userID = paramMap.get('id');
       let rawData = await this.backend.query('subjects', this.userID);
-      let discipline1 = new Discipline();
+      let discipline1 = new DisciplineFormData();
       assign(discipline1, rawData[0], 2);
       this.discipline = discipline1;
       this.backUrl = history.state.route;

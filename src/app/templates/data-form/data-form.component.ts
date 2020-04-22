@@ -1,10 +1,11 @@
-import {ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, Injector, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {DynamicFormsComponent} from '../../libs/dynamic-forms/dynamic-forms.component';
 import {BehaviorSubject} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 import {BackendService} from '../../global-services/backend/backend.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatSnackBar, MatSnackBarConfig} from '@angular/material/snack-bar';
 import {assign} from '../../utils/utils';
+import {DataSource} from '../../global-models/DataSource';
 
 @Component({
   selector: 'app-data-form',
@@ -15,27 +16,26 @@ export class DataFormComponent implements OnInit {
 
   @Input() dataType;
   @Input() collectionName;
-  @Input() prepareDataHook = this.defaultPrepareDataHook;
-  @Input() injectedData;
+  @Input() prepareDataHook: Function = this.defaultPrepareDataHook;
   @Input() pageTitle;
+  @Input() successMessage;
+  @Input() dataSource: DataSource;
 
   @ViewChild('userForm') formContainer: DynamicFormsComponent;
-  userType;
-
-  user: BehaviorSubject<any> =  new BehaviorSubject(null);
-  course;
+  data: BehaviorSubject<any> =  new BehaviorSubject(null);
 
   constructor(private route: ActivatedRoute,
               private backendService: BackendService,
               private snackBar: MatSnackBar,
-              private changeDetectorRef: ChangeDetectorRef
+              private changeDetectorRef: ChangeDetectorRef,
+              private injector: Injector
   ) {
 
   }
 
   ngOnInit(): void {
     if (this.dataType){
-      this.user.next(new this.dataType());
+      this.data.next(new this.dataType());
     }
     this.changeDetectorRef.detectChanges();
 
@@ -44,40 +44,50 @@ export class DataFormComponent implements OnInit {
         this.dataType = data.dataType;
         this.pageTitle = data.pageTitle;
         this.collectionName = data.collectionName;
+        this.successMessage = data.successMessage;
+        this.dataSource = this.injector.get(data.dataSource);
+        if(data.prepareDataHool) this.prepareDataHook = data.prepareDataHook;
         if (this.dataType){
-          this.user.next(new this.dataType());
+          this.data.next(new this.dataType());
         }
       }
     });
 
   }
 
-  defaultPrepareDataHook(data, injected){
-    let dataObject = this.formContainer.getResult();
+  defaultPrepareDataHook(data){
+    let dataObject = new this.dataType();
     assign(dataObject, data, 2);
     return dataObject;
   }
 
-  async saveClass() {
+  async prepareData() {
     let classData = this.formContainer.getResult();
-    if (this.prepareDataHook) classData = await this.prepareDataHook(classData, this.injectedData);
-    await this.saveUserAPI(classData);
+    classData = await this.prepareDataHook(classData);
+
+
+    await this.saveData(classData);
   }
 
   isValid() {
+/*
+todo remove comment after dev
     if (this.formContainer) {
       return this.formContainer.isValid();
     }
+*/
 
-    return false;
+    return true;
   }
 
-  private async saveUserAPI(user) {
-    if (await this.backendService.persist(this.collectionName, user)) {
+  private async saveData(user) {
+
+    if (await this.dataSource.insert(user)) {
       this.formContainer.reset();
-      this.snackBar.open('User Inserted.', '', {
-        duration: 2000
-      });
+      let config = new MatSnackBarConfig();
+      config.panelClass = ['custom-class'];
+      config.duration = 2000;
+      this.snackBar.open(this.successMessage, '', config);
     } else {
       this.snackBar.open('Error.');
     }

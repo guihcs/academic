@@ -1,0 +1,10 @@
+
+
+<label>
+  select
+  <select [formControl]="formControl">
+    <option *ngFor="let datum of data" [ngValue]="datum">
+      {{datum[displayProperty]}}
+    </option>
+  </select>
+</label>

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {ConfigurableInput} from '../../../../libs/dynamic-forms/models/configurable-input';
 import {FormControl} from '@angular/forms';
 import {BackendService} from '../../../../global-services/backend/backend.service';
+import {SelectComponent} from '../../../../libs/dynamic-forms/inputs/select/select.component';
 
 @Component({
   selector: 'app-course-select',
@@ -12,9 +13,9 @@ export class CourseSelectComponent implements OnInit, ConfigurableInput{
 
   args;
   courses;
-
   formControl = new FormControl();
-  control = new FormControl();
+  defaultValue;
+
 
   constructor(
     private backend: BackendService
@@ -24,24 +25,27 @@ export class CourseSelectComponent implements OnInit, ConfigurableInput{
 
     this.backend.getAll('courses').then(courses => {
       this.courses = courses;
-      this.formControl.valueChanges.subscribe( v => {
-        this.control.setValue({name: v.name, area: v.area});
-      });
+
+      if (this.defaultValue){
+        this.formControl.setValue(this.courses.find(v => v.name === this.defaultValue.name));
+      }
     });
+
+
   }
 
   applyArguments(args) {
     this.args = args;
-
     if (args.defaultValue){
-      // this.formControl.setValue(args.defaultValue.name);
+      this.defaultValue = args.defaultValue;
+      if (this.courses){
+        this.formControl.setValue(this.courses.find(v => v.name === this.defaultValue.name));
+      }
     }
-
-
   }
 
   getFormControl() {
-    return this.control;
+    return this.formControl;
   }
 
 

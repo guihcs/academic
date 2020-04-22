@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import {BackendService} from '../../../../global-services/backend/backend.service';
-import {Professor} from '../../../../global-models/Professor';
 import {assign} from '../../../../utils/utils';
-import {UserType} from '../../../../global-models/UserType';
-import {ViewProfessor} from '../../../../global-models/ViewProfessor';
+import {UserProfile} from '../../../../global-models/user/UserProfile';
 import {DataSource} from '../../../../global-models/DataSource';
-import {Student} from '../../../../global-models/Student';
+import {ProfessorDetails} from '../../../../global-models/user/ProfessorDetails';
+import {ProfessorFormData} from '../../../../global-models/user/ProfessorFormData';
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +21,8 @@ export class ProfessorService implements DataSource{
     let professors = [];
 
     for (const datum of data) {
-      if (datum.type !== UserType.PROFESSOR) continue;
-      let professor = new ViewProfessor();
+      if (datum.type !== UserProfile.PROFESSOR) continue;
+      let professor = new ProfessorDetails();
       assign(professor, datum, 2);
       professors.push(professor);
     }
@@ -33,11 +32,21 @@ export class ProfessorService implements DataSource{
 
   async queryOne(params) {
     let rawData = await this.backendService.query('users', params);
-    let student = new Professor();
-    student._id = params;
-    assign(student, rawData[0], 2);
-    return student;
+    let professorDetails = new ProfessorDetails();
+    professorDetails._id = params;
+    assign(professorDetails, rawData[0], 2);
+    return professorDetails;
   }
+
+  insert(data: ProfessorFormData) {
+  }
+
+  delete(data) {
+  }
+
+  update(data) {
+  }
+
 
 
 }

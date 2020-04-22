@@ -3,12 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 import {CoordinatorComponent} from './coordinator.component';
 import {ViewProfessorComponent} from './components/view-professor/view-professor.component';
 import {InsertSubjectComponent} from './components/insert-subject/insert-subject.component';
-import {ViewClassComponent} from './components/view-class/view-class.component';
 import {InsertClassComponent} from './components/insert-class/insert-class.component';
 import {DetailsCourseComponent} from './components/details-course/details-course.component';
 import {DataFormComponent} from '../../templates/data-form/data-form.component';
-import {StudentFormData} from '../../global-models/StudentFormData';
-import {Professor} from '../../global-models/Professor';
+import {StudentFormData} from '../../global-models/user/StudentFormData';
+import {ProfessorFormData} from '../../global-models/user/ProfessorFormData';
 import {StudentService} from './services/student/student.service';
 import {DataDetailsComponent} from '../../templates/data-details/data-details.component';
 import {ProfessorService} from './services/professor/professor.service';
@@ -26,36 +25,48 @@ const routes: Routes = [
         path: 'details/professor/:id',
         component: DataDetailsComponent,
         data: {
+          collectionName: 'users',
           pageTitle: 'Professor Details',
           backUrl: '/coordinator/view/professor',
-          source: ProfessorService
+          source: ProfessorService,
+          updateMessage: 'Professor Updated.',
+          deleteMessage: 'Professor Deleted.'
         }
       },
       {
         path: 'details/student/:id',
         component: DataDetailsComponent,
         data: {
+          collectionName: 'users',
           pageTitle: 'Student Details',
           backUrl: '/coordinator/view/student',
-          source: StudentService
+          source: StudentService,
+          updateMessage: 'Student Updated.',
+          deleteMessage: 'Student Deleted'
         }
       },
       {
         path: 'details/subject/:id',
         component: DataDetailsComponent,
         data: {
+          collectionName: 'subjects',
           pageTitle: 'Discipline Details',
           backUrl: '/coordinator/view/subject',
-          source: DisciplineService
+          source: DisciplineService,
+          updateMessage: 'Discipline Updated.',
+          deleteMessage: 'Discipline Deleted'
         }
       },
       {
         path: 'details/class/:id',
         component: DataDetailsComponent,
         data: {
+          collectionName: 'classes',
           pageTitle: 'Class Details',
           backUrl: '/coordinator/view/class',
-          source: ClassService
+          source: ClassService,
+          updateMessage: 'Class Updated.',
+          deleteMessage: 'Class Deleted.'
         }
       },
       {
@@ -67,8 +78,7 @@ const routes: Routes = [
         path: 'view/student',
         component: DataViewComponent,
         data: {
-          backRoute: '/coordinator/view/student',
-          detailsRoute: '/coordinator/details/student',
+          detailsRoute: (student) => '/coordinator/details/student/' + student._id,
           title: 'View Students',
           placeholder: 'Name, Email or Course',
           columnsDef: [
@@ -84,8 +94,7 @@ const routes: Routes = [
         path: 'view/subject',
         component: DataViewComponent,
         data: {
-          backRoute: '/coordinator/view/subject',
-          detailsRoute: '/coordinator/details/subject',
+          detailsRoute: (discipline) => '/coordinator/details/subject/' + discipline._id,
           title: 'View Disciplines',
           placeholder: 'Name, Email or Course',
           columnsDef: [
@@ -100,8 +109,7 @@ const routes: Routes = [
         path: 'view/class',
         component: DataViewComponent,
         data: {
-          backRoute: '/coordinator/view/class',
-          detailsRoute: '/coordinator/details/class',
+          detailsRoute: (_class) => '/coordinator/details/class/' + _class._id,
           title: 'View Classes',
           placeholder: 'Name, Email or Course',
           columnsDef: [
@@ -117,8 +125,9 @@ const routes: Routes = [
         component: DataFormComponent,
         data: {
           collectionName: 'users',
-          dataType: Professor,
-          pageTitle: 'Insert Professor'
+          dataType: ProfessorFormData,
+          pageTitle: 'Insert Professor',
+          successMessage: 'Professor Inserted.'
         }
 
       },
@@ -128,7 +137,7 @@ const routes: Routes = [
         data: {
           collectionName: 'users',
           dataType: StudentFormData,
-          pageTitle: 'Insert Student'
+          successMessage: 'Student Inserted.'
         }
       },
       {path: 'insert/subject', component: InsertSubjectComponent},

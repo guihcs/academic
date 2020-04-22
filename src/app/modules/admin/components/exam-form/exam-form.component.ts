@@ -12,9 +12,8 @@ import {ExamService} from '../../../../global-services/exam/exam.service';
 export class ExamFormComponent implements OnInit, AfterViewInit {
 
   @ViewChild('dynamicForm') dynamicForm;
-  isLoading = true;
   examID;
-  formDescriptor: BehaviorSubject<Exam> = new BehaviorSubject<Exam>(null);
+  formDescriptor: BehaviorSubject<Exam> = new BehaviorSubject<Exam>(new Exam());
 
   constructor(private examService: ExamService,
               private snackBar: MatSnackBar
@@ -25,16 +24,20 @@ export class ExamFormComponent implements OnInit, AfterViewInit {
   }
 
   async ngAfterViewInit() {
-    this.isLoading = true;
     this.getExamData();
   }
 
 
   async getExamData() {
     let exam = await this.examService.getExam();
-    this.examID = exam._id;
-    this.formDescriptor.next(exam);
-    this.isLoading = false;
+    if (exam){
+      this.examID = exam._id;
+      this.formDescriptor.next(exam);
+
+    }else {
+
+    }
+
   }
 
   async updateExam() {
@@ -43,10 +46,8 @@ export class ExamFormComponent implements OnInit, AfterViewInit {
       exam['_id'] = this.examID;
     }
     if (await this.examService.updateExam(exam)) {
-
-      this.isLoading = true;
       this.getExamData();
-      this.snackBar.open('Exam Updated', '', {
+      this.snackBar.open('Exam Updated.', '', {
         duration: 2000
       });
     } else {

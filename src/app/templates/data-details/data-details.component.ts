@@ -1,8 +1,5 @@
 import {Component, Injector, Input, OnInit, ViewChild} from '@angular/core';
-import {BehaviorSubject, from, Observable} from 'rxjs';
-import {DisciplineDetails} from '../../global-models/DisciplineDetails';
 import {DynamicFormsComponent} from '../../libs/dynamic-forms/dynamic-forms.component';
-import {FormControl} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BackendService} from '../../global-services/backend/backend.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -19,18 +16,18 @@ import {fromPromise} from 'rxjs/internal-compatibility';
 })
 export class DataDetailsComponent implements OnInit {
 
-  @Input() userData;
+  @Input() dataDescriptor;
   @Input() collectionName;
   @Input() pageTitle;
   @Input() backUrl;
+  @Input() updateMessage;
+  @Input() deleteMessage;
 
-  @ViewChild('userForm')
-  private userForm: DynamicFormsComponent;
-  private userID;
-
-  formControl = new FormControl();
-  data;
+  @ViewChild('dynamicFormsComponent')
+  private dynamicFormsComponent: DynamicFormsComponent;
+  private dataID;
   dataSource:DataSource;
+  data = {};
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -47,29 +44,27 @@ export class DataDetailsComponent implements OnInit {
 
     this.activatedRoute.params.subscribe(params => {
       let snapshot = this.activatedRoute.snapshot;
+      this.dataID = params.id;
       if(Object.keys(snapshot.data).length > 0) {
-
+        this.collectionName = snapshot.data.collectionName;
         this.pageTitle = snapshot.data.pageTitle;
         this.backUrl = snapshot.data.backUrl;
         this.dataSource = this.injector.get(snapshot.data.source);
-        this.userData = fromPromise(this.dataSource.queryOne(snapshot.params.id));
+        this.deleteMessage = snapshot.data.deleteMessage;
+        this.updateMessage = snapshot.data.updateMessage;
+        this.dataDescriptor = fromPromise(this.dataSource.queryOne(snapshot.params.id));
       }
     });
   }
 
-  async updateUser() {
-    let user = this.userForm.getResult();
-    user['_id'] = this.userID;
-    let professorData = this.formControl.value;
-    user.professor = {
-      id: professorData._id,
-      name: professorData.name
-    };
+  async updateData() {
+    let rawData = this.dynamicFormsComponent.getResult();
+    rawData['_id'] = this.dataID;
 
-    assign(this.data, user, 2);
+    assign(this.data, rawData, 2);
 
-    if (await this.backend.update(this.collectionName, this.data._id, this.data)) {
-      this.snackBar.open('User updated.', '');
+    if (await this.dataSource.update(this.data)) {
+      this.snackBar.open(this.updateMessage, '');
     } else {
       this.snackBar.open('Error.', '');
     }
@@ -85,8 +80,8 @@ export class DataDetailsComponent implements OnInit {
     let dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {});
     dialogRef.afterClosed().subscribe(async res => {
       if (res === 'delete') {
-        if (await this.backend.delete(this.collectionName, this.userData._id)) {
-          this.snackBar.open('User removed.', '');
+        if (await this.dataSource.delete(await this.dataDescriptor.toPromise())) {
+          this.snackBar.open(this.deleteMessage, '');
           this.backToList();
         } else {
           this.snackBar.open('Error.', '');

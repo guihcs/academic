@@ -1,6 +1,9 @@
 
 
 export interface DataSource {
-  getAll(params);
+  getAll(params?);
   queryOne(params);
+  insert(data, args?);
+  delete(data);
+  update(data);
 }

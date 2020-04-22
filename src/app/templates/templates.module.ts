@@ -12,7 +12,6 @@ import {MatMenuModule} from '@angular/material/menu';
 import {OptionsItemsComponent} from './toolbar/options.items.component';
 import {MatRippleModule} from '@angular/material/core';
 import {MatCardModule} from '@angular/material/card';
-import {UserDetailsComponent} from './user-details/user-details.component';
 import {DynamicFormsModule} from '../libs/dynamic-forms/dynamic-forms.module';
 import {ConfirmDeleteDialogComponent} from './confirm-delete-dialog/confirm-delete-dialog.component';
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material/snack-bar';
@@ -26,6 +25,8 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { DataFormComponent } from './data-form/data-form.component';
 import { DataDetailsComponent } from './data-details/data-details.component';
+import { DataSelectorComponent } from './data-selector/data-selector.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 
@@ -34,37 +35,37 @@ import { DataDetailsComponent } from './data-details/data-details.component';
     SidenavComponent,
     ToolbarComponent,
     OptionsItemsComponent,
-    UserDetailsComponent,
     ConfirmDeleteDialogComponent,
     ProfileComponent,
     DataViewComponent,
     DataFormComponent,
-    DataDetailsComponent
+    DataDetailsComponent,
+    DataSelectorComponent
   ],
-  imports: [
-    CommonModule,
-    MatSidenavModule,
-    MatListModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatIconModule,
-    RouterModule,
-    MatMenuModule,
-    MatRippleModule,
-    MatCardModule,
-    MatDialogModule,
-    DynamicFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule
-  ],
+    imports: [
+        CommonModule,
+        MatSidenavModule,
+        MatListModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatIconModule,
+        RouterModule,
+        MatMenuModule,
+        MatRippleModule,
+        MatCardModule,
+        MatDialogModule,
+        DynamicFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatTableModule,
+        MatSortModule,
+        MatPaginatorModule,
+        ReactiveFormsModule
+    ],
     exports: [
         SidenavComponent,
         ToolbarComponent,
         OptionsItemsComponent,
-        UserDetailsComponent,
         ConfirmDeleteDialogComponent,
         DataViewComponent,
         DataFormComponent,

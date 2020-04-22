@@ -19,7 +19,6 @@ export class DataViewComponent implements OnInit {
   @Input() data: Observable<any>;
   @Input() filter;
   @Input() detailsPath;
-  @Input() backRoute;
   @Output() rowClick = new EventEmitter();
 
   displayedColumns: string[];
@@ -42,10 +41,10 @@ export class DataViewComponent implements OnInit {
       let snapshot = this.activatedRoute.snapshot;
       if(Object.keys(snapshot.data).length > 0) {
         this.title = snapshot.data.title;
-        this.backRoute = snapshot.data.backRoute;
         this.columnsDef = snapshot.data.columnsDef;
         this.detailsPath = snapshot.data.detailsRoute;
         this.placeholder = snapshot.data.placeholder;
+        this.filter = snapshot.data.filter;
         this.data = fromPromise(this.injector.get(snapshot.data.source).getAll());
       }
     });
@@ -68,7 +67,7 @@ export class DataViewComponent implements OnInit {
   }
 
   viewDetails(row: any) {
-    this.router.navigate([this.detailsPath, row._id], {state: {route: this.backRoute}});
+    this.router.navigate([this.detailsPath(row)]);
   }
 
 }

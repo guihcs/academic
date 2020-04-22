@@ -1,5 +1,5 @@
 import {FormInput} from '../libs/dynamic-forms/models/form-metadata';
-import {Course} from './Course';
+import {CourseFormData} from './CourseFormData';
 
 
 export class Class {
@@ -17,6 +17,6 @@ export class Class {
   period;
 
 
-  course = new Course();
+  course = new CourseFormData();
 
 }

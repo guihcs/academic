@@ -3,7 +3,7 @@ import {FormBuilder, FormControl, FormGroupDirective, NgForm} from '@angular/for
 import {Router} from '@angular/router';
 import {SessionService} from '../../global-services/session/session.service';
 import {ErrorStateMatcher} from '@angular/material/core';
-import {UserType} from '../../global-models/UserType';
+import {UserProfile} from '../../global-models/user/UserProfile';
 
 export class ErrorMatcher implements ErrorStateMatcher {
   state;
@@ -52,19 +52,19 @@ export class LoginComponent implements OnInit {
       let session = this.sessionService.getSession();
 
       switch (session.type) {
-        case UserType.ADMIN: {
+        case UserProfile.ADMIN: {
           await this.router.navigate(['/admin']);
           break;
         }
-        case UserType.COORDINATOR: {
+        case UserProfile.COORDINATOR: {
           await this.router.navigate(['/coordinator']);
           break;
         }
-        case UserType.PROFESSOR: {
+        case UserProfile.PROFESSOR: {
           await this.router.navigate(['/professor']);
           break;
         }
-        case UserType.STUDENT: {
+        case UserProfile.STUDENT: {
           await this.router.navigate(['/student']);
           break;
         }

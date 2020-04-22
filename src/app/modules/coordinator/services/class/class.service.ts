@@ -24,6 +24,16 @@ export class ClassService implements DataSource{
     return class1;
   }
 
+  insert(data) {
+  }
+
+  delete(data) {
+  }
+
+  update(data) {
+  }
+
+
 
 
 }

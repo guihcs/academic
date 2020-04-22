@@ -1,6 +1,7 @@
 <label>
   Select Course:
   <select [formControl]="formControl">
+
     <option *ngFor="let course of courses" [ngValue]="course">
       {{course.name}}
     </option>

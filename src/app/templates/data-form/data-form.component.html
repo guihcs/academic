@@ -1,10 +1,10 @@
 <h1>{{pageTitle}}</h1>
 <dynamic-form
   #userForm
-  [objectObservable]="user"
+  [objectObservable]="data"
   formStyleClass="column"
   inputStyleClass="input-form-field"></dynamic-form>
 
 <div>
-  <button (click)="saveClass()" [disabled]="!isValid()" color="primary" mat-raised-button>Insert</button>
+  <button (click)="prepareData()" [disabled]="!isValid()" color="primary" mat-raised-button>Insert</button>
 </div>

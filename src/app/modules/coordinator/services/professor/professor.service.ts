@@ -38,13 +38,20 @@ export class ProfessorService implements DataSource{
     return professorDetails;
   }
 
-  insert(data: ProfessorFormData) {
+  async insert(data: ProfessorFormData) {
+
+    await this.backendService.persist('users', data);
+    return true;
   }
 
-  delete(data) {
+  async delete(data) {
+    await this.backendService.delete('users', data._id);
+    return true;
   }
 
-  update(data) {
+  async update(data) {
+    await this.backendService.update('users', data._id, data);
+    return true;
   }
 
 

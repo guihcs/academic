@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import {Class} from '../../../../global-models/Class';
+import {ClassFormData} from '../../../../global-models/ClassFormData';
 import {DynamicFormsComponent} from '../../../../libs/dynamic-forms/dynamic-forms.component';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BackendService} from '../../../../global-services/backend/backend.service';
@@ -19,7 +19,7 @@ import {SessionService} from '../../../../global-services/session/session.servic
 export class ClassDetailsComponent implements OnInit {
 
 
-  user: BehaviorSubject<Class> = new BehaviorSubject<Class>(null);
+  user: BehaviorSubject<ClassFormData> = new BehaviorSubject<ClassFormData>(null);
   pageTitle;
   @ViewChild('userForm')
   private userForm: DynamicFormsComponent;
@@ -41,7 +41,7 @@ export class ClassDetailsComponent implements OnInit {
     activatedRoute.paramMap.subscribe(async paramMap => {
       this.userID = paramMap.get('id');
       let rawData = await this.backend.query('classes', this.userID);
-      let class1 = new Class();
+      let class1 = new ClassFormData();
       assign(class1, rawData[0], 2);
       this.class = class1;
 

@@ -4,9 +4,6 @@ import { CoordinatorRoutingModule } from './coordinator-routing.module';
 import { CoordinatorComponent } from './coordinator.component';
 import {TemplatesModule} from '../../templates/templates.module';
 import {MatMenuModule} from '@angular/material/menu';
-import { InsertSubjectComponent } from './components/insert-subject/insert-subject.component';
-import { ViewProfessorComponent } from './components/view-professor/view-professor.component';
-import { InsertClassComponent } from './components/insert-class/insert-class.component';
 import {DynamicFormsModule} from '../../libs/dynamic-forms/dynamic-forms.module';
 import {MatButtonModule} from '@angular/material/button';
 import { ProfessorSelectorComponent } from './components/professor-selector/professor-selector.component';
@@ -22,17 +19,18 @@ import {MatIconModule} from '@angular/material/icon';
 import { DetailsCourseComponent } from './components/details-course/details-course.component';
 import {MatListModule} from '@angular/material/list';
 import { ClassSelectorComponent } from './components/class-selector/class-selector.component';
+import { ClassDisciplineViewComponent } from './components/class-discipline-view/class-discipline-view.component';
+import { ProfessorDisciplinesComponent } from './components/professor-disciplines/professor-disciplines.component';
 
 
 @NgModule({
   declarations: [
     CoordinatorComponent,
-    InsertSubjectComponent,
-    ViewProfessorComponent,
-    InsertClassComponent,
     ProfessorSelectorComponent,
     DetailsCourseComponent,
-    ClassSelectorComponent
+    ClassSelectorComponent,
+    ClassDisciplineViewComponent,
+    ProfessorDisciplinesComponent
 
   ],
     imports: [

@@ -1,7 +1,7 @@
 import {CustomInput} from '../../libs/dynamic-forms/models/form-metadata';
 import {ClassSelectorComponent} from '../../modules/coordinator/components/class-selector/class-selector.component';
 import {UserProfile} from './UserProfile';
-import {Class} from '../Class';
+import {ClassFormData} from '../ClassFormData';
 import {UserFormData} from './UserFormData';
 
 
@@ -14,7 +14,7 @@ export class StudentFormData extends UserFormData{
   constructor() {
     super();
     this.type = UserProfile.STUDENT;
-    this.class = new Class();
+    this.class = new ClassFormData();
   }
 
   get className(){

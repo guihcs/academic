@@ -5,6 +5,7 @@ import {DisciplineDetails} from '../../../../global-models/DisciplineDetails';
 import {assign} from '../../../../utils/utils';
 import {map} from 'rxjs/operators';
 import {DisciplineFormData} from '../../../../global-models/DisciplineFormData';
+import {SessionService} from '../../../../global-services/session/session.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +13,16 @@ import {DisciplineFormData} from '../../../../global-models/DisciplineFormData';
 export class DisciplineService implements DataSource{
 
   constructor(
-    private backend: BackendService
+    private backend: BackendService,
+    private sessionService: SessionService
   ) { }
 
-  async getAll(params) {
-    let data = await this.backend.getAll('subjects');
+  async getAll() {
+    let data = await this.backend.getAll('disciplines');
 
     data = data.map(v => {
 
-      let discipline = new DisciplineFormData();
+      let discipline = new DisciplineDetails();
       assign(discipline, v, 2);
       return discipline;
     });
@@ -30,19 +32,29 @@ export class DisciplineService implements DataSource{
   }
 
   async queryOne(params) {
-    let rawData = await this.backend.query('subjects', params);
+    let rawData = await this.backend.query('disciplines', params);
     let discipline = new DisciplineDetails();
     assign(discipline, rawData[0], 2);
     return discipline;
   }
 
-  insert(data) {
+  async insert(data) {
+
+    data.course = this.sessionService.getSession()?.course;
+    await this.backend.persist('disciplines', data);
+    return true;
   }
 
-  delete(data) {
+  async delete(data) {
+    await this.backend.delete('disciplines', data._id);
+    return true;
   }
 
-  update(data) {
+  async update(data) {
+
+    await this.backend.update('disciplines', data._id, data);
+
+    return true;
   }
 
 

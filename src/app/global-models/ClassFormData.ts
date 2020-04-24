@@ -1,8 +1,7 @@
 import {FormInput} from '../libs/dynamic-forms/models/form-metadata';
 import {CourseFormData} from './CourseFormData';
 
-
-export class Class {
+export class ClassFormData {
 
   _id;
 

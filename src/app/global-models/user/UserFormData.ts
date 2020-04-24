@@ -48,9 +48,6 @@ export class UserFormData {
     this.address = new Address();
   }
 
-  get profileName(){
-    return UserProfile[this.type];
-  }
 }
 
 

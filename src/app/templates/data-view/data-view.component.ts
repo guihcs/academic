@@ -50,6 +50,7 @@ export class DataViewComponent implements OnInit {
     });
 
     this.data?.subscribe(data => {
+
       this.displayedColumns = this.columnsDef?.map(v => v.field);
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;

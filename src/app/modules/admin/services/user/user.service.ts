@@ -50,12 +50,13 @@ export class UserService implements DataSource {
     return await this.backendService.delete('users', data._id);
   }
 
-  insert(data) {
-
+  async insert(data) {
+    return await this.backendService.persist('users', data);
   }
 
-  update(data){
-
+  async update(data){
+    //todo user type is being saved with data
+    return await this.backendService.update('users', data._id, data);
   }
 
 }

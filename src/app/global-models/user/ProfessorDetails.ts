@@ -4,7 +4,7 @@ import {ProfessorDisciplinesComponent} from '../../modules/coordinator/component
 
 export class ProfessorDetails extends UserDetails {
 
-
+  //todo add tabs to separate disciplines and data
   @CustomInput(ProfessorDisciplinesComponent, {
     label: 'Disciplines'
   })

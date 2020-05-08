@@ -4,7 +4,7 @@ import {CoordinatorComponent} from './coordinator.component';
 import {DataFormComponent} from '../../templates/data-form/data-form.component';
 import {StudentFormData} from '../../global-models/user/StudentFormData';
 import {ProfessorFormData} from '../../global-models/user/ProfessorFormData';
-import {StudentService} from './services/student/student.service';
+import {StudentService} from '../../global-services/student/student.service';
 import {DataDetailsComponent} from '../../templates/data-details/data-details.component';
 import {ProfessorService} from './services/professor/professor.service';
 import {ClassService} from './services/class/class.service';
@@ -13,6 +13,7 @@ import {DataViewComponent} from '../../templates/data-view/data-view.component';
 import {DisciplineFormData} from '../../global-models/DisciplineFormData';
 import {ClassFormData} from '../../global-models/ClassFormData';
 import {CourseService} from './services/course/course.service';
+import {ProfileComponent} from '../../templates/profile/profile.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
     path: '',
     component: CoordinatorComponent,
     children: [
+      {path: 'profile', component: ProfileComponent},
       {
         path: 'insert/professor',
         component: DataFormComponent,
@@ -67,11 +69,11 @@ const routes: Routes = [
         data: {
           detailsRoute: (professor) => '/coordinator/details/professor/' + professor._id,
           title: 'View Professors',
-          placeholder: 'Name, Email or Course',
           columnsDef: [
             {field: 'name', header: 'Name'}
           ],
           source: ProfessorService
+
         }
       },
       {
@@ -80,13 +82,13 @@ const routes: Routes = [
         data: {
           detailsRoute: (student) => '/coordinator/details/student/' + student._id,
           title: 'View Students',
-          placeholder: 'Name, Email or Course',
           columnsDef: [
             {field: 'name', header: 'Name'},
             {field: 'className', header: 'Class'},
             {field: 'classPeriod', header: 'Class Period'}
           ],
-          source: StudentService
+          source: StudentService,
+
         }
 
       },
@@ -96,13 +98,13 @@ const routes: Routes = [
         data: {
           detailsRoute: (discipline) => '/coordinator/details/subject/' + discipline._id,
           title: 'View Disciplines',
-          placeholder: 'Name, Email or Course',
           columnsDef: [
             {field: 'name', header: 'Name'},
             {field: 'period', header: 'Period'},
             {field: 'professorName', header: 'Professor'}
           ],
-          source: DisciplineService
+          source: DisciplineService,
+
         }
       },
       {
@@ -111,12 +113,12 @@ const routes: Routes = [
         data: {
           detailsRoute: (_class) => '/coordinator/details/class/' + _class._id,
           title: 'View Classes',
-          placeholder: 'Name, Email or Course',
           columnsDef: [
             {field: 'name', header: 'Name'},
             {field: 'period', header: 'Period'}
           ],
-          source: ClassService
+          source: ClassService,
+
         }
       },
       {

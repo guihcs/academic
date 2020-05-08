@@ -9,6 +9,14 @@ export class UserDetails {
   _id?;
   type: UserProfile;
 
+  @Label({
+    label: 'Profile'
+  })
+  set userType(s){}
+  get userType() {
+    return UserProfile[this.type];
+  }
+
   @FormInput({
     label: 'Name'
   })
@@ -40,9 +48,6 @@ export class UserDetails {
   }
 
 
-  get userType() {
-    return UserProfile[this.type];
-  }
 
   get courseName() {
     return '';

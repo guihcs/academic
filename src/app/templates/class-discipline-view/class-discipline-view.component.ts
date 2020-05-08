@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {DisciplineService} from '../../services/discipline/discipline.service';
-import {ConfigurableInput} from '../../../../libs/dynamic-forms/models/configurable-input';
+import {DisciplineService} from '../../modules/coordinator/services/discipline/discipline.service';
+import {ConfigurableInput} from '../../libs/dynamic-forms/models/configurable-input';
 import {FormControl} from '@angular/forms';
 
 @Component({

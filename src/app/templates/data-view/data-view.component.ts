@@ -15,17 +15,28 @@ export class DataViewComponent implements OnInit {
 
   @Input() title;
   @Input() placeholder;
-  @Input() columnsDef;
+  @Input() columnsDef: any[];
   @Input() data: Observable<any>;
   @Input() filter;
   @Input() detailsPath;
   @Output() rowClick = new EventEmitter();
+
 
   displayedColumns: string[];
   dataSource: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
+
+  private filterFunction = (data, filter) => {
+    let serializedFields = [];
+
+    for (const columnsDefElement of this.columnsDef) {
+      serializedFields.push(data[columnsDefElement.field]);
+    }
+
+    return serializedFields.join().toLocaleLowerCase().indexOf(filter) >= 0;
+  };
 
   constructor(
     private router: Router,
@@ -44,7 +55,9 @@ export class DataViewComponent implements OnInit {
         this.columnsDef = snapshot.data.columnsDef;
         this.detailsPath = snapshot.data.detailsRoute;
         this.placeholder = snapshot.data.placeholder;
+        if(!this.placeholder) this.placeholder = this.buildPlaceholder();
         this.filter = snapshot.data.filter;
+        if(!this.filter) this.filter = this.filterFunction;
         this.data = fromPromise(this.injector.get(snapshot.data.source).getAll());
       }
     });
@@ -57,6 +70,17 @@ export class DataViewComponent implements OnInit {
       this.dataSource.sort = this.sort;
       if(this.filter) this.dataSource.filterPredicate = this.filter;
     });
+  }
+
+  private buildPlaceholder(){
+
+    if (this.columnsDef.length > 1){
+      let commaSeparatedPart = this.columnsDef.slice(0, this.columnsDef.length -1).map(v => v.header).join(', ');
+      return commaSeparatedPart + ' or ' + this.columnsDef[this.columnsDef.length-1].header;
+    }else {
+      return this.columnsDef.map(v => v.header).join(', ');
+    }
+
   }
 
   applyFilter(event: Event) {

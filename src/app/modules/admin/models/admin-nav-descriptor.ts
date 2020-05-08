@@ -8,10 +8,10 @@ export class AdminNavDescriptor {
     {type: 'list-item', icon: 'assignment_ind', label: 'View Users', link: ['view', 'user']},
     {type: 'divider'},
     {type: 'header', label: 'Courses'},
-    {type: 'list-item', icon: '', label: 'Create Course', link: ['insert', 'course']},
-    {type: 'list-item', icon: '', label: 'View Courses', link: ['view', 'course']},
+    {type: 'list-item', icon: 'library_add', label: 'Create Course', link: ['insert', 'course']},
+    {type: 'list-item', icon: 'library_books', label: 'View Courses', link: ['view', 'course']},
     {type: 'divider'},
     {type: 'header', label: 'Exam'},
-    {type: 'list-item', icon: 'assignment', label: 'Update Exam', link: ['details', 'exam']},
+    {type: 'list-item', icon: 'event', label: 'Update Exam', link: ['details', 'exam']},
   ];
 }

@@ -10,6 +10,7 @@ import {ProfessorService} from '../coordinator/services/professor/professor.serv
 import {DisciplineService} from './services/discipline/discipline.service';
 import {ClassService} from './services/class/class.service';
 import {DataDetailsComponent} from '../../templates/data-details/data-details.component';
+import {ProfileComponent} from '../../templates/profile/profile.component';
 
 
 const routes: Routes = [
@@ -17,13 +18,13 @@ const routes: Routes = [
     path: '',
     component: ProfessorComponent,
     children: [
+      {path: 'profile', component: ProfileComponent},
       {
         path: 'view/class',
         component: DataViewComponent,
         data: {
           detailsRoute: (_class) => '/professor/details/class/' + _class._id,
           title: 'View Classes',
-          placeholder: 'Name, Email or Course',
           columnsDef: [
             {field: 'name', header: 'Name'},
             {field: 'period', header: 'Period'}
@@ -37,7 +38,6 @@ const routes: Routes = [
         data: {
           detailsRoute: (discipline) => '/professor/details/discipline/' + discipline._id,
           title: 'View Disciplines',
-          placeholder: 'Name, Email or Course',
           columnsDef: [
             {field: 'name', header: 'Name'},
             {field: 'period', header: 'Period'}
@@ -53,7 +53,8 @@ const routes: Routes = [
           backUrl: '/professor/view/class',
           source: ClassService,
           updateMessage: 'Class Updated.',
-          deleteMessage: 'Class Deleted.'
+          deleteMessage: 'Class Deleted.',
+          edit: false
         }
       },
       {
@@ -64,7 +65,8 @@ const routes: Routes = [
           backUrl: '/professor/view/disciplines',
           source: DisciplineService,
           updateMessage: 'Discipline Updated.',
-          deleteMessage: 'Discipline Deleted.'
+          deleteMessage: 'Discipline Deleted.',
+          edit: false
         }
       }
     ]

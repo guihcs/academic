@@ -19,8 +19,9 @@ import {MatIconModule} from '@angular/material/icon';
 import { DetailsCourseComponent } from './components/details-course/details-course.component';
 import {MatListModule} from '@angular/material/list';
 import { ClassSelectorComponent } from './components/class-selector/class-selector.component';
-import { ClassDisciplineViewComponent } from './components/class-discipline-view/class-discipline-view.component';
+import { ClassDisciplineViewComponent } from '../../templates/class-discipline-view/class-discipline-view.component';
 import { ProfessorDisciplinesComponent } from './components/professor-disciplines/professor-disciplines.component';
+import { ClassStudentsComponent } from './components/class-students/class-students.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { ProfessorDisciplinesComponent } from './components/professor-discipline
     DetailsCourseComponent,
     ClassSelectorComponent,
     ClassDisciplineViewComponent,
-    ProfessorDisciplinesComponent
+    ProfessorDisciplinesComponent,
+    ClassStudentsComponent
 
   ],
     imports: [

@@ -8,24 +8,21 @@ import {CourseFormData} from '../../global-models/CourseFormData';
 import {DataViewComponent} from '../../templates/data-view/data-view.component';
 import {DataDetailsComponent} from '../../templates/data-details/data-details.component';
 import {UserService} from './services/user/user.service';
-import { courseViewFilter } from './models/CourseViewFilter';
 import {CoordinatorService} from './services/coordinator/coordinator.service';
 import {CourseService} from '../../global-services/course/course.service';
-import {userViewFilter} from './models/UserViewFilter';
 import {UserProfile} from '../../global-models/user/UserProfile';
+import {ProfileComponent} from '../../templates/profile/profile.component';
 
 const routes: Routes = [
   {
     path: '',
     component: AdminComponent,
     children: [
-
-
+      {path: 'profile', component: ProfileComponent},
       {
         path: 'insert/coordinator',
         component: DataFormComponent,
         data: {
-          collectionName: 'users',
           dataType: CoordinatorFormData,
           pageTitle: 'Insert Coordinator',
           successMessage: 'Coordinator Inserted.',
@@ -37,7 +34,6 @@ const routes: Routes = [
         path: 'insert/course',
         component: DataFormComponent,
         data: {
-          collectionName: 'courses',
           dataType: CourseFormData,
           pageTitle: 'Insert Course',
           successMessage: 'Course Inserted.',
@@ -54,14 +50,12 @@ const routes: Routes = [
             else return '/admin/details/user/' + user._id;
           } ,
           title: 'View Users',
-          placeholder: 'Name, Email or Course',
           columnsDef: [
             {field: 'name', header: 'Name'},
             {field: 'userType', header: 'Profile'},
             {field: 'courseName', header: 'Course'}
           ],
-          source: UserService,
-          filter: userViewFilter
+          source: UserService
         }
       },
 
@@ -71,14 +65,12 @@ const routes: Routes = [
         data: {
           detailsRoute: (course) =>'/admin/details/course/' + course._id,
           title: 'View Courses',
-          placeholder: 'Name, Email or Course',
           columnsDef: [
             {field: 'name', header: 'Name'},
             {field: 'area', header: 'Area'},
             {field: 'coordinatorName', header: 'Coordinator'}
           ],
-          source: CourseService,
-          filter: courseViewFilter
+          source: CourseService
         }
       },
 
@@ -87,7 +79,6 @@ const routes: Routes = [
         path: 'details/course/:id',
         component: DataDetailsComponent,
         data: {
-          collectionName: 'courses',
           pageTitle: 'Course Details',
           backUrl: '/admin/view/course',
           source: CourseService,
@@ -99,7 +90,6 @@ const routes: Routes = [
         path: 'details/coordinator/:id',
         component: DataDetailsComponent,
         data: {
-          collectionName: 'users',
           pageTitle: 'Coordinator Details',
           backUrl: '/admin/view/user',
           source: CoordinatorService,
@@ -111,7 +101,6 @@ const routes: Routes = [
         path: 'details/user/:id',
         component: DataDetailsComponent,
         data: {
-          collectionName: 'users',
           pageTitle: 'User Details',
           backUrl: '/admin/view/user',
           source: UserService,

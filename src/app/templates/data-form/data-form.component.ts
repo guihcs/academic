@@ -70,12 +70,10 @@ export class DataFormComponent implements OnInit {
   }
 
   isValid() {
-/*
-todo remove comment after dev
+
     if (this.formContainer) {
       return this.formContainer.isValid();
     }
-*/
 
     return true;
   }

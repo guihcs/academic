@@ -1,8 +1,8 @@
-import {UserFormData} from './UserFormData';
 import {UserProfile} from './UserProfile';
+import {UserDetails} from './UserDetails';
 
 
-export class Admin extends UserFormData {
+export class Admin extends UserDetails {
 
   titulation: string;
 

@@ -22,6 +22,7 @@ export class DataDetailsComponent implements OnInit {
   @Input() backUrl;
   @Input() updateMessage;
   @Input() deleteMessage;
+  @Input() edit = true;
 
   @ViewChild('dynamicFormsComponent')
   private dynamicFormsComponent: DynamicFormsComponent;
@@ -52,6 +53,8 @@ export class DataDetailsComponent implements OnInit {
         this.dataSource = this.injector.get(snapshot.data.source);
         this.deleteMessage = snapshot.data.deleteMessage;
         this.updateMessage = snapshot.data.updateMessage;
+
+        if(Object.keys(snapshot.data).indexOf('edit') >= 0) this.edit = snapshot.data.edit;
         this.dataDescriptor = fromPromise(this.dataSource.queryOne(snapshot.params.id));
       }
     });

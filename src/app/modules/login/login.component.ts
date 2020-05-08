@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {SessionService} from '../../global-services/session/session.service';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {UserProfile} from '../../global-models/user/UserProfile';
+import {SocketService} from '../../global-services/socket/socket.service';
 
 export class ErrorMatcher implements ErrorStateMatcher {
   state;
@@ -31,12 +32,12 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private sessionService: SessionService
+    private sessionService: SessionService,
+    private socket: SocketService
   ) {
   }
 
   ngOnInit(): void {
-
 
     this.loginForm = this.formBuilder.group({
       email: '',

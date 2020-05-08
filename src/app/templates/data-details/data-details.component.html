@@ -8,7 +8,7 @@
   <h1 class="view-title">{{pageTitle}}</h1>
 
 </div>
-<mat-divider></mat-divider>
+
 <dynamic-form
   #dynamicFormsComponent
   [objectObservable]="dataDescriptor"
@@ -18,8 +18,7 @@
 
 <div>
 
-  <mat-divider></mat-divider>
-  <div class="action-footer">
+  <div class="action-footer" *ngIf="edit">
     <button (click)="updateData()" color="primary" mat-raised-button>Update</button>
     <button (click)="delete()" class="delete-button" color="warn" mat-raised-button>
       Delete

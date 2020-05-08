@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ConfigurableInput} from '../../../../libs/dynamic-forms/models/configurable-input';
 import {FormControl} from '@angular/forms';
 import {UserProfile} from '../../../../global-models/user/UserProfile';
@@ -32,7 +32,8 @@ export class ProfessorSelectorComponent implements OnInit, ConfigurableInput {
     this.args = args;
 
     if (args.defaultValue && this.professors){
-      this.formControl.setValue(this.professors.find(v => v._id === args.defaultValue.id));
+      this.formControl.setValue(this.professors.find(v => v._id === args.defaultValue._id));
+
     }
 
   }

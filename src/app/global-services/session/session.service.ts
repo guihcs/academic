@@ -43,7 +43,8 @@ export class SessionService {
 
     let user = this.typeService.buildObject(sessionData.type);
     assign(user, sessionData, 2);
-    return sessionData;
+
+    return user;
   }
 
   logout() {

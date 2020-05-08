@@ -3,6 +3,7 @@ import {BackendService} from '../../../../global-services/backend/backend.servic
 import {SessionService} from '../../../../global-services/session/session.service';
 import {ConfigurableInput} from '../../../../libs/dynamic-forms/models/configurable-input';
 import {FormControl} from '@angular/forms';
+import {ClassService} from '../../services/class/class.service';
 
 @Component({
   selector: 'app-class-selector',
@@ -15,15 +16,15 @@ export class ClassSelectorComponent implements OnInit, ConfigurableInput {
   classes;
 
   constructor(
-    private backendService: BackendService,
+    private classService: ClassService,
     private sessionService: SessionService
   ) { }
 
   ngOnInit(): void {
-    this.backendService.getAll('classes').then(c => {
-
+    this.classService.getAll().then(c => {
       this.classes = c.filter(v => v.course?.name === this.sessionService.getSession().course?.name);
     });
+
   }
 
   applyArguments(args) {

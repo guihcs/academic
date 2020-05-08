@@ -11,8 +11,8 @@ import {ConfigurableInput} from '../../../../libs/dynamic-forms/models/configura
 export class AddressInputComponent implements OnInit, ConfigurableInput, AfterViewInit {
 
   cepControl = new FormControl('');
-  cityControl = new FormControl('');
-  stateControl = new FormControl('');
+  cityControl = new FormControl({value: ''});
+  stateControl = new FormControl({value: ''});
 
   formGroup = new FormGroup({
     cep: this.cepControl,

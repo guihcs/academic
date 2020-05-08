@@ -3,6 +3,8 @@ import {getDescriptor} from './models/form-metadata';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {InputBuilderService} from './input-builder/input-builder.service';
 import {Observable} from 'rxjs';
+import {RawLabelComponent} from './inputs/raw-label/raw-label.component';
+import {toPascalCase} from '../../utils/utils';
 
 @Component({
   selector: 'dynamic-form',
@@ -77,12 +79,17 @@ export class DynamicFormsComponent implements OnInit, AfterViewInit {
 
   private buildInput(inputConfig, decoratedPropertyName, formObject, container) {
 
-    let group;
+    let group: FormGroup;
     switch (inputConfig.type) {
 
       case 'nested-input': {
         let nestedObject = formObject[decoratedPropertyName];
         let metadataDescriptor = getDescriptor(formObject, decoratedPropertyName);
+
+        this.inputBuilderService.buildCustomInput(container, {
+          label: toPascalCase(decoratedPropertyName)
+        }, RawLabelComponent);
+
         let nestedGroup = this.buildGroup(container, nestedObject, metadataDescriptor.depth - 1);
         if (nestedGroup) {
           group = nestedGroup;

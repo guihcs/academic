@@ -36,7 +36,6 @@ const routes: Routes = [
   },
   {
     path: 'exam',
-    canActivate: [AuthGuard],
     loadChildren: () => import('./modules/exam/exam.module').then(m => m.ExamModule)}
 ];
 

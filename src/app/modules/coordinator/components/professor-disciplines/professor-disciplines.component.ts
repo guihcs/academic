@@ -1,38 +1,35 @@
 import { Component, OnInit } from '@angular/core';
-import {ConfigurableInput} from '../../../../libs/dynamic-forms/models/configurable-input';
-import {FormControl} from '@angular/forms';
 import {DisciplineService} from '../../services/discipline/discipline.service';
+import {ProfessorService} from '../../services/professor/professor.service';
 
 @Component({
   selector: 'app-professor-disciplines',
   templateUrl: './professor-disciplines.component.html',
   styleUrls: ['./professor-disciplines.component.css']
 })
-export class ProfessorDisciplinesComponent implements OnInit, ConfigurableInput {
+export class ProfessorDisciplinesComponent implements OnInit {
 
-  formControl = new FormControl();
   disciplines;
-  defaultValue;
+  data;
 
-  constructor(private disciplineService: DisciplineService) { }
+  constructor(
+    private disciplineService: DisciplineService,
+    private professorService: ProfessorService
+  ) { }
 
   ngOnInit(): void {
-    this.disciplineService.getAll().then(data => {
-      this.disciplines = data.filter(v => v.professor?.name === this.defaultValue);
 
-    });
+    this.loadData();
   }
 
-  applyArguments(args) {
-    this.defaultValue = args.defaultValue;
-
+  async loadData(){
+    let professor = await this.professorService.queryOne(this.data.params.id);
+    let disciplines = await this.disciplineService.getAll();
+    this.disciplines = disciplines.filter(v => v.professor?.name === professor.name);
   }
 
-  getFormControl() {
-    return this.formControl;
+  getData(){
+
   }
-
-
-
 
 }

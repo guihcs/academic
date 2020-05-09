@@ -45,12 +45,12 @@ export class ProfessorService implements DataSource{
   }
 
   async delete(data) {
-    await this.backendService.delete('users', data._id);
+    await this.backendService.delete('users', data.profile._id);
     return true;
   }
 
   async update(data) {
-    await this.backendService.update('users', data._id, data);
+    await this.backendService.update('users', data.profile._id, data.profile);
     return true;
   }
 

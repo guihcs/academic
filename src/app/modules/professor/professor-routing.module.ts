@@ -11,6 +11,10 @@ import {DisciplineService} from './services/discipline/discipline.service';
 import {ClassService} from './services/class/class.service';
 import {DataDetailsComponent} from '../../templates/data-details/data-details.component';
 import {ProfileComponent} from '../../templates/profile/profile.component';
+import {TabbedPaneComponent} from '../../templates/tabbed-pane/tabbed-pane.component';
+import {DefaultUpdateComponent} from '../../templates/default-update/default-update.component';
+import {ClassDisciplineViewComponent} from '../../templates/class-discipline-view/class-discipline-view.component';
+import {ClassStudentsComponent} from '../coordinator/components/class-students/class-students.component';
 
 
 const routes: Routes = [
@@ -47,14 +51,28 @@ const routes: Routes = [
       },
       {
         path: 'details/class/:id',
-        component: DataDetailsComponent,
+        component: TabbedPaneComponent,
         data: {
           pageTitle: 'Class Details',
-          backUrl: '/professor/view/class',
+          backUrl: '/coordinator/view/class',
           source: ClassService,
           updateMessage: 'Class Updated.',
           deleteMessage: 'Class Deleted.',
-          edit: false
+          edit: false,
+          tabs: [
+            {
+              name: 'Details',
+              component: DefaultUpdateComponent
+            },
+            {
+              name: 'Disciplines',
+              component: ClassDisciplineViewComponent
+            },
+            {
+              name: 'Students',
+              component: ClassStudentsComponent
+            }
+          ]
         }
       },
       {

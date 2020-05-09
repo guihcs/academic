@@ -27,6 +27,10 @@ import { DataFormComponent } from './data-form/data-form.component';
 import { DataDetailsComponent } from './data-details/data-details.component';
 import { DataSelectorComponent } from './data-selector/data-selector.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import {TabbedPaneComponent} from './tabbed-pane/tabbed-pane.component';
+import { DefaultUpdateComponent } from './default-update/default-update.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import { ComponentRendererComponent } from './component-renderer/component-renderer.component';
 
 
 
@@ -40,7 +44,10 @@ import {ReactiveFormsModule} from '@angular/forms';
     DataViewComponent,
     DataFormComponent,
     DataDetailsComponent,
-    DataSelectorComponent
+    DataSelectorComponent,
+    TabbedPaneComponent,
+    DefaultUpdateComponent,
+    ComponentRendererComponent
   ],
     imports: [
         CommonModule,
@@ -60,7 +67,8 @@ import {ReactiveFormsModule} from '@angular/forms';
         MatTableModule,
         MatSortModule,
         MatPaginatorModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MatTabsModule
     ],
     exports: [
         SidenavComponent,

@@ -18,16 +18,11 @@ export class ClassDetails {
   })
   period;
 
-  @CustomInput(ClassDisciplineViewComponent, {
-    label: 'Disciplines'
-  })
+
   get classPeriod(){
     return this.period;
   }
 
-  @CustomInput(ClassStudentsComponent, {
-    label: 'Students'
-  })
   get id(){
     return this._id;
   };

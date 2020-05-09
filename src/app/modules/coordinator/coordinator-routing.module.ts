@@ -12,8 +12,12 @@ import {DisciplineService} from './services/discipline/discipline.service';
 import {DataViewComponent} from '../../templates/data-view/data-view.component';
 import {DisciplineFormData} from '../../global-models/DisciplineFormData';
 import {ClassFormData} from '../../global-models/ClassFormData';
-import {CourseService} from './services/course/course.service';
 import {ProfileComponent} from '../../templates/profile/profile.component';
+import {TabbedPaneComponent} from '../../templates/tabbed-pane/tabbed-pane.component';
+import {DefaultUpdateComponent} from '../../templates/default-update/default-update.component';
+import {ProfessorDisciplinesComponent} from './components/professor-disciplines/professor-disciplines.component';
+import {ClassDisciplineViewComponent} from '../../templates/class-discipline-view/class-discipline-view.component';
+import {ClassStudentsComponent} from './components/class-students/class-students.component';
 
 
 const routes: Routes = [
@@ -123,13 +127,23 @@ const routes: Routes = [
       },
       {
         path: 'details/professor/:id',
-        component: DataDetailsComponent,
+        component: TabbedPaneComponent,
         data: {
           pageTitle: 'Professor Details',
           backUrl: '/coordinator/view/professor',
           source: ProfessorService,
           updateMessage: 'Professor Updated.',
-          deleteMessage: 'Professor Deleted.'
+          deleteMessage: 'Professor Deleted.',
+          tabs: [
+            {
+              name: 'Profile',
+              component: DefaultUpdateComponent
+            },
+            {
+              name: 'Disciplines',
+              component: ProfessorDisciplinesComponent
+            }
+          ]
         }
       },
       {
@@ -156,24 +170,27 @@ const routes: Routes = [
       },
       {
         path: 'details/class/:id',
-        component: DataDetailsComponent,
+        component: TabbedPaneComponent,
         data: {
           pageTitle: 'Class Details',
           backUrl: '/coordinator/view/class',
           source: ClassService,
           updateMessage: 'Class Updated.',
-          deleteMessage: 'Class Deleted.'
-        }
-      },
-      {
-        path: 'details/course',
-        component: DataDetailsComponent,
-        data: {
-          pageTitle: 'Course Details',
-          backUrl: '/coordinator/view/course',
-          source: CourseService,
-          updateMessage: 'Course Updated.',
-          deleteMessage: 'Course Deleted.'
+          deleteMessage: 'Class Deleted.',
+          tabs: [
+            {
+              name: 'Details',
+              component: DefaultUpdateComponent
+            },
+            {
+              name: 'Disciplines',
+              component: ClassDisciplineViewComponent
+            },
+            {
+              name: 'Students',
+              component: ClassStudentsComponent
+            }
+          ]
         }
       }
 

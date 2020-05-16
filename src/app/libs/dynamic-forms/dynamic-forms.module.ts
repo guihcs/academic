@@ -9,6 +9,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {CommonModule} from '@angular/common';
 import { RawLabelComponent } from './inputs/raw-label/raw-label.component';
+import { CheckboxComponent } from './inputs/checkbox/checkbox.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -17,7 +19,8 @@ import { RawLabelComponent } from './inputs/raw-label/raw-label.component';
     LabelComponent,
     SelectComponent,
     TextInputComponent,
-    RawLabelComponent
+    RawLabelComponent,
+    CheckboxComponent
   ],
     imports: [
         ReactiveFormsModule,
@@ -25,7 +28,8 @@ import { RawLabelComponent } from './inputs/raw-label/raw-label.component';
         ReactiveFormsModule,
         MatFormFieldModule,
         MatInputModule,
-        CommonModule
+        CommonModule,
+        MatCheckboxModule
 
     ],
   exports: [

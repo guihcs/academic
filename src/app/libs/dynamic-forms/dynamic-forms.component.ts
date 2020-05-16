@@ -46,7 +46,8 @@ export class DynamicFormsComponent implements OnInit, AfterViewInit {
   }
 
   isValid() {
-    return this.dynamicForm.valid;
+    // return this.dynamicForm.valid;
+    return true;
   }
 
   getResult() {

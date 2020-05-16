@@ -11,12 +11,13 @@ import {StudentDetails} from '../../global-models/user/StudentDetails';
 @Injectable({
   providedIn: 'root'
 })
-export class StudentService implements DataSource{
+export class StudentService implements DataSource {
 
   constructor(
     private backendService: BackendService,
     private sessionService: SessionService
-  ) { }
+  ) {
+  }
 
 
   async getAll(){
@@ -26,6 +27,9 @@ export class StudentService implements DataSource{
       if (userData.type === UserProfile.STUDENT){
         let student = new StudentDetails();
         assign(student, userData, 2);
+
+        if(student.code) student.image = await this.backendService.download(student.code);
+
         students.push(student);
       }
     }
@@ -38,10 +42,10 @@ export class StudentService implements DataSource{
 
 
   async queryStudent(id){
-
     let rawData = await this.backendService.query('users', id);
     let student = new StudentDetails();
     assign(student, rawData[0], 2);
+    if(student.code) student.image = await this.backendService.download(student.code);
     return student;
   }
 
@@ -49,10 +53,24 @@ export class StudentService implements DataSource{
     return this.queryStudent(params);
   }
 
-  async insert(data) {
+  async insert(data, image) {
     delete data.class.course.coordinator;
+    data.code = StudentService.generateStudentCode();
+    data.active = true;
     await this.backendService.persist('users', data);
+    await this.backendService.upload(data.code, image);
     return true;
+  }
+
+  private static generateStudentCode(){
+    let date = new Date();
+
+    let year = date.getFullYear();
+    let semester = date.getMonth() < 6 ? 1 : 2;
+    let salt = Math.floor(Math.random() * 100 % 100).toString().padStart(2, '0');
+    let millis = date.getMilliseconds().toString().padStart(3, '0');
+
+    return [year, semester, salt, millis].join('');
   }
 
   async delete(data) {

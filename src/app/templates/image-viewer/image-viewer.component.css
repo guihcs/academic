@@ -1,0 +1,14 @@
+
+img {
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+}
+
+mat-card {
+  float: right;
+  padding: 4px;
+  border-radius: 100%;
+  width: 100px;
+  height: 100px;
+}

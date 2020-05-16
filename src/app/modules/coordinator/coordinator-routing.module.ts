@@ -18,6 +18,8 @@ import {DefaultUpdateComponent} from '../../templates/default-update/default-upd
 import {ProfessorDisciplinesComponent} from './components/professor-disciplines/professor-disciplines.component';
 import {ClassDisciplineViewComponent} from '../../templates/class-discipline-view/class-discipline-view.component';
 import {ClassStudentsComponent} from './components/class-students/class-students.component';
+import {InsertStudentComponent} from './components/insert-student/insert-student.component';
+import {ViewStudentComponent} from './components/view-student/view-student.component';
 
 
 const routes: Routes = [
@@ -39,7 +41,7 @@ const routes: Routes = [
       },
       {
         path: 'insert/student',
-        component: DataFormComponent,
+        component: InsertStudentComponent,
         data: {
           dataType: StudentFormData,
           pageTitle: 'Insert Student',
@@ -82,7 +84,7 @@ const routes: Routes = [
       },
       {
         path: 'view/student',
-        component: DataViewComponent,
+        component: ViewStudentComponent,
         data: {
           detailsRoute: (student) => '/coordinator/details/student/' + student._id,
           title: 'View Students',

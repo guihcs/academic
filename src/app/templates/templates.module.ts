@@ -31,6 +31,9 @@ import {TabbedPaneComponent} from './tabbed-pane/tabbed-pane.component';
 import { DefaultUpdateComponent } from './default-update/default-update.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import { ComponentRendererComponent } from './component-renderer/component-renderer.component';
+import { ImageViewerComponent } from './image-viewer/image-viewer.component';
+import { DisciplinesViewComponent } from './disciplines-view/disciplines-view.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 
@@ -47,7 +50,9 @@ import { ComponentRendererComponent } from './component-renderer/component-rende
     DataSelectorComponent,
     TabbedPaneComponent,
     DefaultUpdateComponent,
-    ComponentRendererComponent
+    ComponentRendererComponent,
+    ImageViewerComponent,
+    DisciplinesViewComponent
   ],
     imports: [
         CommonModule,
@@ -68,7 +73,8 @@ import { ComponentRendererComponent } from './component-renderer/component-rende
         MatSortModule,
         MatPaginatorModule,
         ReactiveFormsModule,
-        MatTabsModule
+        MatTabsModule,
+        MatCheckboxModule
     ],
     exports: [
         SidenavComponent,

@@ -3,6 +3,7 @@ import {ClassSelectorComponent} from '../../modules/coordinator/components/class
 import {UserProfile} from './UserProfile';
 import {UserFormData} from './UserFormData';
 import {ClassDetails} from '../ClassDetails';
+import {DisciplinesSelectorComponent} from '../../modules/coordinator/components/disciplines-selector/disciplines-selector.component';
 
 
 export class StudentFormData extends UserFormData{
@@ -10,6 +11,13 @@ export class StudentFormData extends UserFormData{
     label: 'Class'
   })
   class;
+  code;
+  active;
+
+  @CustomInput(DisciplinesSelectorComponent, {
+    label: 'Disciplines'
+  })
+  disciplines;
 
   constructor() {
     super();

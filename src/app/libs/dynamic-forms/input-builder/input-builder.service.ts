@@ -4,6 +4,7 @@ import {ConfigurableInput} from '../models/configurable-input';
 import {TextInputComponent} from '../inputs/text/text-input.component';
 import {LabelComponent} from '../inputs/label/label.component';
 import {SelectComponent} from '../inputs/select/select.component';
+import {CheckboxComponent} from '../inputs/checkbox/checkbox.component';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,9 @@ export class InputBuilderService {
       }
       case 'select': {
         return this.buildSelect(viewRef, descriptor);
+      }
+      case 'checkbox': {
+        return this.buildCustomInput(viewRef, descriptor, CheckboxComponent);
       }
       default: {
         return this.buildTextInput(viewRef, descriptor);

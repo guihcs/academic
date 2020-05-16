@@ -1,0 +1,6 @@
+
+<mat-checkbox [(ngModel)]="notStable">
+  Not Stable
+</mat-checkbox>
+
+<button *ngIf="notStable" mat-raised-button (click)="openDisciplinesModal()">Select Disciplines</button>

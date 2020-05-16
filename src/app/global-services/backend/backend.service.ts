@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -35,5 +35,18 @@ export class BackendService {
   async query(collection, id){
     let res: any = await this.http.get('api/' + collection + '/' + id).toPromise();
     return res;
+  }
+
+  async upload(name, data){
+    const formData = new FormData();
+    formData.append('file', data);
+    const headers = new HttpHeaders({'enctype': 'multipart/form-data'});
+    return this.http.post('api/file/' + name, formData, {headers: headers}).toPromise();
+  }
+
+  async download(name){
+    return this.http.get('api/file/' + name, {
+      responseType: 'text',
+    }).toPromise();
   }
 }

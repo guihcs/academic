@@ -1,0 +1,17 @@
+<h1>{{pageTitle}}</h1>
+<div class="photo-container">
+  <div class="photo">
+    <img [src]="imageData" *ngIf="imageData" alt="Photo">
+  </div>
+  <input #file type="file" placeholder="Upload" accept="image/*" (change)="preview(file.files)">
+</div>
+
+<dynamic-form
+  #userForm
+  [objectObservable]="data"
+  formStyleClass="column"
+  inputStyleClass="input-form-field"></dynamic-form>
+
+<div>
+  <button (click)="prepareData()" [disabled]="!isValid()" color="primary" mat-raised-button>Insert</button>
+</div>

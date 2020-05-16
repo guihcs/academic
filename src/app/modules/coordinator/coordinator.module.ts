@@ -22,6 +22,12 @@ import { ClassSelectorComponent } from './components/class-selector/class-select
 import { ClassDisciplineViewComponent } from '../../templates/class-discipline-view/class-discipline-view.component';
 import { ProfessorDisciplinesComponent } from './components/professor-disciplines/professor-disciplines.component';
 import { ClassStudentsComponent } from './components/class-students/class-students.component';
+import { InsertStudentComponent } from './components/insert-student/insert-student.component';
+import { ViewStudentComponent } from './components/view-student/view-student.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {OverlayModule} from '@angular/cdk/overlay';
+import { DisciplinesSelectorComponent } from './components/disciplines-selector/disciplines-selector.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 @NgModule({
@@ -32,7 +38,11 @@ import { ClassStudentsComponent } from './components/class-students/class-studen
     ClassSelectorComponent,
     ClassDisciplineViewComponent,
     ProfessorDisciplinesComponent,
-    ClassStudentsComponent
+    ClassStudentsComponent,
+    InsertStudentComponent,
+    ViewStudentComponent,
+    DisciplinesSelectorComponent,
+
 
   ],
     imports: [
@@ -52,7 +62,10 @@ import { ClassStudentsComponent } from './components/class-students/class-studen
         MatDividerModule,
         MatIconModule,
         ReactiveFormsModule,
-        MatListModule
+        MatListModule,
+        MatCheckboxModule,
+        OverlayModule,
+      MatDialogModule
     ]
 })
 export class CoordinatorModule { }

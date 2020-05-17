@@ -20,6 +20,8 @@ import {ClassDisciplineViewComponent} from '../../templates/class-discipline-vie
 import {ClassStudentsComponent} from './components/class-students/class-students.component';
 import {InsertStudentComponent} from './components/insert-student/insert-student.component';
 import {ViewStudentComponent} from './components/view-student/view-student.component';
+import {DisciplinesDialogComponent} from '../../templates/disciplines-dialog/disciplines-dialog.component';
+import {DisciplinesViewComponent} from '../../templates/disciplines-view/disciplines-view.component';
 
 
 const routes: Routes = [
@@ -150,13 +152,23 @@ const routes: Routes = [
       },
       {
         path: 'details/student/:id',
-        component: DataDetailsComponent,
+        component: TabbedPaneComponent,
         data: {
           pageTitle: 'Student Details',
           backUrl: '/coordinator/view/student',
           source: StudentService,
           updateMessage: 'Student Updated.',
-          deleteMessage: 'Student Deleted'
+          deleteMessage: 'Student Deleted',
+          tabs: [
+            {
+              name: 'Profile',
+              component: DefaultUpdateComponent
+            },
+            {
+              name: 'Disciplines',
+              component: DisciplinesViewComponent
+            }
+          ]
         }
       },
       {

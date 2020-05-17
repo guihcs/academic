@@ -15,6 +15,7 @@ export class StudentDetails extends UserDetails {
     label: 'Code'
   })
   code;
+  disciplines: any[];
 
   @Label({
     label: 'Class'

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ConfigurableInput} from '../../../../libs/dynamic-forms/models/configurable-input';
 import {FormControl} from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
-import {DisciplinesViewComponent} from '../../../../templates/disciplines-view/disciplines-view.component';
+import {DisciplinesDialogComponent} from '../../../../templates/disciplines-dialog/disciplines-dialog.component';
 
 @Component({
   selector: 'app-disciplines-selector',
@@ -29,13 +29,13 @@ export class DisciplinesSelectorComponent implements OnInit, ConfigurableInput {
   }
 
   openDisciplinesModal(){
-    let dialogRef = this.dialog.open(DisciplinesViewComponent, {
+    let dialogRef = this.dialog.open(DisciplinesDialogComponent, {
       width: '600px',
       data: this.formControl.value
     });
 
     dialogRef.afterClosed().subscribe(v => {
-      this.formControl.setValue(v);
+      if (v) this.formControl.setValue(v);
     });
   }
 }

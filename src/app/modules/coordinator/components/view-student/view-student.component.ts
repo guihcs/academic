@@ -40,8 +40,6 @@ export class ViewStudentComponent implements OnInit {
     for (const columnsDefElement of this.columnsDef) {
       serializedFields.push(data[columnsDefElement.field]);
     }
-    console.log('hue');
-
     return serializedFields.join().toLocaleLowerCase().indexOf(filter) >= 0;
   };
 
@@ -80,7 +78,6 @@ export class ViewStudentComponent implements OnInit {
   }
 
   private buildPlaceholder(){
-
     if (this.columnsDef.length > 1){
       let commaSeparatedPart = this.columnsDef.slice(0, this.columnsDef.length -1).map(v => v.header).join(', ');
       return commaSeparatedPart + ' or ' + this.columnsDef[this.columnsDef.length-1].header;
@@ -109,6 +106,7 @@ export class ViewStudentComponent implements OnInit {
   }
 
   displayImage(row, element){
+    if (element.image === 'undefined') return;
     let index = this.rows.toArray().findIndex(e => e === row);
     let origin = this.origins.toArray()[index];
     this.imagePopupService.open(origin, element.image);

@@ -32,8 +32,9 @@ import { DefaultUpdateComponent } from './default-update/default-update.componen
 import {MatTabsModule} from '@angular/material/tabs';
 import { ComponentRendererComponent } from './component-renderer/component-renderer.component';
 import { ImageViewerComponent } from './image-viewer/image-viewer.component';
-import { DisciplinesViewComponent } from './disciplines-view/disciplines-view.component';
+import { DisciplinesDialogComponent } from './disciplines-dialog/disciplines-dialog.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { DisciplinesViewComponent } from './disciplines-view/disciplines-view.component';
 
 
 
@@ -52,6 +53,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     DefaultUpdateComponent,
     ComponentRendererComponent,
     ImageViewerComponent,
+    DisciplinesDialogComponent,
     DisciplinesViewComponent
   ],
     imports: [

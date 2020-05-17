@@ -7,6 +7,7 @@ import {DataSource} from '../../global-models/DataSource';
 import {SessionService} from '../session/session.service';
 import {ProfessorFormData} from '../../global-models/user/ProfessorFormData';
 import {StudentDetails} from '../../global-models/user/StudentDetails';
+import {DisciplineService} from '../../modules/coordinator/services/discipline/discipline.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ export class StudentService implements DataSource {
 
   constructor(
     private backendService: BackendService,
-    private sessionService: SessionService
+    private sessionService: SessionService,
+    private disciplineService: DisciplineService
   ) {
   }
 
@@ -27,9 +29,7 @@ export class StudentService implements DataSource {
       if (userData.type === UserProfile.STUDENT){
         let student = new StudentDetails();
         assign(student, userData, 2);
-
         if(student.code) student.image = await this.backendService.download(student.code);
-
         students.push(student);
       }
     }
@@ -54,6 +54,10 @@ export class StudentService implements DataSource {
   }
 
   async insert(data, image) {
+    if(!data.disciplines){
+      let disciplines = await this.disciplineService.getAll();
+      data.disciplines = disciplines.filter(d => d.period === data.class.period);
+    }
     delete data.class.course.coordinator;
     data.code = StudentService.generateStudentCode();
     data.active = true;
@@ -74,12 +78,14 @@ export class StudentService implements DataSource {
   }
 
   async delete(data) {
-    await this.backendService.delete('users', data._id);
+    await this.backendService.delete('users', data.profile._id);
     return true;
   }
 
   async update(data) {
-    await this.backendService.update('users', data._id, data);
+    let studentData = data.profile;
+    studentData.disciplines = data.disciplines;
+    await this.backendService.update('users', studentData._id, studentData);
     return true;
   }
 

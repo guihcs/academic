@@ -19,7 +19,9 @@ export class CoordinatorNavDescriptor {
     {type: 'divider'},
     {type: 'header', label: 'Class'},
     {type: 'list-item', icon: 'supervisor_account', label: 'Create Class', link: ['insert', 'class']},
-    {type: 'list-item', icon: 'supervisor_account', label: 'View Class', link: ['view', 'class']}
+    {type: 'list-item', icon: 'supervisor_account', label: 'View Class', link: ['view', 'class']},
+    {type: 'header', label: 'Downloads'},
+    {type: 'list-item', icon: 'download', label: 'Student File', link: ['insert', 'class']}
 
   ];
 }

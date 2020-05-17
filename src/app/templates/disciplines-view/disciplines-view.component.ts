@@ -1,10 +1,8 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {ConfirmDeleteDialogComponent} from '../confirm-delete-dialog/confirm-delete-dialog.component';
-import {MatTableDataSource} from '@angular/material/table';
+import { Component, OnInit } from '@angular/core';
 import {SelectionModel} from '@angular/cdk/collections';
 import {DisciplineService} from '../../modules/coordinator/services/discipline/discipline.service';
-import {DisciplineDetails} from '../../global-models/DisciplineDetails';
+import {MatTableDataSource} from '@angular/material/table';
+import {StudentService} from '../../global-services/student/student.service';
 
 @Component({
   selector: 'app-disciplines-view',
@@ -16,22 +14,32 @@ export class DisciplinesViewComponent implements OnInit {
   displayedColumns: string[] = ['select', 'name'];
   dataSource;
   selection = new SelectionModel<any>(true, []);
+  data;
 
   constructor(
-    private dialogRef: MatDialogRef<ConfirmDeleteDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) data,
-    private disciplineService: DisciplineService
-  ) {
+    private disciplineService: DisciplineService,
+    private studentService: StudentService
+  ) { }
+  ngOnInit(): void {
+
+    this.initialize();
   }
 
-  ngOnInit(): void {
-    this.disciplineService.getAll().then(v => {
-      this.dataSource = new MatTableDataSource<DisciplineDetails>(v);
+  async initialize(){
+    let student = await this.studentService.queryStudent(this.data.params.id);
+
+    let disciplines = await this.disciplineService.getAll();
+
+    this.selection.clear();
+
+    disciplines.forEach(v => {
+      if (student.disciplines.find(d => d.name === v.name)){
+        this.selection.select(v);
+      }
     });
 
+    this.dataSource = new MatTableDataSource(disciplines);
   }
-
-
 
 
   /** Whether the number of selected elements matches the total number of rows. */
@@ -55,8 +63,9 @@ export class DisciplinesViewComponent implements OnInit {
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
   }
-  cancel() {
-    this.dialogRef.close();
-  }
 
+
+  getData(){
+    return this.selection.selected;
+  }
 }

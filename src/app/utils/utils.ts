@@ -17,7 +17,12 @@ export function assign(target, src, depth) {
       }
 
     } else {
-      target[key] = src[key];
+      try {
+        target[key] = src[key];
+      }catch (e) {
+
+      }
+
     }
   }
 }

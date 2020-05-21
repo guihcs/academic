@@ -28,6 +28,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {OverlayModule} from '@angular/cdk/overlay';
 import { DisciplinesSelectorComponent } from './components/disciplines-selector/disciplines-selector.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { StudentFilesComponent } from './components/student-files/student-files.component';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     InsertStudentComponent,
     ViewStudentComponent,
     DisciplinesSelectorComponent,
+    StudentFilesComponent,
 
 
   ],

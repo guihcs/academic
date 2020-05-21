@@ -37,16 +37,38 @@ export class BackendService {
     return res;
   }
 
-  async upload(name, data){
+  async uploadImage(name, data){
     const formData = new FormData();
     formData.append('file', data);
-    const headers = new HttpHeaders({'enctype': 'multipart/form-data'});
+    const headers = new HttpHeaders({
+      'enctype': 'multipart/form-data',
+      'Content-Encoding': 'gzip'
+    });
     return this.http.post('api/file/' + name, formData, {headers: headers}).toPromise();
   }
 
-  async download(name){
+  async downloadImage(name){
     return this.http.get('api/file/' + name, {
       responseType: 'text',
     }).toPromise();
   }
+
+  async writeFile(descriptor){
+    return this.http.post('api/file/', descriptor).toPromise();
+  }
+
+  async writeChunk(chunk){
+    return this.http.post('api/chunk/', chunk, {
+      headers: {
+        'Content-Type': 'application/json',
+        'data-type': 'chunk'
+      }
+    }).toPromise();
+  }
+
+  async readChunk(fileID, n){
+    return this.http.get(`api/chunk/?id=${fileID}&n=${n}`).toPromise();
+  }
+
+
 }

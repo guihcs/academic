@@ -22,6 +22,7 @@ import {InsertStudentComponent} from './components/insert-student/insert-student
 import {ViewStudentComponent} from './components/view-student/view-student.component';
 import {DisciplinesDialogComponent} from '../../templates/disciplines-dialog/disciplines-dialog.component';
 import {DisciplinesViewComponent} from '../../templates/disciplines-view/disciplines-view.component';
+import {StudentFilesComponent} from './components/student-files/student-files.component';
 
 
 const routes: Routes = [
@@ -206,7 +207,11 @@ const routes: Routes = [
             }
           ]
         }
-      }
+      },
+
+
+      { path: 'files', component: StudentFilesComponent}
+
 
     ]
   }

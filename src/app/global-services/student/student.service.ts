@@ -1,13 +1,12 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BackendService} from '../backend/backend.service';
 import {UserProfile} from '../../global-models/user/UserProfile';
-import {StudentFormData} from '../../global-models/user/Student';
 import {assign} from '../../utils/utils';
 import {DataSource} from '../../global-models/DataSource';
 import {SessionService} from '../session/session.service';
-import {ProfessorFormData} from '../../global-models/user/ProfessorFormData';
 import {StudentDetails} from '../../global-models/user/StudentDetails';
 import {DisciplineService} from '../../modules/coordinator/services/discipline/discipline.service';
+import {FileService} from '../file/file.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +14,7 @@ import {DisciplineService} from '../../modules/coordinator/services/discipline/d
 export class StudentService implements DataSource {
 
   constructor(
+    private fileService: FileService,
     private backendService: BackendService,
     private sessionService: SessionService,
     private disciplineService: DisciplineService
@@ -25,11 +25,30 @@ export class StudentService implements DataSource {
   async getAll(){
     let all = await this.backendService.getAll('users');
     let students = [];
+    let files = await this.fileService.getAll();
+
+
     for (const userData of all) {
       if (userData.type === UserProfile.STUDENT){
         let student = new StudentDetails();
         assign(student, userData, 2);
-        if(student.code) student.image = await this.backendService.download(student.code);
+        if(student.code){
+          let imageFile = files.find(f => f.metadata?.misc?.code === student.code);
+
+          if(imageFile){
+            let imageData = await this.fileService.download(imageFile);
+            let reader = new FileReader();
+
+            reader.readAsDataURL(imageData);
+            student.image = await new Promise((resolve, reject) => {
+              reader.onload = (_event) => {
+                resolve(reader.result);
+              }
+            });
+
+          }
+
+        }
         students.push(student);
       }
     }
@@ -45,7 +64,7 @@ export class StudentService implements DataSource {
     let rawData = await this.backendService.query('users', id);
     let student = new StudentDetails();
     assign(student, rawData[0], 2);
-    if(student.code) student.image = await this.backendService.download(student.code);
+    if(student.code) student.image = await this.backendService.downloadImage(student.code);
     return student;
   }
 
@@ -53,16 +72,21 @@ export class StudentService implements DataSource {
     return this.queryStudent(params);
   }
 
-  async insert(data, image) {
-    if(!data.disciplines){
+  async insert(studentData, imageFile) {
+
+    if(!studentData.disciplines){
       let disciplines = await this.disciplineService.getAll();
-      data.disciplines = disciplines.filter(d => d.period === data.class.period);
+      studentData.disciplines = disciplines.filter(d => d.period === studentData.class.period);
     }
-    delete data.class.course.coordinator;
-    data.code = StudentService.generateStudentCode();
-    data.active = true;
-    await this.backendService.persist('users', data);
-    await this.backendService.upload(data.code, image);
+    delete studentData.class.course.coordinator;
+    studentData.code = StudentService.generateStudentCode();
+    studentData.active = true;
+
+    await this.backendService.persist('users', studentData);
+    await this.fileService.upload(imageFile, {
+      code: studentData.code
+    });
+
     return true;
   }
 

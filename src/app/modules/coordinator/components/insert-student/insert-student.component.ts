@@ -24,7 +24,7 @@ export class InsertStudentComponent implements OnInit {
   @ViewChild('userForm') formContainer: DynamicFormsComponent;
   data: BehaviorSubject<any> =  new BehaviorSubject(null);
   imageData;
-  imagePath;
+  imageFile;
 
   constructor(private route: ActivatedRoute,
               private backendService: BackendService,
@@ -82,9 +82,9 @@ export class InsertStudentComponent implements OnInit {
 
   private async saveData(user) {
 
-    if (await this.dataSource.insert(user, this.imageData)) {
+    if (await this.dataSource.insert(user, this.imageFile)) {
       this.imageData = null;
-      this.imagePath = null;
+      this.imageFile = null;
       this.formContainer.reset();
       let config = new MatSnackBarConfig();
       config.panelClass = ['custom-class'];
@@ -98,7 +98,7 @@ export class InsertStudentComponent implements OnInit {
 
   preview(file){
     let reader = new FileReader();
-    this.imagePath = file;
+    this.imageFile = file;
     reader.readAsDataURL(file[0]);
     reader.onload = (_event) => {
       this.imageData = reader.result;

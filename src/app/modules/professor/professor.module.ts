@@ -21,10 +21,12 @@ import {MatDividerModule} from '@angular/material/divider';
 import {DynamicFormsModule} from '../../libs/dynamic-forms/dynamic-forms.module';
 import {MatListModule} from '@angular/material/list';
 import {ReactiveFormsModule} from '@angular/forms';
+import { StudentGradeComponent } from './components/student-grade/student-grade.component';
+import { GradeComponent } from './components/grade/grade.component';
 
 
 @NgModule({
-  declarations: [ProfessorComponent, ViewClassComponent, ClassDetailsComponent, ViewDisciplinesComponent, DisciplineDetailsComponent],
+  declarations: [ProfessorComponent, ViewClassComponent, ClassDetailsComponent, ViewDisciplinesComponent, DisciplineDetailsComponent, StudentGradeComponent, GradeComponent],
   imports: [
     CommonModule,
     ProfessorRoutingModule,

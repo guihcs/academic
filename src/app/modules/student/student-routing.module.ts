@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {StudentComponent} from './student.component';
 import {ProfileComponent} from '../../templates/profile/profile.component';
 import {FileUploadComponent} from './components/file-upload/file-upload.component';
+import {GradesComponent} from './components/grades/grades.component';
 
 
 const routes: Routes = [
@@ -11,7 +12,8 @@ const routes: Routes = [
     component: StudentComponent,
     children: [
       {path: 'profile', component: ProfileComponent},
-      {path: 'upload', component: FileUploadComponent}
+      {path: 'upload', component: FileUploadComponent},
+      {path: 'grades', component: GradesComponent}
     ]
   }
 ];

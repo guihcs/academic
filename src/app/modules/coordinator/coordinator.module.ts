@@ -29,6 +29,7 @@ import {OverlayModule} from '@angular/cdk/overlay';
 import { DisciplinesSelectorComponent } from './components/disciplines-selector/disciplines-selector.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { StudentFilesComponent } from './components/student-files/student-files.component';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 
 @NgModule({
@@ -47,27 +48,28 @@ import { StudentFilesComponent } from './components/student-files/student-files.
 
 
   ],
-    imports: [
-        CommonModule,
-        CoordinatorRoutingModule,
-        TemplatesModule,
-        MatMenuModule,
-        DynamicFormsModule,
-        MatButtonModule,
-        MatSnackBarModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatTableModule,
-        MatSortModule,
-        MatPaginatorModule,
-        FormsModule,
-        MatDividerModule,
-        MatIconModule,
-        ReactiveFormsModule,
-        MatListModule,
-        MatCheckboxModule,
-        OverlayModule,
-      MatDialogModule
-    ]
+  imports: [
+    CommonModule,
+    CoordinatorRoutingModule,
+    TemplatesModule,
+    MatMenuModule,
+    DynamicFormsModule,
+    MatButtonModule,
+    MatSnackBarModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    FormsModule,
+    MatDividerModule,
+    MatIconModule,
+    ReactiveFormsModule,
+    MatListModule,
+    MatCheckboxModule,
+    OverlayModule,
+    MatDialogModule,
+    MatExpansionModule
+  ]
 })
 export class CoordinatorModule { }

@@ -49,28 +49,7 @@ export class LoginComponent implements OnInit {
   async login(loginData) {
     this.havePasswordError = false;
     this.errorMatcher.state = false;
-    if (await this.sessionService.login(loginData)) {
-      let session = this.sessionService.getSession();
-
-      switch (session.type) {
-        case UserProfile.ADMIN: {
-          await this.router.navigate(['/admin']);
-          break;
-        }
-        case UserProfile.COORDINATOR: {
-          await this.router.navigate(['/coordinator']);
-          break;
-        }
-        case UserProfile.PROFESSOR: {
-          await this.router.navigate(['/professor']);
-          break;
-        }
-        case UserProfile.STUDENT: {
-          await this.router.navigate(['/student']);
-          break;
-        }
-      }
-    } else {
+    if (!await this.sessionService.nlogin(loginData)) {
       this.errorMatcher.state = true;
       this.passwordErrorMessage = 'Invalid login or password.';
       this.havePasswordError = true;

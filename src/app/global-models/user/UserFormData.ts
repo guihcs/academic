@@ -27,13 +27,6 @@ export class UserFormData {
   })
   email: string;
 
-  @FormInput({
-    type: 'password',
-    label: 'Password',
-    required: true
-  })
-  password: string;
-
   @NestedInput('Profile', 2)
   profile: Profile;
 

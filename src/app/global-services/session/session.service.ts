@@ -8,6 +8,8 @@ import {CoordinatorFormData} from '../../global-models/user/CoordinatorFormData'
 import {ProfessorFormData} from '../../global-models/user/ProfessorFormData';
 import {StudentFormData} from '../../global-models/user/Student';
 import {TypeService} from '../../modules/coordinator/services/type/type.service';
+import {Router} from '@angular/router';
+import {BackendService} from '../backend/backend.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +20,8 @@ export class SessionService {
 
   constructor(
     private http: HttpClient,
+    private backendService: BackendService,
+    private router: Router,
     private typeService: TypeService
   ) {
   }
@@ -32,10 +36,62 @@ export class SessionService {
     return false;
   }
 
+  async nlogin(data){
+
+    const res:any = await this.http.post('/api/nlogin', data).toPromise();
+
+    if (res.status === 'ok'){
+
+      localStorage.setItem('profile', JSON.stringify(res.profile));
+      localStorage.setItem('token', res.token);
+
+      return await this.redirect();
+    }
+
+    return false;
+
+  }
+
+  async activate(id, password) {
+    let res:any = await this.backendService.activate(id, password);
+
+    if (res.status === 'ok'){
+      localStorage.setItem('profile', JSON.stringify(res.profile));
+      localStorage.setItem('token', res.token);
+
+      return await this.redirect();
+    }
+  }
+
+
+  async redirect(){
+
+    let session = this.getSession();
+
+    switch (session.type) {
+      case UserProfile.ADMIN: {
+        return await this.router.navigate(['/admin']);
+
+      }
+      case UserProfile.COORDINATOR: {
+        return await this.router.navigate(['/coordinator']);
+
+      }
+      case UserProfile.PROFESSOR: {
+        return await this.router.navigate(['/professor']);
+
+      }
+      case UserProfile.STUDENT: {
+        return await this.router.navigate(['/student']);
+      }
+    }
+  }
+
 
   getSession() {
 
-    let sessionData = JSON.parse(localStorage.getItem('user'));
+    let data = localStorage.getItem('profile');
+    let sessionData = JSON.parse(data);
 
     if (!sessionData) {
       return null;

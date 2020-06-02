@@ -82,10 +82,14 @@ export class StudentService implements DataSource {
     studentData.code = StudentService.generateStudentCode();
     studentData.active = true;
 
-    await this.backendService.persist('users', studentData);
-    await this.fileService.upload(imageFile, {
-      code: studentData.code
-    });
+    await this.backendService.nsign(studentData);
+
+    if (imageFile){
+      await this.fileService.upload(imageFile, {
+        code: studentData.code
+      });
+    }
+
 
     return true;
   }

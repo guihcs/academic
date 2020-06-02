@@ -6,7 +6,7 @@ import {ClassDetails} from '../ClassDetails';
 import {DisciplinesSelectorComponent} from '../../modules/coordinator/components/disciplines-selector/disciplines-selector.component';
 
 
-export class StudentFormData extends UserFormData{
+export class StudentFormData extends UserFormData {
   @CustomInput(ClassSelectorComponent, {
     label: 'Class'
   })

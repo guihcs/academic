@@ -36,7 +36,13 @@ const routes: Routes = [
   },
   {
     path: 'exam',
-    loadChildren: () => import('./modules/exam/exam.module').then(m => m.ExamModule)}
+    loadChildren: () => import('./modules/exam/exam.module').then(m => m.ExamModule)
+  },
+
+  {
+    path: 'activate',
+    loadChildren: () => import('./modules/activate-account/activate-account.module').then(m => m.ActivateAccountModule)
+  }
 ];
 
 @NgModule({

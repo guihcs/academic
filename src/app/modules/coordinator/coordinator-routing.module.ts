@@ -20,7 +20,6 @@ import {ClassDisciplineViewComponent} from '../../templates/class-discipline-vie
 import {ClassStudentsComponent} from './components/class-students/class-students.component';
 import {InsertStudentComponent} from './components/insert-student/insert-student.component';
 import {ViewStudentComponent} from './components/view-student/view-student.component';
-import {DisciplinesDialogComponent} from '../../templates/disciplines-dialog/disciplines-dialog.component';
 import {DisciplinesViewComponent} from '../../templates/disciplines-view/disciplines-view.component';
 import {StudentFilesComponent} from './components/student-files/student-files.component';
 

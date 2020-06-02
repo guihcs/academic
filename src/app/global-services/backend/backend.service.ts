@@ -71,4 +71,14 @@ export class BackendService {
   }
 
 
+  async nsign(data){
+    return this.http.post(`api/nsign`, data).toPromise();
+  }
+
+
+  async activate(id, password){
+    return this.http.post(`api/activate/${id}`, {password}).toPromise();
+  }
+
+
 }

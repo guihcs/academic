@@ -1,5 +1,5 @@
-import {FormInput} from '../libs/dynamic-forms/models/form-metadata';
 import {CourseFormData} from './CourseFormData';
+import {FormInput} from '@guihss/ngx-dynamic-forms';
 
 export class ClassFormData {
 

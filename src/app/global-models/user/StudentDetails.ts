@@ -1,6 +1,6 @@
 import {UserDetails} from './UserDetails';
-import {CustomInput, FormInput, Label} from '../../libs/dynamic-forms/models/form-metadata';
 import {ImageViewerComponent} from '../../templates/image-viewer/image-viewer.component';
+import {CustomInput, FormInput, Label} from '@guihss/ngx-dynamic-forms';
 
 export class StudentDetails extends UserDetails {
 

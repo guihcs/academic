@@ -1,4 +1,4 @@
-import {CustomInput} from '../../libs/dynamic-forms/models/form-metadata';
+import {CustomInput} from '@guihss/ngx-dynamic-forms';
 import {ClassSelectorComponent} from '../../modules/coordinator/components/class-selector/class-selector.component';
 import {UserProfile} from './UserProfile';
 import {UserFormData} from './UserFormData';

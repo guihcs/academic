@@ -1,7 +1,7 @@
 import {UserProfile} from './UserProfile';
 import {Profile} from './Profile';
 import {Address} from './Address';
-import {CustomInput, FormInput, Label, NestedInput} from '../../libs/dynamic-forms/models/form-metadata';
+import {CustomInput, FormInput, Label, NestedInput} from '@guihss/ngx-dynamic-forms';
 import {AddressInputComponent} from '../../modules/admin/components/address-input/address-input.component';
 import {CourseDetails} from '../CourseDetails';
 

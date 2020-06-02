@@ -1,7 +1,7 @@
 import {UserFormData} from './UserFormData';
 import {UserProfile} from './UserProfile';
 import {CourseFormData} from '../CourseFormData';
-import {CustomInput} from '../../libs/dynamic-forms/models/form-metadata';
+import {CustomInput} from '@guihss/ngx-dynamic-forms';
 import {CourseSelectComponent} from '../../modules/admin/components/course-select/course-select.component';
 
 export class CoordinatorFormData extends UserFormData {

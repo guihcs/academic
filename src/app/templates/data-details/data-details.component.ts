@@ -1,5 +1,4 @@
 import {Component, Injector, Input, OnInit, ViewChild} from '@angular/core';
-import {DynamicFormsComponent} from '../../libs/dynamic-forms/dynamic-forms.component';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BackendService} from '../../global-services/backend/backend.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -8,6 +7,7 @@ import {assign} from '../../utils/utils';
 import {ConfirmDeleteDialogComponent} from '../confirm-delete-dialog/confirm-delete-dialog.component';
 import {DataSource} from '../../global-models/DataSource';
 import {fromPromise} from 'rxjs/internal-compatibility';
+import {DynamicFormsComponent} from '@guihss/ngx-dynamic-forms';
 
 @Component({
   selector: 'app-data-details',

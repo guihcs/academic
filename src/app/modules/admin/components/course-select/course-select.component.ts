@@ -1,8 +1,7 @@
-import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
-import {ConfigurableInput} from '../../../../libs/dynamic-forms/models/configurable-input';
+import {Component, OnInit} from '@angular/core';
+import {ConfigurableInput} from '@guihss/ngx-dynamic-forms';
 import {FormControl} from '@angular/forms';
 import {BackendService} from '../../../../global-services/backend/backend.service';
-import {SelectComponent} from '../../../../libs/dynamic-forms/inputs/select/select.component';
 
 @Component({
   selector: 'app-course-select',

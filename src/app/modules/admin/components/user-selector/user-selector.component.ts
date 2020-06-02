@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {BackendService} from '../../../../global-services/backend/backend.service';
-import {ConfigurableInput} from '../../../../libs/dynamic-forms/models/configurable-input';
+import {ConfigurableInput} from '@guihss/ngx-dynamic-forms';
 
 @Component({
   selector: 'app-user-selector',

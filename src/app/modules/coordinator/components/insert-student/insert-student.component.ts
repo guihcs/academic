@@ -1,11 +1,11 @@
 import {ChangeDetectorRef, Component, Injector, Input, OnInit, ViewChild} from '@angular/core';
 import {DataSource} from '../../../../global-models/DataSource';
-import {DynamicFormsComponent} from '../../../../libs/dynamic-forms/dynamic-forms.component';
 import {BehaviorSubject} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 import {BackendService} from '../../../../global-services/backend/backend.service';
 import {MatSnackBar, MatSnackBarConfig} from '@angular/material/snack-bar';
 import {assign} from '../../../../utils/utils';
+import {DynamicFormsComponent} from '@guihss/ngx-dynamic-forms';
 
 @Component({
   selector: 'app-insert-student',

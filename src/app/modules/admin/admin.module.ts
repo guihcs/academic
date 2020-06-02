@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { AdminRoutingModule } from './admin-routing.module';
-import { AdminComponent } from './admin.component';
+import {AdminRoutingModule} from './admin-routing.module';
+import {AdminComponent} from './admin.component';
 import {TemplatesModule} from '../../templates/templates.module';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
@@ -14,15 +14,14 @@ import {MatInputModule} from '@angular/material/input';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import {DynamicFormsModule} from '../../libs/dynamic-forms/dynamic-forms.module';
+import {DynamicFormsModule} from '@guihss/ngx-dynamic-forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {AddressInputComponent} from './components/address-input/address-input.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {ExamFormComponent} from './components/exam-form/exam-form.component';
 import {UserSelectorComponent} from './components/user-selector/user-selector.component';
-import { CourseSelectComponent } from './components/course-select/course-select.component';
-
+import {CourseSelectComponent} from './components/course-select/course-select.component';
 
 
 @NgModule({

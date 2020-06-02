@@ -1,5 +1,5 @@
-import {CustomInput, FormInput} from '../libs/dynamic-forms/models/form-metadata';
 import {ProfessorSelectorComponent} from '../modules/coordinator/components/professor-selector/professor-selector.component';
+import {CustomInput, FormInput} from '@guihss/ngx-dynamic-forms';
 
 
 export class DisciplineDetails {

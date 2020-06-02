@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {AddressService} from '../../../../global-services/address/address.service';
-import {ConfigurableInput} from '../../../../libs/dynamic-forms/models/configurable-input';
+import {ConfigurableInput} from '@guihss/ngx-dynamic-forms';
 
 @Component({
   selector: 'app-address-input',

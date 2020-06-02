@@ -1,10 +1,10 @@
-import {Component, Injector, Input, OnInit, ViewChild} from '@angular/core';
-import {DynamicFormsComponent} from '../../libs/dynamic-forms/dynamic-forms.component';
+import {Component, Injector, OnInit, ViewChild} from '@angular/core';
 import {DataSource} from '../../global-models/DataSource';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BackendService} from '../../global-services/backend/backend.service';
 import {BehaviorSubject} from 'rxjs';
 import {assign} from '../../utils/utils';
+import {DynamicFormsComponent} from '@guihss/ngx-dynamic-forms';
 
 @Component({
   selector: 'app-default-update',

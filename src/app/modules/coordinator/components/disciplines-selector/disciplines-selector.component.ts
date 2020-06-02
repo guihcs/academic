@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {ConfigurableInput} from '../../../../libs/dynamic-forms/models/configurable-input';
+import {Component, OnInit} from '@angular/core';
+import {ConfigurableInput} from '@guihss/ngx-dynamic-forms';
 import {FormControl} from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
 import {DisciplinesDialogComponent} from '../../../../templates/disciplines-dialog/disciplines-dialog.component';

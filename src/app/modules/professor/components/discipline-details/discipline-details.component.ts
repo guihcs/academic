@@ -1,15 +1,11 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {DisciplineFormData} from '../../../../global-models/DisciplineFormData';
-import {DynamicFormsComponent} from '../../../../libs/dynamic-forms/dynamic-forms.component';
 import {FormControl} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BackendService} from '../../../../global-services/backend/backend.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {MatDialog} from '@angular/material/dialog';
 import {assign} from '../../../../utils/utils';
-import {UserProfile} from '../../../../global-models/user/UserProfile';
-import {ConfirmDeleteDialogComponent} from '../../../../templates/confirm-delete-dialog/confirm-delete-dialog.component';
+import {DynamicFormsComponent} from '@guihss/ngx-dynamic-forms';
 
 @Component({
   selector: 'app-discipline-details',

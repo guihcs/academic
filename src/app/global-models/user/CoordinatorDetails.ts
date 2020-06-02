@@ -1,9 +1,8 @@
 import {UserDetails} from './UserDetails';
-import {CustomInput} from '../../libs/dynamic-forms/models/form-metadata';
+import {CustomInput} from '@guihss/ngx-dynamic-forms';
 import {Profile} from './Profile';
 import {Address} from './Address';
 import {CourseSelectComponent} from '../../modules/admin/components/course-select/course-select.component';
-
 
 
 export class CoordinatorDetails extends UserDetails {

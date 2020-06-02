@@ -1,4 +1,4 @@
-import {FormInput} from '../libs/dynamic-forms/models/form-metadata';
+import {FormInput} from '@guihss/ngx-dynamic-forms';
 
 
 export class Exam {

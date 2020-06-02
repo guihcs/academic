@@ -1,8 +1,4 @@
-import {CustomInput, FormInput, Label} from '../libs/dynamic-forms/models/form-metadata';
-import {ClassDisciplineViewComponent} from '../templates/class-discipline-view/class-discipline-view.component';
-import {ClassStudentsComponent} from '../modules/coordinator/components/class-students/class-students.component';
-import {forwardRef} from '@angular/core';
-
+import {Label} from '@guihss/ngx-dynamic-forms';
 
 
 export class ClassDetails {

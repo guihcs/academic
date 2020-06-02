@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {BackendService} from '../../../../global-services/backend/backend.service';
+import {Component, OnInit} from '@angular/core';
 import {SessionService} from '../../../../global-services/session/session.service';
-import {ConfigurableInput} from '../../../../libs/dynamic-forms/models/configurable-input';
+import {ConfigurableInput} from '@guihss/ngx-dynamic-forms';
 import {FormControl} from '@angular/forms';
 import {ClassService} from '../../services/class/class.service';
 

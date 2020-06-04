@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
+import {Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {SessionService} from '../../../../global-services/session/session.service';
 import {DisciplineService} from '../../services/discipline/discipline.service';
 import {StudentService} from '../../../../global-services/student/student.service';
@@ -6,10 +6,8 @@ import {ClassService} from '../../services/class/class.service';
 import {BackendService} from '../../../../global-services/backend/backend.service';
 import {GradeComponent} from '../grade/grade.component';
 import {FormGroup} from '@angular/forms';
-import {createLogErrorHandler} from '@angular/compiler-cli/ngcc/src/execution/tasks/completion';
 
 import {PDFService} from '../../../../global-services/pdf/pdf.service';
-
 
 
 @Component({
@@ -99,7 +97,7 @@ export class StudentGradeComponent implements OnInit {
       this.pdfService.grid(vals);
     }
 
-    this.pdfService.save('Grades');
+    this.pdfService.open();
   }
 
 

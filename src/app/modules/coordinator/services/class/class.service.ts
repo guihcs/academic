@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {DataSource} from '../../../../global-models/DataSource';
 import {BackendService} from '../../../../global-services/backend/backend.service';
 import {assign} from '../../../../utils/utils';
@@ -47,6 +47,9 @@ export class ClassService implements DataSource{
   async update(data) {
     await this.backendService.update('classes', data._id, data);
     return true;
+  }
+
+  page(min, max) {
   }
 
 

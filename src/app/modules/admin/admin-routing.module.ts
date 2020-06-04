@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {AdminComponent} from './admin.component';
 import {ExamFormComponent} from './components/exam-form/exam-form.component';
 import {DataFormComponent} from '../../templates/data-form/data-form.component';
@@ -12,6 +12,7 @@ import {CoordinatorService} from './services/coordinator/coordinator.service';
 import {CourseService} from '../../global-services/course/course.service';
 import {UserProfile} from '../../global-models/user/UserProfile';
 import {ProfileComponent} from '../../templates/profile/profile.component';
+import {UserViewComponent} from './components/user-view/user-view.component';
 
 const routes: Routes = [
   {
@@ -43,7 +44,7 @@ const routes: Routes = [
 
       {
         path: 'view/user',
-        component: DataViewComponent,
+        component: UserViewComponent,
         data: {
           detailsRoute: (user) => {
             if (user.type === UserProfile.COORDINATOR) return '/admin/details/coordinator/' + user._id;

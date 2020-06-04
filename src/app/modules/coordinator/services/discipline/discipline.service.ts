@@ -1,10 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {DataSource} from '../../../../global-models/DataSource';
 import {BackendService} from '../../../../global-services/backend/backend.service';
 import {DisciplineDetails} from '../../../../global-models/DisciplineDetails';
 import {assign} from '../../../../utils/utils';
-import {map} from 'rxjs/operators';
-import {DisciplineFormData} from '../../../../global-models/DisciplineFormData';
 import {SessionService} from '../../../../global-services/session/session.service';
 
 @Injectable({
@@ -55,6 +53,9 @@ export class DisciplineService implements DataSource{
     await this.backend.update('disciplines', data._id, data);
 
     return true;
+  }
+
+  page(min, max) {
   }
 
 

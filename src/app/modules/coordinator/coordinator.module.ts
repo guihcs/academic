@@ -30,6 +30,7 @@ import {DisciplinesSelectorComponent} from './components/disciplines-selector/di
 import {MatDialogModule} from '@angular/material/dialog';
 import {StudentFilesComponent} from './components/student-files/student-files.component';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {StatisticsComponent} from './components/statistics/statistics.component';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
     ViewStudentComponent,
     DisciplinesSelectorComponent,
     StudentFilesComponent,
+    StatisticsComponent,
 
 
   ],

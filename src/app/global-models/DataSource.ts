@@ -6,4 +6,5 @@ export interface DataSource {
   insert(data, args?);
   delete(data);
   update(data);
+  page(min, max);
 }

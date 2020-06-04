@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 
 declare const Buffer;
@@ -30,6 +30,7 @@ export class GradeComponent implements OnInit {
   }
 
   setGrade(grade){
+    if (!grade) return;
     this.g1.setValue(grade.grades.g1);
     this.g2.setValue(grade.grades.g2);
     this.g3.setValue(grade.grades.g3);

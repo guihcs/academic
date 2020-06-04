@@ -117,6 +117,9 @@ export class StudentService implements DataSource {
     return true;
   }
 
+  page(min, max) {
+  }
+
 
 
 }

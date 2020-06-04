@@ -55,4 +55,7 @@ export class CourseService implements DataSource{
     return true;
   }
 
+  page(min, max) {
+  }
+
 }

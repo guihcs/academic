@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BackendService} from '../../../../global-services/backend/backend.service';
 import {assign} from '../../../../utils/utils';
 import {UserProfile} from '../../../../global-models/user/UserProfile';
@@ -52,6 +52,9 @@ export class ProfessorService implements DataSource{
   async update(data) {
     await this.backendService.update('users', data.profile._id, data.profile);
     return true;
+  }
+
+  page(min, max) {
   }
 
 

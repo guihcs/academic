@@ -1,0 +1,23 @@
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  width: 25%;
+}
+
+.data-row {
+
+  transition: 0.3s;
+}
+
+.data-row:hover {
+
+  background-color: whitesmoke;
+  cursor: pointer;
+}

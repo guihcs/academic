@@ -22,6 +22,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {ExamFormComponent} from './components/exam-form/exam-form.component';
 import {UserSelectorComponent} from './components/user-selector/user-selector.component';
 import {CourseSelectComponent} from './components/course-select/course-select.component';
+import {UserViewComponent} from './components/user-view/user-view.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import {CourseSelectComponent} from './components/course-select/course-select.co
         AddressInputComponent,
         ExamFormComponent,
         UserSelectorComponent,
-        CourseSelectComponent
+        CourseSelectComponent,
+        UserViewComponent
     ],
     exports: [
         CourseSelectComponent

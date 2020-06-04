@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BackendService} from '../../../../global-services/backend/backend.service';
 import {DataSource} from '../../../../global-models/DataSource';
 import {UserProfile} from '../../../../global-models/user/UserProfile';
-import {CoordinatorFormData} from '../../../../global-models/user/CoordinatorFormData';
 import {assign} from '../../../../utils/utils';
 import {CoordinatorDetails} from '../../../../global-models/user/CoordinatorDetails';
 
@@ -78,6 +77,9 @@ export class CoordinatorService implements DataSource {
     }
 
     return true;
+  }
+
+  page(min, max) {
   }
 
 

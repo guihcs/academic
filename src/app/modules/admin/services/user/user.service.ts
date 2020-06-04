@@ -1,8 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BackendService} from '../../../../global-services/backend/backend.service';
 import {DataSource} from '../../../../global-models/DataSource';
-import {UserFormData} from '../../../../global-models/user/UserFormData';
-import {UserDetails} from '../../../../global-models/user/UserDetails';
 import {assign} from '../../../../utils/utils';
 import {Admin} from '../../../../global-models/user/Admin';
 import {CoordinatorDetails} from '../../../../global-models/user/CoordinatorDetails';
@@ -55,8 +53,11 @@ export class UserService implements DataSource {
   }
 
   async update(data){
-    //todo user type is being saved with data
     return await this.backendService.update('users', data._id, data);
+  }
+
+  async page(min, max){
+    return await this.backendService.page('users', min, max);
   }
 
 }

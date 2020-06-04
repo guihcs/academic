@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {CoordinatorComponent} from './coordinator.component';
 import {DataFormComponent} from '../../templates/data-form/data-form.component';
 import {StudentFormData} from '../../global-models/user/StudentFormData';
@@ -22,6 +22,7 @@ import {InsertStudentComponent} from './components/insert-student/insert-student
 import {ViewStudentComponent} from './components/view-student/view-student.component';
 import {DisciplinesViewComponent} from '../../templates/disciplines-view/disciplines-view.component';
 import {StudentFilesComponent} from './components/student-files/student-files.component';
+import {StatisticsComponent} from './components/statistics/statistics.component';
 
 
 const routes: Routes = [
@@ -209,8 +210,8 @@ const routes: Routes = [
       },
 
 
-      { path: 'files', component: StudentFilesComponent}
-
+      { path: 'files', component: StudentFilesComponent},
+      { path: 'statistics', component: StatisticsComponent}
 
     ]
   }

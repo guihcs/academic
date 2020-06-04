@@ -81,4 +81,11 @@ export class BackendService {
   }
 
 
+  async page(collection, min, max){
+    return this.http.get(`api/page/${collection}/${min}/${max}`).toPromise();
+  }
+
+  async count(collection): Promise<any>{
+    return this.http.get(`api/count/${collection}`).toPromise();
+  }
 }

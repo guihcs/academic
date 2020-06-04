@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {DataSource} from '../../../../global-models/DataSource';
 import {BackendService} from '../../../../global-services/backend/backend.service';
 import {SessionService} from '../../../../global-services/session/session.service';
@@ -36,6 +36,9 @@ export class DisciplineService implements DataSource{
   }
 
   update(data) {
+  }
+
+  page(min, max) {
   }
 
 

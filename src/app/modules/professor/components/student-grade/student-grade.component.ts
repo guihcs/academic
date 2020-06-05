@@ -88,12 +88,30 @@ export class StudentGradeComponent implements OnInit {
 
   }
 
-  generatePDF(){
+  generatePDF() {
     this.pdfService.start();
 
-    for (const grade of this.grades) {
+    this.pdfService.grid(['Aluno', 'n1', 'n2', 'n3', 'média', 'situação']);
+
+    for (let grade of this.grades) {
+
+      grade.grades.g1 = parseFloat(grade.grades.g1);
+      grade.grades.g2 = parseFloat(grade.grades.g2);
+      grade.grades.g3 = parseFloat(grade.grades.g3);
+
       let student = this.students.find(v => v._id === grade.studentID);
-      let vals = [student.name, grade.grades.g1, grade.grades.g2, grade.grades.g3];
+      let mean = (grade.grades.g1 + grade.grades.g2 + grade.grades.g3) / 3.0;
+
+
+      let situation = 'Aprovado';
+      if (mean < 4) {
+        situation = 'Reprovado';
+      }
+      if (mean < 7) {
+        situation = 'Recuperação';
+      }
+
+      let vals = [student.name, grade.grades.g1, grade.grades.g2, grade.grades.g3, mean.toFixed(1), situation];
       this.pdfService.grid(vals);
     }
 
@@ -101,7 +119,4 @@ export class StudentGradeComponent implements OnInit {
   }
 
 
-  getData(){
-
-  }
 }

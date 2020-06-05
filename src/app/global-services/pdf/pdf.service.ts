@@ -25,11 +25,13 @@ export class PDFService {
 
   grid(vals){
 
+    this.doc.setFontSize(9);
+
     let columnStart = 10;
 
     for (const val of vals) {
       this.doc.text(val.toString(), columnStart, this.line);
-      columnStart += 50;
+      columnStart += 32;
     }
 
 

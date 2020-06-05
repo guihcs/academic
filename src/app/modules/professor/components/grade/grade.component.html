@@ -1,10 +1,19 @@
 
 
-<div>
-  <p>{{student?.name}}</p>
-  <input [formControl]="g1">
-  <input [formControl]="g2">
-  <input [formControl]="g3">
-  <p>Avg: {{mean()}}</p>
-  <p> Situation: {{situation()}}</p>
-</div>
+<mat-card>
+  <p class="name">{{student?.name}}</p>
+  <label>
+    n1
+    <input [formControl]="g1" type="number">
+  </label>
+  <label>
+    n2
+    <input [formControl]="g2" type="number">
+  </label>
+  <label>
+    n3
+    <input [formControl]="g3" type="number">
+  </label>
+  <p>Avg: {{mean().toFixed(1)}}</p>
+  <p> Situation: <span [classList]="getSituationClass()">{{situation()}} </span></p>
+</mat-card>

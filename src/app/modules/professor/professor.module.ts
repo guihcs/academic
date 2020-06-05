@@ -23,6 +23,7 @@ import {MatListModule} from '@angular/material/list';
 import {ReactiveFormsModule} from '@angular/forms';
 import {StudentGradeComponent} from './components/student-grade/student-grade.component';
 import {GradeComponent} from './components/grade/grade.component';
+import {MatCardModule} from '@angular/material/card';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import {GradeComponent} from './components/grade/grade.component';
     MatDividerModule,
     DynamicFormsModule,
     MatListModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatCardModule
   ]
 })
 export class ProfessorModule { }

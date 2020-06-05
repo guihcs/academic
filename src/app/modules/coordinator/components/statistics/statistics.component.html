@@ -1,3 +1,11 @@
 <h1>Statistics</h1>
 
-<p *ngFor="let count of counts">{{count | json}}</p>
+<mat-card
+  *ngFor="let count of counts"
+>
+  <p>{{count.class}}</p>
+  <p>Aprovados: {{count.result.approved}}</p>
+  <p>Reprovados: {{count.result.reproved}}</p>
+</mat-card>
+
+

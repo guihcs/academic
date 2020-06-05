@@ -63,8 +63,24 @@ export class StudentService implements DataSource {
   async queryStudent(id){
     let rawData = await this.backendService.query('users', id);
     let student = new StudentDetails();
+    let files = await this.fileService.getAll();
     assign(student, rawData[0], 2);
-    if(student.code) student.image = await this.backendService.downloadImage(student.code);
+    if (student.code) {
+      let imageFile = files.find(f => f.metadata?.misc?.code === student.code);
+
+      if (imageFile) {
+        let imageData = await this.fileService.download(imageFile);
+        let reader = new FileReader();
+
+        reader.readAsDataURL(imageData);
+        student.image = await new Promise((resolve, reject) => {
+          reader.onload = (_event) => {
+            resolve(reader.result);
+          };
+        });
+
+      }
+    }
     return student;
   }
 

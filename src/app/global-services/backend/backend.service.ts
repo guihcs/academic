@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -32,8 +32,15 @@ export class BackendService {
     return res.status === 'ok';
   }
 
-  async query(collection, id){
-    let res: any = await this.http.get('api/' + collection + '/' + id).toPromise();
+  async query(collection, id) {
+
+    let params = new HttpParams()
+      .set('collection', collection)
+      .set('id', id);
+
+    let res: any = await this.http.get(`api/query`, {
+      params
+    }).toPromise();
     return res;
   }
 

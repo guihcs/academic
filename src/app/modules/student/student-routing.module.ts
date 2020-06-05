@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {StudentComponent} from './student.component';
 import {ProfileComponent} from '../../templates/profile/profile.component';
-import {FileUploadComponent} from './components/file-upload/file-upload.component';
+import {FileUploadPageComponent} from './components/file-upload-page/file-upload-page.component';
 import {GradesComponent} from './components/grades/grades.component';
 
 
@@ -12,7 +12,7 @@ const routes: Routes = [
     component: StudentComponent,
     children: [
       {path: 'profile', component: ProfileComponent},
-      {path: 'upload', component: FileUploadComponent},
+      {path: 'upload', component: FileUploadPageComponent},
       {path: 'grades', component: GradesComponent}
     ]
   }

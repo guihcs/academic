@@ -92,6 +92,7 @@ const routes: Routes = [
           detailsRoute: (student) => '/coordinator/details/student/' + student._id,
           title: 'View Students',
           columnsDef: [
+            {field: 'code', header: 'Code'},
             {field: 'name', header: 'Name'},
             {field: 'className', header: 'Class'},
             {field: 'classPeriod', header: 'Class Period'}

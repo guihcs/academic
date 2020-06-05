@@ -35,6 +35,10 @@ import {DisciplinesDialogComponent} from './disciplines-dialog/disciplines-dialo
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {DisciplinesViewComponent} from './disciplines-view/disciplines-view.component';
 import {DynamicFormsModule} from '@guihss/ngx-dynamic-forms';
+import {FileComponent} from './file/file.component';
+import {GlobalPipesModule} from '../global-pipes/global-pipes.module';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {FileUploadComponent} from './file-upload/file-upload.component';
 
 
 @NgModule({
@@ -53,40 +57,46 @@ import {DynamicFormsModule} from '@guihss/ngx-dynamic-forms';
     ComponentRendererComponent,
     ImageViewerComponent,
     DisciplinesDialogComponent,
-    DisciplinesViewComponent
+    DisciplinesViewComponent,
+    FileComponent,
+    FileUploadComponent
   ],
-    imports: [
-        CommonModule,
-        MatSidenavModule,
-        MatListModule,
-        MatToolbarModule,
-        MatButtonModule,
-        MatIconModule,
-        RouterModule,
-        MatMenuModule,
-        MatRippleModule,
-        MatCardModule,
-        MatDialogModule,
-        DynamicFormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatTableModule,
-        MatSortModule,
-        MatPaginatorModule,
-        ReactiveFormsModule,
-        MatTabsModule,
-        MatCheckboxModule,
-        DynamicFormsModule
-    ],
-    exports: [
-        SidenavComponent,
-        ToolbarComponent,
-        OptionsItemsComponent,
-        ConfirmDeleteDialogComponent,
-        DataViewComponent,
-        DataFormComponent,
-        DataDetailsComponent
-    ],
+  imports: [
+    CommonModule,
+    MatSidenavModule,
+    MatListModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    RouterModule,
+    MatMenuModule,
+    MatRippleModule,
+    MatCardModule,
+    MatDialogModule,
+    DynamicFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    ReactiveFormsModule,
+    MatTabsModule,
+    MatCheckboxModule,
+    DynamicFormsModule,
+    GlobalPipesModule,
+    MatProgressBarModule
+  ],
+  exports: [
+    SidenavComponent,
+    ToolbarComponent,
+    OptionsItemsComponent,
+    ConfirmDeleteDialogComponent,
+    DataViewComponent,
+    DataFormComponent,
+    DataDetailsComponent,
+    FileComponent,
+    FileUploadComponent
+  ],
 
   providers: [
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2000}},

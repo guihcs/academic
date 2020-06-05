@@ -1,0 +1,39 @@
+
+.hidden {
+  display: none;
+}
+
+mat-card {
+  margin-bottom: 8px;
+  padding: 0;
+  transition: 0.3s;
+}
+
+mat-card:hover {
+  background-color: rgba(0.6, 0.6, 0.6, 0.1);
+  cursor: pointer;
+}
+
+.card-content {
+  padding: 6px;
+}
+
+.file-desc {
+
+  margin-left: 8px;
+
+}
+
+.file-title {
+  font-size: 18px;
+}
+
+.img {
+  width: 70px;
+  height: 70px;
+  background-color: lightgray;
+}
+
+::ng-deep .mat-progress-bar.mat-primary .mat-progress-bar-fill {
+  transition: none;
+}

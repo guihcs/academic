@@ -1,0 +1,16 @@
+<mat-card (click)="fileSelect.emit(file)" class="mat-elevation-z2">
+
+  <div class="row card-content">
+    <div class="img"></div>
+    <div class="file-desc">
+      <p class="file-title">{{file.name}}</p>
+      <p> {{file.size | data }}</p>
+    </div>
+  </div>
+
+  <mat-progress-bar
+    #progress
+    [mode]="mode"
+    [value]="value | async"
+  ></mat-progress-bar>
+</mat-card>

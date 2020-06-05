@@ -1,0 +1,5 @@
+<h1>File Upload</h1>
+<input #fileInput (change)="upload(fileInput.files)" hidden multiple="multiple" type="file">
+<button (click)="fileInput.click()" mat-raised-button>Upload</button>
+
+<app-file-upload *ngFor="let file of files" [file]="file"></app-file-upload>

@@ -1,7 +1,6 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FileService} from '../../../../global-services/file/file.service';
 import {SessionService} from '../../../../global-services/session/session.service';
-import {MatTableDataSource} from '@angular/material/table';
 import {Router} from '@angular/router';
 
 @Component({
@@ -11,7 +10,6 @@ import {Router} from '@angular/router';
 })
 export class StudentFilesComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'download'];
   dataSource;
   @ViewChild('link', {read: HTMLAnchorElement, static: true})
   private a;
@@ -28,15 +26,13 @@ export class StudentFilesComponent implements OnInit {
   }
 
   async init(){
-    let files = await this.fileService.getAll();
+    this.dataSource = await this.fileService.getAll();
 
-
-
-    this.dataSource = new MatTableDataSource(files);
   }
 
 
   async download(element, link){
+
     let file = await this.fileService.download(element);
 
     let url = window.URL.createObjectURL(file);
@@ -45,4 +41,5 @@ export class StudentFilesComponent implements OnInit {
     link.click();
     window.URL.revokeObjectURL(url);
   }
+
 }

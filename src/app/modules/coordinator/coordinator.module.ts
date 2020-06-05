@@ -31,6 +31,9 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {StudentFilesComponent} from './components/student-files/student-files.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {StatisticsComponent} from './components/statistics/statistics.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatCardModule} from '@angular/material/card';
+import {GlobalPipesModule} from '../../global-pipes/global-pipes.module';
 
 
 @NgModule({
@@ -71,7 +74,10 @@ import {StatisticsComponent} from './components/statistics/statistics.component'
     MatCheckboxModule,
     OverlayModule,
     MatDialogModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatProgressBarModule,
+    MatCardModule,
+    GlobalPipesModule
   ]
 })
 export class CoordinatorModule { }

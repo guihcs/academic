@@ -2,21 +2,8 @@
 
 <a #link style="display: none"></a>
 
-<table mat-table [dataSource]="dataSource">
-
-  <!-- Checkbox Column -->
-
-  <!-- Name Column -->
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.filename}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="download">
-    <th mat-header-cell *matHeaderCellDef>Download</th>
-    <td mat-cell *matCellDef="let element"> <button (click)="download(element, link)">Download</button></td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+<app-file
+  (fileSelect)="download($event, link)"
+  *ngFor="let file of dataSource"
+  [file]="file"
+></app-file>

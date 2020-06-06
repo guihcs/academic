@@ -1,4 +1,10 @@
 # Academic
+The project implements a academic system front end. The code still is in development.
+
+This project depends on another project that serve as a backend for the application, more info here: 
+
+Below is information on how to run the project: [Academic Backend](https://github.com/guilherme-fafic/academic-backend).
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.1.
 

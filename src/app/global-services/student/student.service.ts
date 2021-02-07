@@ -7,6 +7,7 @@ import {SessionService} from '../session/session.service';
 import {StudentDetails} from '../../global-models/user/StudentDetails';
 import {DisciplineService} from '../../modules/coordinator/services/discipline/discipline.service';
 import {FileService} from '../file/file.service';
+import {BehaviorSubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -101,7 +102,8 @@ export class StudentService implements DataSource {
     await this.backendService.nsign(studentData);
 
     if (imageFile){
-      await this.fileService.upload(imageFile, {
+      imageFile[0].progress = new BehaviorSubject(0);
+      await this.fileService.upload(imageFile[0], {
         code: studentData.code
       });
     }

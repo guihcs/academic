@@ -8,6 +8,7 @@ import {GradeComponent} from '../grade/grade.component';
 import {FormGroup} from '@angular/forms';
 
 import {PDFService} from '../../../../global-services/pdf/pdf.service';
+import {MatSnackBar, MatSnackBarConfig} from '@angular/material/snack-bar';
 
 
 @Component({
@@ -33,7 +34,8 @@ export class StudentGradeComponent implements OnInit {
     private classService: ClassService,
     private backendService: BackendService,
     private componentFactoryResolver: ComponentFactoryResolver,
-    private pdfService: PDFService
+    private pdfService: PDFService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -73,8 +75,18 @@ export class StudentGradeComponent implements OnInit {
 
       if (this.grades){
         let g = this.grades.find(v => v.studentID === id);
-        g.grades = formValues[id];
-        await this.backendService.update('grades', g._id, g);
+        if (g){
+          g.grades = formValues[id];
+          await this.backendService.update('grades', g._id, g);
+        }else {
+          let grade = {
+            studentID: id,
+            discipline: '',
+            grades: formValues[id]
+          }
+          await this.backendService.persist('grades', grade);
+        }
+
       }else {
         let grade = {
           studentID: id,
@@ -85,6 +97,12 @@ export class StudentGradeComponent implements OnInit {
       }
 
     }
+
+
+    let config = new MatSnackBarConfig();
+    config.panelClass = ['custom-class'];
+    config.duration = 2000;
+    this.snackBar.open('Grades Updated.', '', config);
 
   }
 
